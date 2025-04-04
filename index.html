@@ -417,57 +417,7 @@
     <section class="testimonials-section">
         <div class="container">
 
-    <!-- Maps Initialization -->
-    <script>
-        // Pre-define map initialization functions
-        function initMap() {
-            console.log('initMap called');
-            if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
-                console.error('Google Maps not available when initMap was called');
-                return;
-            }
-            
-            // Check if the map element exists
-            const mapElement = document.getElementById('mountain-edge-map');
-            if (!mapElement) {
-                console.error('Map element not found');
-                return;
-            }
-            
-            try {
-                console.log('Creating map instance');
-                // The rest of the map initialization will be handled by the map.js file
-                if (typeof window.map === 'undefined') {
-                    console.log('Triggering full map initialization');
-                    // The original initMap function from map.js will take over
-                }
-            } catch (error) {
-                console.error('Error initializing map:', error);
-            }
-        }
-        
-        function initGlobalMap() {
-            console.log('initGlobalMap called');
-            if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
-                console.error('Google Maps not available when initGlobalMap was called');
-                return;
-            }
-            
-            // Check if the map element exists
-            const mapElement = document.getElementById('global-mountain-edge-map');
-            if (!mapElement) {
-                console.error('Global map element not found');
-                return;
-            }
-            
-            try {
-                // The rest of the global map initialization will be handled by the global-map.js file
-                console.log('Initializing global map instance');
-            } catch (error) {
-                console.error('Error initializing global map:', error);
-            }
-        }
-    </script>
+    <!-- Maps will be initialized by the main map.js and global-map.js files -->
 
             <h2 class="section-title">What Our Clients Say About Mountain's Edge</h2>
             <div class="testimonials-slider">
@@ -880,6 +830,9 @@
         </div>
     </footer>
 
+    <!-- Load Google Maps API first -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDt84u_m6IGyrNZ9Eyc2W0fAIx6yD3peTo&callback=initMapsCallback" async defer></script>
+    
     <script src="assets/js/image-optimization.js"></script>
     <script src="assets/js/alt-text-checker.js"></script>
     <script src="assets/js/script.js"></script>

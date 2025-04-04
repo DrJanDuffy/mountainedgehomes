@@ -52,11 +52,8 @@ window.addEventListener('load', function() {
                 console.error('Google API not loaded');
                 alert('Google Maps API is not loaded. Attempting to load it now...');
                 
-                // Reset loading flag if it exists
-                window.googleMapsLoading = false;
-                
                 // Function to run when testing the API
-                window.testMapCallback = function() {
+                window.initMapsCallback = function() {
                     console.log('Google Maps API loaded successfully via test');
                     alert('Google Maps API loaded successfully!');
                     
@@ -72,7 +69,7 @@ window.addEventListener('load', function() {
                 
                 // Try to reload the maps API
                 const script = document.createElement('script');
-                script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDt84u_m6IGyrNZ9Eyc2W0fAIx6yD3peTo&callback=testMapCallback';
+                script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDt84u_m6IGyrNZ9Eyc2W0fAIx6yD3peTo&callback=initMapsCallback';
                 script.async = true;
                 script.defer = true;
                 
@@ -91,7 +88,6 @@ window.addEventListener('load', function() {
         // Add diagnostics to the console
         console.log('Map initialization diagnostics:');
         console.log('- window.google exists:', typeof window.google !== 'undefined');
-        console.log('- window.googleMapsLoading:', window.googleMapsLoading);
         console.log('- initMap function exists:', typeof window.initMap === 'function');
         console.log('- initGlobalMap function exists:', typeof window.initGlobalMap === 'function');
         

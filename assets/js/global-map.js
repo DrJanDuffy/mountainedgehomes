@@ -1,4 +1,3 @@
-
 // Global Map initialization
 window.addEventListener('load', function() {
     // Check if the global map element exists on this page
@@ -6,50 +5,6 @@ window.addEventListener('load', function() {
     if (!mapElement) return;
     
     console.log('Global map element found');
-    
-    // Hide error initially
-    const errorElement = document.getElementById('global-map-error');
-    if (errorElement) {
-        errorElement.style.display = 'none';
-    }
-    
-    // Define Mountain Edge coordinates
-    const mountainEdgeCenter = { lat: 36.0051, lng: -115.2552 };
-    
-    // Function to show map error
-    function showMapError() {
-        console.error('Showing global map error');
-        if (errorElement) {
-            errorElement.style.display = 'block';
-        } else {
-            // Create error element if it doesn't exist
-            mapElement.innerHTML = `
-                <div id="global-map-error" style="text-align: center; padding: 20px;">
-                    <i class="fas fa-exclamation-triangle" style="font-size: 32px; color: #e74c3c; margin-bottom: 15px;"></i>
-                    <h3>Map Loading Error</h3>
-                    <p>We're having trouble loading the map. Please try again later.</p>
-                    <div style="margin-top: 15px; font-size: 14px; color: #666;">
-                        <p><strong>Mountain Edge Location:</strong> 36.0051°N, 115.2552°W</p>
-                        <p>A beautiful master-planned community in southwest Las Vegas.</p>
-                    </div>
-                </div>
-            `;
-        }
-        
-        // Show fallback if it exists
-        const fallback = mapElement.querySelector('.static-map-fallback');
-        if (fallback) {
-            fallback.style.display = 'flex';
-        }
-    }
-    
-    // Define error handler for Google Maps authentication failures
-    if (!window.gm_authFailure) {
-        window.gm_authFailure = function() {
-            console.error('Google Maps authentication error');
-            showMapError();
-        };
-    }
     
     // Function to handle map script loading
     function loadGlobalMapScript() {
@@ -67,20 +22,7 @@ window.addEventListener('load', function() {
             `);
         }
         
-        // Check if Google Maps API is already loaded or loading
-        if (window.googleMapsLoading) {
-            console.log('Google Maps API already loading for global map');
-            // Wait for the loading to complete and then initialize
-            const checkInterval = setInterval(function() {
-                if (typeof google !== 'undefined' && typeof google.maps !== 'undefined') {
-                    clearInterval(checkInterval);
-                    console.log('Google Maps loaded, initializing global map');
-                    initGlobalMap();
-                }
-            }, 500);
-            return;
-        }
-        
+        // Check if Google Maps API is already loaded
         if (typeof google !== 'undefined' && typeof google.maps !== 'undefined') {
             console.log('Google Maps API already loaded, initializing global map');
             initGlobalMap();
@@ -102,7 +44,7 @@ window.addEventListener('load', function() {
         script.onerror = function() {
             console.error('Failed to load Google Maps API for global map');
             window.googleMapsLoading = false;
-            showMapError();
+            showGlobalMapError();
         };
         
         // Set a timeout to show error if maps doesn't load within 10 seconds
@@ -110,7 +52,7 @@ window.addEventListener('load', function() {
             if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
                 console.error('Google Maps API timeout for global map');
                 window.googleMapsLoading = false;
-                showMapError();
+                showGlobalMapError();
             }
         }, 10000);
         
@@ -127,65 +69,123 @@ window.addEventListener('load', function() {
     console.log('Global map initialization scheduled');
 });
 
+// Function to show global map error
+function showGlobalMapError() {
+    console.error('Showing global map error');
+    const errorElement = document.getElementById('global-map-error');
+    if (errorElement) {
+        errorElement.style.display = 'block';
+    } else {
+        const mapElement = document.getElementById('global-mountain-edge-map');
+        if (mapElement) {
+            mapElement.innerHTML = `
+                <div id="global-map-error" style="text-align: center; padding: 20px;">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 32px; color: #e74c3c; margin-bottom: 15px;"></i>
+                    <h3>Map Loading Error</h3>
+                    <p>We're having trouble loading the map. Please try again later.</p>
+                    <div style="margin-top: 15px; font-size: 14px; color: #666;">
+                        <p><strong>Mountain Edge Location:</strong> 36.0051°N, 115.2552°W</p>
+                        <p>A beautiful master-planned community in southwest Las Vegas.</p>
+                    </div>
+                </div>
+            `;
+        }
+    }
+
+    // Show fallback if it exists
+    const mapElement = document.getElementById('global-mountain-edge-map');
+    if (mapElement) {
+        const fallback = mapElement.querySelector('.static-map-fallback');
+        if (fallback) {
+            fallback.style.display = 'flex';
+        }
+    }
+}
+
 // Initialize the global map
 function initGlobalMap() {
+    console.log('Initializing global map');
     const mountainEdgeCenter = { lat: 36.0051, lng: -115.2552 };
     const mapElement = document.getElementById('global-mountain-edge-map');
-    
-    if (!mapElement || typeof google === 'undefined') return;
-    
-    // Create the map
-    const map = new google.maps.Map(mapElement, {
-        center: mountainEdgeCenter,
-        zoom: 12,
-        mapTypeControl: true,
-        fullscreenControl: true,
-        streetViewControl: true,
-        styles: [
-            {
-                featureType: "poi.business",
-                stylers: [{ visibility: "simplified" }],
-            },
-            {
-                featureType: "water",
-                elementType: "geometry",
-                stylers: [{ color: "#a3ccff" }],
-            },
-        ],
-    });
 
-    // Add Mountain Edge boundary overlay
-    const mountainEdgeBoundary = [
-        { lat: 36.0227, lng: -115.2697 },
-        { lat: 36.0227, lng: -115.2365 },
-        { lat: 35.9932, lng: -115.2365 },
-        { lat: 35.9932, lng: -115.2697 },
-        { lat: 36.0227, lng: -115.2697 }
-    ];
+    if (!mapElement) {
+        console.log('Global map element not found');
+        return;
+    }
 
-    const mountainEdgePolygon = new google.maps.Polygon({
-        paths: mountainEdgeBoundary,
-        strokeColor: "#FF9800",
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        fillColor: "#FFC107",
-        fillOpacity: 0.1,
-    });
-    mountainEdgePolygon.setMap(map);
+    if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
+        console.error('Google Maps API not available for global map');
+        showGlobalMapError();
+        return;
+    }
 
-    // Add Mountain Edge center marker
-    new google.maps.Marker({
-        position: mountainEdgeCenter,
-        map: map,
-        title: "Mountain Edge",
-        icon: {
-            path: google.maps.SymbolPath.CIRCLE,
-            scale: 10,
-            fillColor: "#4CAF50",
-            fillOpacity: 0.9,
+    try {
+        // Create the map
+        const map = new google.maps.Map(mapElement, {
+            center: mountainEdgeCenter,
+            zoom: 12,
+            mapTypeControl: true,
+            fullscreenControl: true,
+            streetViewControl: true,
+            styles: [
+                {
+                    featureType: "poi.business",
+                    stylers: [{ visibility: "simplified" }],
+                },
+                {
+                    featureType: "water",
+                    elementType: "geometry",
+                    stylers: [{ color: "#a3ccff" }],
+                },
+            ],
+        });
+
+        // Add Mountain Edge boundary overlay
+        const mountainEdgeBoundary = [
+            { lat: 36.0227, lng: -115.2697 },
+            { lat: 36.0227, lng: -115.2365 },
+            { lat: 35.9932, lng: -115.2365 },
+            { lat: 35.9932, lng: -115.2697 },
+            { lat: 36.0227, lng: -115.2697 }
+        ];
+
+        const mountainEdgePolygon = new google.maps.Polygon({
+            paths: mountainEdgeBoundary,
+            strokeColor: "#FF9800",
+            strokeOpacity: 0.8,
             strokeWeight: 2,
-            strokeColor: "#fff"
-        },
-        animation: google.maps.Animation.DROP
-    });
+            fillColor: "#FFC107",
+            fillOpacity: 0.1,
+        });
+        mountainEdgePolygon.setMap(map);
+
+        // Add Mountain Edge center marker
+        new google.maps.Marker({
+            position: mountainEdgeCenter,
+            map: map,
+            title: "Mountain Edge",
+            icon: {
+                path: google.maps.SymbolPath.CIRCLE,
+                scale: 10,
+                fillColor: "#4CAF50",
+                fillOpacity: 0.9,
+                strokeWeight: 2,
+                strokeColor: "#fff"
+            },
+            animation: google.maps.Animation.DROP
+        });
+
+        console.log('Global map initialized successfully');
+    } catch (error) {
+        console.error('Error initializing global map:', error);
+        showGlobalMapError();
+    }
+}
+
+// Define error handler for Google Maps authentication failures
+if (!window.gm_authFailure) {
+    window.gm_authFailure = function() {
+        console.error('Google Maps authentication error');
+        showGlobalMapError();
+    };
 }
