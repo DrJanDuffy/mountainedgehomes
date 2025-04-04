@@ -1197,6 +1197,114 @@ footer::before {
 }
 
 .testimonial-content {
+
+/* Enhanced form styles */
+.form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.input-focused {
+    transform: translateY(-2px);
+}
+
+/* Form success animations */
+.form-success {
+    text-align: center;
+    padding: 2rem;
+    background-color: rgba(39, 174, 96, 0.1);
+    border-radius: 10px;
+    border: 2px solid rgba(39, 174, 96, 0.2);
+}
+
+.success-icon-container {
+    margin-bottom: 1.5rem;
+}
+
+.form-success .fa-check-circle {
+    font-size: 4rem;
+    color: #27ae60;
+    animation: pulse 2s infinite;
+}
+
+.form-success h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #27ae60;
+    animation: slide-in 0.5s ease-out;
+}
+
+.form-success p {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 1rem;
+    animation: fade-in 1s ease-out;
+}
+
+.extra-message {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(39, 174, 96, 0.2);
+    animation: fade-in-slow 1.5s ease-out;
+}
+
+.extra-message p {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.extra-message i {
+    margin-right: 0.5rem;
+    color: #27ae60;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-in-slow {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
     font-style: italic;
     font-size: 1.1rem;
     color: #34495e;
@@ -1264,15 +1372,34 @@ footer::before {
 .neighborhood-form textarea {
     width: 100%;
     padding: 1rem;
-    border: none;
+    border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 4px;
     background-color: rgba(255, 255, 255, 0.1);
     color: #fff;
+    transition: all 0.3s ease;
+    font-size: 1.05rem;
+}
+
+.neighborhood-form input:focus,
+.neighborhood-form select:focus,
+.neighborhood-form textarea:focus {
+    border-color: #e74c3c;
+    box-shadow: 0 0 10px rgba(231, 76, 60, 0.3);
+    transform: translateY(-2px);
+    outline: none;
 }
 
 .neighborhood-form input::placeholder,
 .neighborhood-form textarea::placeholder {
     color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
+    transition: all 0.3s ease;
+}
+
+.neighborhood-form input:focus::placeholder,
+.neighborhood-form textarea:focus::placeholder {
+    opacity: 0.5;
+    transform: translateX(10px);
 }
 
 .neighborhood-form select {
@@ -1292,16 +1419,57 @@ footer::before {
     background-color: #e74c3c;
     color: #fff;
     border: none;
-    padding: 1rem;
-    font-size: 1.1rem;
+    padding: 1.2rem 1rem;
+    font-size: 1.2rem;
     font-weight: 600;
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .form-button:hover {
     background-color: #c0392b;
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
+}
+
+.form-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+.form-button:hover::after {
+    animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(20, 20);
+        opacity: 0;
+    }
 }
 
 .privacy-note {
