@@ -515,6 +515,83 @@ nav ul li a.active::after {
 
 /* Footer */
 footer {
+
+/* Neighborhoods Section */
+.neighborhoods-section {
+    padding: 80px 0;
+    background-color: #f9f9f9;
+}
+
+.section-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.neighborhoods-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.neighborhoods-text {
+    margin-bottom: 30px;
+    max-width: 800px;
+}
+
+.neighborhoods-text p {
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.neighborhoods-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 40px;
+    width: 100%;
+    max-width: 900px;
+}
+
+.neighborhood-category {
+    flex: 1;
+    min-width: 250px;
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.neighborhood-category h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent-color);
+}
+
+.neighborhood-category ul {
+    list-style: none;
+    padding: 0;
+}
+
+.neighborhood-category li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.neighborhood-category li:last-child {
+    border-bottom: none;
+}
+
+@media (max-width: 768px) {
+    .neighborhoods-grid {
+        flex-direction: column;
+    }
+}
+
     background-color: var(--primary-color);
     color: white;
     padding: 60px 0 20px;

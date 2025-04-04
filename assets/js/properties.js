@@ -1,4 +1,3 @@
-
 // Property listings data
 const properties = [
     {
@@ -115,4 +114,58 @@ function generatePropertyCard(property) {
 // Export for use in other scripts
 if (typeof module !== 'undefined') {
     module.exports = { properties, generatePropertyCard };
+}
+//Assuming this is where the select element is located.  Adjust as needed.
+const neighborhoodSelect = document.getElementById('neighborhood-select'); //replace 'neighborhood-select' with the actual id of your select element.
+if (neighborhoodSelect) {
+    neighborhoodSelect.innerHTML = `
+<option value="">All Neighborhoods</option>
+                        <option value="alpian-meadows">Alpian Meadows</option>
+                        <option value="alturas">Alturas</option>
+                        <option value="arlington-ranch">Arlington Ranch</option>
+                        <option value="aspire">Aspire (gated)</option>
+                        <option value="azure-canyon">Azure Canyon/Versante</option>
+                        <option value="beacon-hill">Beacon Hill</option>
+                        <option value="blue-diamond-springs">Blue Diamond Springs</option>
+                        <option value="cascade">Cascade at Mountain Pass (guard-gated)</option>
+                        <option value="cattara">Cattara</option>
+                        <option value="chaco-canyon">Chaco Canyon</option>
+                        <option value="coldwater-crossing">Coldwater Crossing</option>
+                        <option value="collina">Collina (gated)</option>
+                        <option value="denali">Denali</option>
+                        <option value="jasmine-falls">Jasmine Falls</option>
+                        <option value="las-colinas">Las Colinas</option>
+                        <option value="los-serranos">Los Serranos</option>
+                        <option value="madera">Madera</option>
+                        <option value="mandolin">Mandolin</option>
+                        <option value="maravilla">Maravilla</option>
+                        <option value="mesa-valla">Mesa/Valla (gated)</option>
+                        <option value="mirasol">Mirasol</option>
+                        <option value="montelano">Montelano (gated)</option>
+                        <option value="montecito">Montecito</option>
+                        <option value="monterey-ranch">Monterey Ranch</option>
+                        <option value="pyrenees">Pyrenees At Mountain Pass</option>
+                        <option value="quintessa">Quintessa (gated)</option>
+                        <option value="rio-vista">Rio Vista</option>
+                        <option value="rivendell">Rivendell</option>
+                        <option value="rockdale">Rockdale</option>
+                        <option value="sage-canyon">Sage Canyon</option>
+                        <option value="san-gabriel">San Gabriel (gated)</option>
+                        <option value="serenada">Serenada/Mountains Edge Pod 135</option>
+                        <option value="sierra-madre">Sierra Madre (gated)</option>
+                        <option value="silver-hills">Silver Hills</option>
+                        <option value="sonoma-summit">Sonoma Summit</option>
+                        <option value="south-mountain">South Mountain</option>
+                        <option value="sterling-ridge">Sterling Ridge</option>
+                        <option value="stonebridge">Stonebridge (gated)</option>
+                        <option value="stonehurst">Stonehurst</option>
+                        <option value="sutter">Sutter</option>
+                        <option value="sutter-point">Sutter Point</option>
+                        <option value="tierra-vista">Tierra Vista</option>
+                        <option value="tularosa">Tularosa/Pod 227</option>
+                        <option value="tuscalante">Tuscalante/Mountains Edge Pod 211</option>
+                        <option value="via-valencia">Via Valencia</option>
+                        <option value="willow-creek">Willow Creek</option>
+                        <option value="yellowstone">Yellowstone</option>
+`;
 }
