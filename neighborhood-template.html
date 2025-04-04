@@ -7,6 +7,7 @@
     <title>[Neighborhood Name] | Mountain Edge Homes</title>
     <meta name="description" content="Discover luxury homes in [Neighborhood Name] at Mountain's Edge with Dr. Jan Duffy, your Mountain's Edge real estate specialist.">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/global-map.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
@@ -167,8 +168,36 @@
                 </form>
                 <div class="form-contact-info">
                     <h3>Or Call Us Directly</h3>
-                    <p><i class="fas fa-phone"></i> <a href="tel:7022221988">(702) 222-1988</a></p>
+                    <p><i class="fas fa-phone"></i> <a href="tel:7029195002">(702) 919-5002</a></p>
                     <p class="privacy-note">Your information will never be shared with third parties. By submitting this form, you agree to our privacy policy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Include Global Map -->
+    <!-- Global Map Section -->
+    <section class="global-map-section">
+        <div class="container">
+            <h2 class="section-title">Explore Mountain Edge</h2>
+            <div class="global-map-content">
+                <div class="global-map-container">
+                    <div id="global-mountain-edge-map">
+                        <div id="global-map-error" style="display: none; text-align: center; padding: 20px;">
+                            <i class="fas fa-exclamation-triangle" style="font-size: 32px; color: #e74c3c; margin-bottom: 15px;"></i>
+                            <h3>Map Loading Error</h3>
+                            <p>We're having trouble loading the map. Please try again later.</p>
+                            <div style="margin-top: 15px; font-size: 14px; color: #666;">
+                                <p><strong>Mountain Edge Location:</strong> 36.0051°N, 115.2552°W</p>
+                                <p>A beautiful master-planned community in southwest Las Vegas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="global-map-info">
+                    <h3>About Mountain Edge</h3>
+                    <p>Mountain Edge is a master-planned community located in southwest Las Vegas, Nevada. Known for its scenic mountain views, beautiful homes, and numerous parks and trails, Mountain Edge offers a high quality of life and easy access to major amenities.</p>
+                    <p>The community features multiple neighborhoods with various home styles and price points, making it accessible to a wide range of homebuyers.</p>
                 </div>
             </div>
         </div>
@@ -234,5 +263,6 @@
     <script src="assets/js/utils.js"></script>
     <script src="assets/js/properties.js"></script>
     <script src="assets/js/neighborhood.js"></script>
+    <script src="assets/js/global-map.js"></script>
 </body>
 </html>
