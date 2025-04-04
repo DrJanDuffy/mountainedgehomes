@@ -33,7 +33,7 @@ function initMap() {
     // Create the map
     map = new google.maps.Map(document.getElementById("mountain-edge-map"), {
         center: mountainEdgeCenter,
-        zoom: 11,
+        zoom: 12,
         mapTypeControl: true,
         fullscreenControl: true,
         streetViewControl: true,
