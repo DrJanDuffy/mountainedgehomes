@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js"></script>
 </head>
 <body>
     <!-- Header -->
@@ -34,6 +35,7 @@
                     <li><a href="testimonials.html">Testimonials</a></li>
                     <li><a href="index.html#booking">Schedule</a></li>
                     <li><a href="index.html#contact">Contact</a></li>
+                    <li><a href="home-value.html">Home Value</a></li>
                 </ul>
             </nav>
         </div>
@@ -44,11 +46,38 @@
         <div class="container">
             <h1>Mountain's Edge Real Estate Market Insights</h1>
             <p>Stay informed with the latest trends, tips, and news about Las Vegas luxury real estate</p>
+            <div class="hero-cta">
+                <a href="#recent-articles" class="btn btn-prominent">Read Latest Articles</a>
+                <a href="#subscribe" class="btn btn-secondary">Subscribe to Updates</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Article Section -->
+    <section class="featured-article-section">
+        <div class="container">
+            <div class="featured-article-card">
+                <div class="featured-article-image">
+                    <img src="assets/images/property1.jpg" alt="Luxury home in Mountain's Edge Las Vegas" class="img-responsive">
+                </div>
+                <div class="featured-article-content">
+                    <span class="article-tag">Featured</span>
+                    <h2>2024 Market Outlook: What's Next for Mountain's Edge Real Estate</h2>
+                    <p class="article-meta">
+                        <span class="article-date"><i class="far fa-calendar-alt"></i> April 1, 2024</span>
+                        <span class="article-author"><i class="far fa-user"></i> Dr. Jan Duffy</span>
+                    </p>
+                    <p class="article-excerpt">
+                        Despite fluctuating interest rates, Mountain's Edge continues to see strong demand for luxury homes. Our analysis shows neighborhood values have increased 7.2% year-over-year, outpacing many Las Vegas suburbs...
+                    </p>
+                    <a href="#" class="btn btn-sm">Read Full Article</a>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Blog Content Section -->
-    <section class="blog-content">
+    <section id="recent-articles" class="blog-content">
         <div class="container">
             <div class="blog-main">
                 <div class="blog-feed-container">
@@ -67,6 +96,66 @@
                             width="100%" 
                             allowfullscreen>
                         </iframe>
+                    </div>
+                </div>
+                
+                <div class="blog-categories">
+                    <h3>Browse by Category</h3>
+                    <div class="category-tags">
+                        <a href="#" class="category-tag">Market Trends</a>
+                        <a href="#" class="category-tag">Home Buying Tips</a>
+                        <a href="#" class="category-tag">Selling Advice</a>
+                        <a href="#" class="category-tag">Investment Strategy</a>
+                        <a href="#" class="category-tag">Neighborhood News</a>
+                        <a href="#" class="category-tag">Luxury Homes</a>
+                        <a href="#" class="category-tag">Mortgage Updates</a>
+                    </div>
+                </div>
+                
+                <div class="recent-articles">
+                    <h3>Recent Articles</h3>
+                    <div class="article-grid">
+                        <div class="article-card">
+                            <div class="article-image">
+                                <img src="assets/images/property2.jpg" alt="Mountain's Edge home interior design trends" loading="lazy">
+                            </div>
+                            <div class="article-details">
+                                <h4>Design Trends: What Mountain's Edge Buyers Are Looking For</h4>
+                                <p class="article-meta">
+                                    <span class="article-date"><i class="far fa-calendar-alt"></i> March 25, 2024</span>
+                                </p>
+                                <p class="article-excerpt">The latest design preferences among luxury homebuyers in Las Vegas' Mountain's Edge community show a strong preference for...</p>
+                                <a href="#" class="read-more">Read More</a>
+                            </div>
+                        </div>
+                        
+                        <div class="article-card">
+                            <div class="article-image">
+                                <img src="assets/images/property3.jpg" alt="Mountain's Edge community amenities" loading="lazy">
+                            </div>
+                            <div class="article-details">
+                                <h4>Mountain's Edge Community Spotlight: Amenities Worth Noting</h4>
+                                <p class="article-meta">
+                                    <span class="article-date"><i class="far fa-calendar-alt"></i> March 18, 2024</span>
+                                </p>
+                                <p class="article-excerpt">From hiking trails to community parks, exploring the amenities that make Mountain's Edge one of Las Vegas' most...</p>
+                                <a href="#" class="read-more">Read More</a>
+                            </div>
+                        </div>
+                        
+                        <div class="article-card">
+                            <div class="article-image">
+                                <img src="assets/images/property1.jpg" alt="Mountain's Edge real estate investment" loading="lazy">
+                            </div>
+                            <div class="article-details">
+                                <h4>Investment Potential: Why Mountain's Edge Properties Outperform</h4>
+                                <p class="article-meta">
+                                    <span class="article-date"><i class="far fa-calendar-alt"></i> March 10, 2024</span>
+                                </p>
+                                <p class="article-excerpt">Our analysis of property appreciation rates in Southwest Las Vegas shows Mountain's Edge outperforming neighboring areas by...</p>
+                                <a href="#" class="read-more">Read More</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -117,10 +206,16 @@
                     <a href="our-team.html" class="btn btn-sm">Learn More</a>
                 </div>
                 
-                <div class="sidebar-section cta-box">
+                <div id="subscribe" class="sidebar-section cta-box">
                     <h3>Looking to Buy or Sell?</h3>
                     <p>Contact us today for a personalized consultation about Mountain's Edge real estate opportunities.</p>
                     <a href="index.html#contact" class="btn btn-contact btn-sm">Contact Now</a>
+                </div>
+
+                <div class="sidebar-section realscout-component">
+                    <h3>Find Your Dream Home</h3>
+                    <p>Use our powerful search tools to find properties in Mountain's Edge that match your criteria.</p>
+                    <realscout-simple-search agent-encoded-id="QWdlbnQtMjI1MDUw"></realscout-simple-search>
                 </div>
                 
                 <div class="sidebar-section featured-neighborhoods">
@@ -141,6 +236,59 @@
                         <input type="email" placeholder="Your Email Address" required>
                         <button type="submit" class="btn btn-sm">Subscribe</button>
                     </form>
+                </div>
+
+                <div class="sidebar-section popular-posts">
+                    <h3>Most Popular Articles</h3>
+                    <ul class="popular-post-list">
+                        <li>
+                            <a href="#">
+                                <div class="popular-post-image">
+                                    <img src="assets/images/property1.jpg" alt="Popular article thumbnail" loading="lazy">
+                                </div>
+                                <div class="popular-post-info">
+                                    <h4>5 Reasons Mountain's Edge Continues to Attract Luxury Buyers</h4>
+                                    <span class="post-date">March 5, 2024</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="popular-post-image">
+                                    <img src="assets/images/property2.jpg" alt="Popular article thumbnail" loading="lazy">
+                                </div>
+                                <div class="popular-post-info">
+                                    <h4>The Ultimate Guide to Mountain's Edge School Districts</h4>
+                                    <span class="post-date">February 28, 2024</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="popular-post-image">
+                                    <img src="assets/images/property3.jpg" alt="Popular article thumbnail" loading="lazy">
+                                </div>
+                                <div class="popular-post-info">
+                                    <h4>Interest Rate Trends and Their Impact on Las Vegas Home Buyers</h4>
+                                    <span class="post-date">February 20, 2024</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Article CTA Section -->
+    <section class="article-cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Have Questions About Mountain's Edge Real Estate?</h2>
+                <p>Our expert team is ready to answer all your questions about buying, selling, or investing in the Mountain's Edge community.</p>
+                <div class="cta-buttons">
+                    <a href="index.html#contact" class="btn btn-lg">Contact Us Today</a>
+                    <a href="home-value.html" class="btn btn-secondary btn-lg">Get Your Home Value</a>
                 </div>
             </div>
         </div>
@@ -177,21 +325,6 @@
         </div>
     </section>
 
-    <!-- Include global map component -->
-    <div id="global-map-container"></div>
-    <script>
-        // Load the global map component
-        fetch('assets/html/global-map.html')
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('global-map-container').innerHTML = html;
-                // Load the map script after inserting the HTML
-                const script = document.createElement('script');
-                script.src = 'assets/js/global-map.js';
-                document.body.appendChild(script);
-            });
-    </script>
-
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -217,8 +350,10 @@
                             <li><a href="our-team.html">Our Team</a></li>
                             <li><a href="blog.html">Blog</a></li>
                             <li><a href="testimonials.html">Testimonials</a></li>
+                            <li><a href="home-value.html">Home Value</a></li>
                             <li><a href="index.html#booking">Schedule</a></li>
                             <li><a href="index.html#contact">Contact</a></li>
+                            <li><a href="sitemap.html">Sitemap</a></li>
                         </ul>
                     </div>
                     <div class="link-column">
@@ -247,16 +382,36 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 Mountain Edge Homes. All rights reserved.</p>
+                <p>&copy; 2024 Mountain Edge Homes. All rights reserved.</p>
                 <div class="footer-bottom-links">
                     <a href="#">Privacy Policy</a>
                     <a href="#">Terms of Service</a>
-                    <a href="#">Sitemap</a>
+                    <a href="sitemap.html">Sitemap</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <script src="assets/js/script.js"></script>
+    <script>
+        // Function to copy RSS Feed URL to clipboard
+        function copyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            
+            // Show feedback
+            const copyBtn = document.querySelector('.copy-btn');
+            const originalText = copyBtn.innerHTML;
+            copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            
+            setTimeout(() => {
+                copyBtn.innerHTML = originalText;
+            }, 2000);
+        }
+    </script>
 </body>
 </html>
