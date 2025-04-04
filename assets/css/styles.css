@@ -1053,6 +1053,21 @@ footer::before {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
+.business-info {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.business-info p {
+    margin-bottom: 8px;
+}
+
+.business-info strong {
+    color: var(--primary-color);
+}
+
+
 .neighborhood-hero .hero-overlay {
     position: absolute;
     top: 0;
