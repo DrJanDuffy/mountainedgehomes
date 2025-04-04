@@ -164,7 +164,7 @@ function renderPropertyDetails(property) {
                         </div>
                         <div class="agent-contact-item">
                             <i class="fas fa-envelope"></i>
-                            <span>sarah@mountainedgehomes.com</span>
+                            <span>jan.duffy@mountainedgehomes.com</span>
                         </div>
                     </div>
                     
