@@ -88,10 +88,21 @@ const properties = [
 
 // Function to generate property cards HTML
 function generatePropertyCard(property) {
+    // Extract high-res version for srcset if available
+    const highResImage = property.highResImage || property.image;
+
     return `
     <div class="property-card">
-        <div class="property-image">
-            <img src="${property.image}" alt="${property.title}">
+        <div class="property-image image-container image-hover-zoom">
+            <img 
+                src="assets/images/property-placeholder.jpg" 
+                data-src="${property.image}" 
+                data-srcset="${highResImage} 2x" 
+                alt="${property.title} - ${property.description || 'Beautiful property in Mountain\'s Edge'}" 
+                class="optimized-image" 
+                width="800" 
+                height="600"
+                loading="lazy">
             <div class="property-price">${property.price}</div>
             ${property.neighborhood ? `<div class="property-neighborhood">${property.neighborhood}</div>` : ''}
         </div>

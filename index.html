@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,6 +32,19 @@
 
     <!-- Hero Section -->
     <section class="hero">
+        <!-- Optimized Hero Background with proper alt text - loaded by CSS but described here -->
+        <picture>
+            <source srcset="assets/images/hero-mountains-edge-2400w.jpg" media="(min-width: 1600px)">
+            <source srcset="assets/images/hero-mountains-edge-1600w.jpg" media="(min-width: 800px)">
+            <source srcset="assets/images/hero-mountains-edge-800w.jpg" media="(max-width: 799px)">
+            <img 
+                src="assets/images/hero-mountains-edge-placeholder.jpg" 
+                data-src="assets/images/hero-mountains-edge-1600w.jpg" 
+                alt="Panoramic view of Mountain's Edge community in Las Vegas with mountain backdrop" 
+                class="hero-background optimized-image" 
+                loading="eager" 
+                aria-hidden="true">
+        </picture>
         <div class="hero-content">
             <h1>Las Vegas Mountain's Edge Real Estate Specialists</h1>
             <p>Premium Mountain's Edge Properties in Southwest Las Vegas, Clark County 89178</p>
@@ -100,11 +112,11 @@
             <div class="properties-grid" id="featured-properties">
                 <!-- Properties will be loaded dynamically from properties.js -->
             </div>
-            
+
             <div class="realscout-container">
                 <realscout-office-listings agent-encoded-id="QWdlbnQtMjI1MDUw" sort-order="PRICE_LOW" listing-status="For Sale" property-types="TC,SFR,MF" price-min="500000"></realscout-office-listings>
             </div>
-            
+
             <div class="center-btn">
                 <a href="#" class="btn">View All Properties</a>
             </div>
@@ -172,8 +184,16 @@
             <h2 class="section-title">Premium Mountain's Edge Las Vegas Neighborhoods</h2>
             <div class="neighborhoods-grid">
                 <div class="neighborhood-card">
-                    <div class="neighborhood-image">
-                        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Aspire">
+                    <div class="neighborhood-image image-container image-hover-zoom">
+                        <img 
+                            src="assets/images/placeholder-neighborhood.jpg" 
+                            data-src="assets/images/neighborhood-aspire.jpg" 
+                            data-srcset="assets/images/neighborhood-aspire-2x.jpg 2x" 
+                            alt="Aspire neighborhood in Mountain's Edge featuring luxury gated homes with desert landscaping" 
+                            class="optimized-image" 
+                            width="800" 
+                            height="600"
+                            loading="lazy">
                     </div>
                     <div class="neighborhood-info">
                         <h3>Aspire</h3>
@@ -182,8 +202,16 @@
                     </div>
                 </div>
                 <div class="neighborhood-card">
-                    <div class="neighborhood-image">
-                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Cascade">
+                    <div class="neighborhood-image image-container image-hover-zoom">
+                        <img 
+                            src="assets/images/placeholder-neighborhood.jpg" 
+                            data-src="assets/images/neighborhood-cascade.jpg" 
+                            data-srcset="assets/images/neighborhood-cascade-2x.jpg 2x" 
+                            alt="Cascade at Mountain Pass neighborhood showcasing luxury homes with mountain views" 
+                            class="optimized-image" 
+                            width="800" 
+                            height="600"
+                            loading="lazy">
                     </div>
                     <div class="neighborhood-info">
                         <h3>Cascade at Mountain Pass</h3>
@@ -192,8 +220,16 @@
                     </div>
                 </div>
                 <div class="neighborhood-card">
-                    <div class="neighborhood-image">
-                        <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Collina">
+                    <div class="neighborhood-image image-container image-hover-zoom">
+                        <img 
+                            src="assets/images/placeholder-neighborhood.jpg" 
+                            data-src="assets/images/neighborhood-collina.jpg" 
+                            data-srcset="assets/images/neighborhood-collina-2x.jpg 2x" 
+                            alt="Collina neighborhood in Mountain's Edge featuring stunning homes and picturesque settings" 
+                            class="optimized-image" 
+                            width="800" 
+                            height="600"
+                            loading="lazy">
                     </div>
                     <div class="neighborhood-info">
                         <h3>Collina</h3>
@@ -202,8 +238,16 @@
                     </div>
                 </div>
                 <div class="neighborhood-card">
-                    <div class="neighborhood-image">
-                        <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Mesa/Valla">
+                    <div class="neighborhood-image image-container image-hover-zoom">
+                        <img 
+                            src="assets/images/placeholder-neighborhood.jpg" 
+                            data-src="assets/images/neighborhood-mesa-valla.jpg" 
+                            data-srcset="assets/images/neighborhood-mesa-valla-2x.jpg 2x" 
+                            alt="Mesa/Valla neighborhood in Mountain's Edge, known for family-friendly homes and amenities" 
+                            class="optimized-image" 
+                            width="800" 
+                            height="600"
+                            loading="lazy">
                     </div>
                     <div class="neighborhood-info">
                         <h3>Mesa/Valla</h3>
@@ -212,8 +256,16 @@
                     </div>
                 </div>
                 <div class="neighborhood-card">
-                    <div class="neighborhood-image">
-                        <img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Montelano">
+                    <div class="neighborhood-image image-container image-hover-zoom">
+                        <img 
+                            src="assets/images/placeholder-neighborhood.jpg" 
+                            data-src="assets/images/neighborhood-montelano.jpg" 
+                            data-srcset="assets/images/neighborhood-montelano-2x.jpg 2x" 
+                            alt="Montelano neighborhood in Mountain's Edge showcasing upscale homes with spacious lots" 
+                            class="optimized-image" 
+                            width="800" 
+                            height="600"
+                            loading="lazy">
                     </div>
                     <div class="neighborhood-info">
                         <h3>Montelano</h3>
@@ -222,8 +274,16 @@
                     </div>
                 </div>
                 <div class="neighborhood-card">
-                    <div class="neighborhood-image">
-                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Quintessa">
+                    <div class="neighborhood-image image-container image-hover-zoom">
+                        <img 
+                            src="assets/images/placeholder-neighborhood.jpg" 
+                            data-src="assets/images/neighborhood-quintessa.jpg" 
+                            data-srcset="assets/images/neighborhood-quintessa-2x.jpg 2x" 
+                            alt="Quintessa neighborhood in Mountain's Edge, known for its architectural distinction and amenities" 
+                            class="optimized-image" 
+                            width="800" 
+                            height="600"
+                            loading="lazy">
                     </div>
                     <div class="neighborhood-info">
                         <h3>Quintessa</h3>
@@ -232,8 +292,16 @@
                     </div>
                 </div>
                 <div class="neighborhood-card">
-                    <div class="neighborhood-image">
-                        <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="San Gabriel">
+                    <div class="neighborhood-image image-container image-hover-zoom">
+                        <img 
+                            src="assets/images/placeholder-neighborhood.jpg" 
+                            data-src="assets/images/neighborhood-san-gabriel.jpg" 
+                            data-srcset="assets/images/neighborhood-san-gabriel-2x.jpg 2x" 
+                            alt="San Gabriel neighborhood in Mountain's Edge offering charming homes and family amenities" 
+                            class="optimized-image" 
+                            width="800" 
+                            height="600"
+                            loading="lazy">
                     </div>
                     <div class="neighborhood-info">
                         <h3>San Gabriel</h3>
@@ -242,8 +310,16 @@
                     </div>
                 </div>
                 <div class="neighborhood-card">
-                    <div class="neighborhood-image">
-                        <img src="https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Sierra Madre">
+                    <div class="neighborhood-image image-container image-hover-zoom">
+                        <img 
+                            src="assets/images/placeholder-neighborhood.jpg" 
+                            data-src="assets/images/neighborhood-sierra-madre.jpg" 
+                            data-srcset="assets/images/neighborhood-sierra-madre-2x.jpg 2x" 
+                            alt="Sierra Madre neighborhood in Mountain's Edge featuring prestigious homes with mountain views" 
+                            class="optimized-image" 
+                            width="800" 
+                            height="600"
+                            loading="lazy">
                     </div>
                     <div class="neighborhood-info">
                         <h3>Sierra Madre</h3>
@@ -456,6 +532,7 @@
         </div>
     </footer>
 
+    <script src="assets/js/image-optimization.js"></script>
     <script src="assets/js/script.js"></script>
     <script src="assets/js/properties.js"></script>
     <script src="assets/js/followupboss.js"></script>

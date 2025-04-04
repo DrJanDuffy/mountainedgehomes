@@ -1,0 +1,87 @@
+
+/* Image optimization styles */
+
+/* Base image styling */
+.optimized-image {
+    width: 100%;
+    height: auto;
+    transition: opacity 0.3s ease, filter 0.5s ease;
+}
+
+/* Lazy loading image state */
+img[data-src] {
+    opacity: 0;
+}
+
+/* Loaded image state */
+img.loaded {
+    opacity: 1;
+}
+
+/* Responsive image containers */
+.image-container {
+    position: relative;
+    overflow: hidden;
+    background-color: #f0f0f0; /* Light placeholder */
+}
+
+/* Aspect ratio containers */
+.ratio-16-9 {
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+}
+
+.ratio-4-3 {
+    padding-top: 75%; /* 4:3 Aspect Ratio */
+}
+
+.ratio-1-1 {
+    padding-top: 100%; /* 1:1 Aspect Ratio (Square) */
+}
+
+.ratio-3-4 {
+    padding-top: 133.33%; /* 3:4 Aspect Ratio */
+}
+
+/* Images inside ratio containers */
+.image-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Image hover effects */
+.image-hover-zoom img {
+    transition: transform 0.5s ease;
+}
+
+.image-hover-zoom:hover img {
+    transform: scale(1.05);
+}
+
+/* Property image galleries */
+.property-gallery img {
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Team member images */
+.team-member-image img {
+    border-radius: 50%;
+    border: 3px solid var(--accent-color);
+}
+
+/* High-res image markers for retina displays */
+.high-res-indicator {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    pointer-events: none;
+}

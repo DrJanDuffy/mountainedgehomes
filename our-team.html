@@ -43,8 +43,16 @@
     <section class="team-member-profile">
         <div class="container">
             <div class="profile-header">
-                <div class="profile-image">
-                    <img src="assets/images/jan-duffy.jpg" alt="Dr. Jan Duffy">
+                <div class="profile-image team-member-image">
+                    <img 
+                        src="assets/images/profile-placeholder.jpg" 
+                        data-src="assets/images/jan-duffy.jpg" 
+                        data-srcset="assets/images/jan-duffy-2x.jpg 2x" 
+                        alt="Dr. Jan Duffy - Mountain's Edge Real Estate Specialist with over 15 years of experience in Las Vegas luxury homes" 
+                        class="optimized-image" 
+                        width="400" 
+                        height="400"
+                        loading="eager">
                 </div>
                 <div class="profile-intro">
                     <h2>Dr. Jan Duffy</h2>
@@ -357,6 +365,7 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
+    <script src="assets/js/image-optimization.js"></script>
     <script src="assets/js/script.js"></script>
     <script src="assets/js/team.js"></script>
     <script src="assets/js/global-map.js"></script>
