@@ -1,10 +1,328 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Webpage</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mountain Edge Homes | Luxury Mountain Real Estate</title>
+    <meta name="description" content="Discover luxury mountain properties in breathtaking locations with Mountain Edge Homes, the premier real estate agency for high-end mountain homes.">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js"></script>
 </head>
 <body>
-  <realscout-widget></realscout-widget>
-  <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" defer></script>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>Mountain Edge Homes</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="#properties">Properties</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Find Your Dream Mountain Home</h1>
+            <p>Discover luxury properties in breathtaking locations</p>
+            <a href="#properties" class="btn">View Properties</a>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-container">
+                <h2>Find Your Perfect Property</h2>
+                <form class="search-form">
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <select id="location" name="location">
+                            <option value="">Any Location</option>
+                            <option value="enterprise">Enterprise</option>
+                            <option value="southwest">Southwest</option>
+                            <option value="summerlin">Summerlin</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="property-type">Property Type</label>
+                        <select id="property-type" name="property-type">
+                            <option value="">Any Type</option>
+                            <option value="house">House</option>
+                            <option value="condo">Condo</option>
+                            <option value="townhouse">Townhouse</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="price-range">Price Range</label>
+                        <select id="price-range" name="price-range">
+                            <option value="">Any Price</option>
+                            <option value="300000-500000">$300,000 - $500,000</option>
+                            <option value="500000-750000">$500,000 - $750,000</option>
+                            <option value="750000-1000000">$750,000 - $1,000,000</option>
+                            <option value="1000000+">$1,000,000+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="bedrooms">Bedrooms</label>
+                        <select id="bedrooms" name="bedrooms">
+                            <option value="">Any</option>
+                            <option value="1">1+</option>
+                            <option value="2">2+</option>
+                            <option value="3">3+</option>
+                            <option value="4">4+</option>
+                            <option value="5">5+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-secondary">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Properties Section -->
+    <section id="properties" class="properties-section">
+        <div class="container">
+            <h2 class="section-title">Featured Properties</h2>
+            <div class="properties-grid" id="featured-properties">
+                <!-- Properties will be loaded dynamically from properties.js -->
+            </div>
+            
+            <div class="realscout-container">
+                <realscout-office-listings agent-encoded-id="QWdlbnQtMjI1MDUw" sort-order="PRICE_LOW" listing-status="For Sale" property-types="TC,SFR,MF" price-min="500000"></realscout-office-listings>
+            </div>
+            
+            <div class="center-btn">
+                <a href="#" class="btn">View All Properties</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Mountain Edge Homes is the premier real estate agency specializing in luxury mountain properties. With over 15 years of experience in the market, we have an unparalleled knowledge of the most desirable mountain locations.</p>
+                    <p>Our team of expert agents is dedicated to providing exceptional service and finding the perfect property to match your lifestyle and preferences. Whether you're looking for a cozy cabin, a modern mountain retreat, or a luxurious estate, we have the expertise to help you find your dream mountain home.</p>
+                    <p>We pride ourselves on our personalized approach, attention to detail, and commitment to exceeding our clients' expectations. When you work with Mountain Edge Homes, you're not just getting an agent – you're getting a trusted advisor who will guide you through every step of the buying or selling process.</p>
+                    <a href="#contact" class="btn">Contact Us</a>
+                </div>
+                <div class="about-image">
+                    <img src="assets/images/team.jpg" alt="Mountain Edge Homes Team">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Property Buying</h3>
+                    <p>We guide you through every step of the buying process, from property search to closing, ensuring a smooth and successful transaction.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <h3>Property Selling</h3>
+                    <p>We leverage our market expertise and marketing strategies to sell your property quickly and at the best possible price.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Investment Consulting</h3>
+                    <p>We provide expert advice on real estate investments, helping you make informed decisions and maximize your returns.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Property Management</h3>
+                    <p>We offer comprehensive property management services to help you maintain and optimize your real estate investments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">What Our Clients Say</h2>
+            <div class="testimonials-slider">
+                <div class="testimonial" style="display: block;">
+                    <div class="testimonial-content">
+                        <p>"Working with Mountain Edge Homes was an absolute pleasure. Their knowledge of the market, professionalism, and attention to detail made the home buying process seamless. We couldn't be happier with our new mountain retreat!"</p>
+                    </div>
+                    <div class="client-info">
+                        <h4>John & Sarah Davis</h4>
+                        <p>Bought a home in Summerlin, NV</p>
+                    </div>
+                </div>
+                <div class="testimonial" style="display: none;">
+                    <div class="testimonial-content">
+                        <p>"The team at Mountain Edge Homes went above and beyond to help us sell our property. Their marketing strategy was excellent, and they found the perfect buyers who appreciated our home as much as we did. We highly recommend their services!"</p>
+                    </div>
+                    <div class="client-info">
+                        <h4>Michael Johnson</h4>
+                        <p>Sold a property in Enterprise, NV</p>
+                    </div>
+                </div>
+                <div class="testimonial" style="display: none;">
+                    <div class="testimonial-content">
+                        <p>"As first-time home buyers, we were nervous about the process, but the Mountain Edge Homes team guided us every step of the way. Their expertise and patience made all the difference. We found our dream home thanks to them!"</p>
+                    </div>
+                    <div class="client-info">
+                        <h4>Emily & Robert Wilson</h4>
+                        <p>Bought a home in Spring Mountains, NV</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Our Office</h3>
+                            <p>123 Mountain View Drive<br>Enterprise, NV 89178</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h3>Phone</h3>
+                            <p>(555) 123-4567</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email</h3>
+                            <p>info@mountainedgehomes.com</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h3>Office Hours</h3>
+                            <p>Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 4:00 PM<br>Sunday: By Appointment</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Your Phone</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>Mountain Edge Homes</h3>
+                    <p>Your trusted partner in mountain real estate. We help you find the perfect property that matches your lifestyle and preferences.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-column">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="#properties">Properties</a></li>
+                            <li><a href="#about">About Us</a></li>
+                            <li><a href="#services">Services</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-column">
+                        <h4>Properties</h4>
+                        <ul>
+                            <li><a href="#">Luxury Homes</a></li>
+                            <li><a href="#">Mountain Retreats</a></li>
+                            <li><a href="#">Cabins</a></li>
+                            <li><a href="#">Land</a></li>
+                            <li><a href="#">View All</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-column">
+                        <h4>Neighborhoods</h4>
+                        <ul>
+                            <li><a href="neighborhood-aspire.html">Aspire</a></li>
+                            <li><a href="neighborhood-cascade.html">Cascade</a></li>
+                            <li><a href="#">Tularosa</a></li>
+                            <li><a href="#">Chaco Canyon</a></li>
+                            <li><a href="#">View All</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Mountain Edge Homes. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/properties.js"></script>
 </body>
 </html>
