@@ -87,6 +87,43 @@ document.addEventListener('DOMContentLoaded', function() {
         const stickyHeader = function() {
             if (window.scrollY > heroSection.offsetHeight / 2) {
                 header.classList.add('scrolled');
+
+    // Advanced search toggle
+    const searchToggle = document.getElementById('search-toggle');
+    const advancedSearchForm = document.getElementById('advanced-property-search');
+    const advancedFields = document.querySelectorAll('.advanced-field');
+    
+    if (searchToggle && advancedSearchForm) {
+        // Initially hide advanced fields
+        advancedFields.forEach(field => {
+            field.style.display = 'none';
+        });
+        
+        searchToggle.addEventListener('click', function() {
+            // Toggle advanced fields visibility
+            const isCollapsed = searchToggle.classList.contains('collapsed');
+            
+            if (isCollapsed) {
+                // Show advanced fields
+                advancedFields.forEach(field => {
+                    field.style.display = 'block';
+                });
+                searchToggle.classList.remove('collapsed');
+                advancedSearchForm.classList.add('search-form-full');
+            } else {
+                // Hide advanced fields
+                advancedFields.forEach(field => {
+                    field.style.display = 'none';
+                });
+                searchToggle.classList.add('collapsed');
+                advancedSearchForm.classList.remove('search-form-full');
+            }
+        });
+        
+        // Initialize in collapsed state
+        searchToggle.classList.add('collapsed');
+    }
+
             } else {
                 header.classList.remove('scrolled');
             }

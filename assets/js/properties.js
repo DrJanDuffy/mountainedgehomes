@@ -94,6 +94,7 @@ function generatePropertyCard(property) {
     return `
     <div class="property-card">
         <div class="property-image image-container image-hover-zoom">
+            ${property.featured ? '<div class="featured-tag">Featured</div>' : ''}
             <img 
                 src="assets/images/property-placeholder.jpg" 
                 data-src="${property.image}" 
@@ -121,6 +122,30 @@ function generatePropertyCard(property) {
     </div>
     `;
 }
+
+// Function to initialize property listings
+function initializePropertyListings() {
+    // Handle featured properties display
+    const featuredPropertiesContainer = document.getElementById('featured-properties');
+    if (featuredPropertiesContainer) {
+        // Filter to get only featured properties
+        const featuredProperties = properties.filter(property => property.featured);
+        
+        // Generate HTML for featured properties
+        let featuredHTML = '';
+        featuredProperties.forEach(property => {
+            featuredHTML += generatePropertyCard(property);
+        });
+        
+        // Insert properties into container
+        featuredPropertiesContainer.innerHTML = featuredHTML;
+    }
+}
+
+// Initialize property listings when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initializePropertyListings();
+});
 
 // Export for use in other scripts
 if (typeof module !== 'undefined') {

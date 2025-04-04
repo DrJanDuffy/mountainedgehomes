@@ -7,6 +7,7 @@
     <meta name="description" content="Discover luxury Mountain's Edge homes in Las Vegas 89178 with Mountain Edge Homes, the premier real estate agency specializing in Mountain's Edge neighborhoods and properties.">
     <meta name="keywords" content="Mountain's Edge real estate, Las Vegas luxury homes, Mountain's Edge homes for sale, Las Vegas 89178 properties, Sierra Madre homes, Aspire gated community, Southwest Las Vegas real estate">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/property-search.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js"></script>
 </head>
@@ -55,43 +56,56 @@
         </div>
     </section>
 
-    <!-- Search Section -->
-    <section class="search-section">
+    <!-- Enhanced Property Search Section -->
+    <section class="property-search-section">
         <div class="container">
             <div class="search-container">
-                <h2>Find Your Perfect Property</h2>
-                <form class="search-form">
+                <div class="search-header">
+                    <h2>Find Your Mountain's Edge Dream Home</h2>
+                    <button class="search-toggle" id="search-toggle">
+                        Advanced Search <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+                
+                <form id="advanced-property-search" class="search-form">
                     <div class="form-group">
-                        <label for="location">Location</label>
-                        <select id="location" name="location">
+                        <label for="search-location">Location</label>
+                        <select id="search-location" name="location">
                             <option value="">Any Location</option>
-                            <option value="enterprise">Enterprise</option>
-                            <option value="southwest">Southwest</option>
-                            <option value="summerlin">Summerlin</option>
+                            <option value="Mountain Edge">Mountain's Edge</option>
+                            <option value="Enterprise">Enterprise</option>
+                            <option value="Southwest Las Vegas">Southwest</option>
+                            <option value="89178">89178 Zip Code</option>
                         </select>
                     </div>
+                    
                     <div class="form-group">
-                        <label for="property-type">Property Type</label>
-                        <select id="property-type" name="property-type">
-                            <option value="">Any Type</option>
-                            <option value="house">House</option>
-                            <option value="condo">Condo</option>
-                            <option value="townhouse">Townhouse</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="price-range">Price Range</label>
-                        <select id="price-range" name="price-range">
+                        <label for="search-price-range">Price Range</label>
+                        <select id="search-price-range" name="price-range">
                             <option value="">Any Price</option>
                             <option value="300000-500000">$300,000 - $500,000</option>
                             <option value="500000-750000">$500,000 - $750,000</option>
                             <option value="750000-1000000">$750,000 - $1,000,000</option>
-                            <option value="1000000+">$1,000,000+</option>
+                            <option value="1000000-1500000">$1,000,000 - $1,500,000</option>
+                            <option value="1500000-">$1,500,000+</option>
                         </select>
                     </div>
+                    
                     <div class="form-group">
-                        <label for="bedrooms">Bedrooms</label>
-                        <select id="bedrooms" name="bedrooms">
+                        <label for="search-property-type">Property Type</label>
+                        <select id="search-property-type" name="property-type">
+                            <option value="">Any Type</option>
+                            <option value="Single Family">Single Family</option>
+                            <option value="Condo">Condo</option>
+                            <option value="Townhouse">Townhouse</option>
+                            <option value="Luxury">Luxury Home</option>
+                            <option value="Gated">Gated Community</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group advanced-field">
+                        <label for="search-bedrooms">Bedrooms</label>
+                        <select id="search-bedrooms" name="bedrooms">
                             <option value="">Any</option>
                             <option value="1">1+</option>
                             <option value="2">2+</option>
@@ -100,24 +114,63 @@
                             <option value="5">5+</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-secondary">Search</button>
+                    
+                    <div class="form-group advanced-field">
+                        <label for="search-bathrooms">Bathrooms</label>
+                        <select id="search-bathrooms" name="bathrooms">
+                            <option value="">Any</option>
+                            <option value="1">1+</option>
+                            <option value="2">2+</option>
+                            <option value="3">3+</option>
+                            <option value="4">4+</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group advanced-field">
+                        <label for="search-neighborhood">Neighborhood</label>
+                        <select id="search-neighborhood" name="neighborhood">
+                            <!-- Will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    
+                    <div class="search-actions">
+                        <button type="button" id="reset-search" class="btn-reset">
+                            <i class="fas fa-undo"></i> Reset
+                        </button>
+                        <button type="submit" class="btn-search">
+                            <i class="fas fa-search"></i> Find Properties
+                        </button>
                     </div>
                 </form>
             </div>
+            
+            <!-- Search Summary - will be populated by JS -->
+            <div id="search-summary" class="search-summary"></div>
         </div>
     </section>
 
     <!-- Properties Section -->
     <section id="properties" class="properties-section">
         <div class="container">
-            <h2 class="section-title">Mountain's Edge Las Vegas Luxury Homes For Sale</h2>
-            <div class="properties-grid" id="featured-properties">
-                <!-- Properties will be loaded dynamically from properties.js -->
+            <div class="featured-listings">
+                <h2 class="section-title">Featured Mountain's Edge Luxury Homes</h2>
+                <div class="properties-grid" id="featured-properties">
+                    <!-- Featured properties will be loaded dynamically from properties.js -->
+                </div>
             </div>
 
-            <div class="realscout-container">
-                <realscout-office-listings agent-encoded-id="QWdlbnQtMjI1MDUw" sort-order="PRICE_LOW" listing-status="For Sale" property-types="TC,SFR,MF" price-min="500000"></realscout-office-listings>
+            <div id="search-results">
+                <h2 class="search-results-heading">Mountain's Edge Las Vegas Luxury Homes For Sale</h2>
+                <div class="realscout-container">
+                    <realscout-office-listings 
+                        agent-encoded-id="QWdlbnQtMjI1MDUw" 
+                        sort-order="PRICE_HIGH" 
+                        listing-status="For Sale" 
+                        property-types="TC,SFR,MF" 
+                        price-min="500000"
+                        max-results="12">
+                    </realscout-office-listings>
+                </div>
             </div>
 
             <div class="center-btn">
@@ -538,6 +591,7 @@
     <script src="assets/js/image-optimization.js"></script>
     <script src="assets/js/script.js"></script>
     <script src="assets/js/properties.js"></script>
+    <script src="assets/js/property-search.js"></script>
     <script src="assets/js/followupboss.js"></script>
     <script src="assets/js/map.js"></script>
 </body>
