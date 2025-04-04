@@ -5,11 +5,48 @@ window.addEventListener('load', function() {
     const mapElement = document.getElementById('global-mountain-edge-map');
     if (!mapElement) return;
     
-    // Create fallback map content first
-    document.getElementById('global-map-error').style.display = 'none';
+    // Hide error initially
+    const errorElement = document.getElementById('global-map-error');
+    if (errorElement) {
+        errorElement.style.display = 'none';
+    }
     
     // Define Mountain Edge coordinates
     const mountainEdgeCenter = { lat: 36.0051, lng: -115.2552 };
+    
+    // Function to show map error
+    function showMapError() {
+        if (errorElement) {
+            errorElement.style.display = 'block';
+        } else {
+            // Create error element if it doesn't exist
+            mapElement.innerHTML = `
+                <div id="global-map-error" style="text-align: center; padding: 20px;">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 32px; color: #e74c3c; margin-bottom: 15px;"></i>
+                    <h3>Map Loading Error</h3>
+                    <p>We're having trouble loading the map. Please try again later.</p>
+                    <div style="margin-top: 15px; font-size: 14px; color: #666;">
+                        <p><strong>Mountain Edge Location:</strong> 36.0051°N, 115.2552°W</p>
+                        <p>A beautiful master-planned community in southwest Las Vegas.</p>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Show fallback if it exists
+        const fallback = mapElement.querySelector('.static-map-fallback');
+        if (fallback) {
+            fallback.style.display = 'flex';
+        }
+    }
+    
+    // Define error handler for Google Maps authentication failures
+    if (!window.gm_authFailure) {
+        window.gm_authFailure = function() {
+            console.error('Google Maps authentication error');
+            showMapError();
+        };
+    }
     
     // Function to handle map script loading
     function loadMapScript() {
@@ -34,12 +71,17 @@ window.addEventListener('load', function() {
             
             // Handle script loading errors
             script.onerror = function() {
-                if (mapElement) {
-                    document.getElementById('global-map-error').style.display = 'block';
-                    document.querySelector('.static-map-fallback').style.display = 'flex';
-                    console.error('Failed to load Google Maps API');
-                }
+                console.error('Failed to load Google Maps API');
+                showMapError();
             };
+            
+            // Set a timeout to show error if maps doesn't load within 10 seconds
+            const mapTimeout = setTimeout(function() {
+                if (typeof google === 'undefined') {
+                    console.error('Google Maps API timeout');
+                    showMapError();
+                }
+            }, 10000);
             
             document.head.appendChild(script);
         } else {
@@ -50,6 +92,9 @@ window.addEventListener('load', function() {
     
     // Load the map
     loadMapScript();
+    
+    // Log for debugging
+    console.log('Global map initialization attempted');
 });
 
 // Initialize the global map

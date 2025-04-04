@@ -172,14 +172,41 @@ function clearMarkers() {
 window.addEventListener('load', function() {
     // Create fallback map content first
     const mapElement = document.getElementById('mountain-edge-map');
+    if (!mapElement) return; // Exit if map element doesn't exist on this page
     
     // Define error handler for Google Maps authentication failures
     window.gm_authFailure = function() {
-        if (mapElement) {
-            document.getElementById('map-error').style.display = 'block';
-            console.error('Google Maps authentication error');
-        }
+        console.error('Google Maps authentication error');
+        showMapError(mapElement);
     };
+    
+    // Function to show map error
+    function showMapError(element) {
+        // Make sure the error element exists
+        const errorElement = document.getElementById('map-error');
+        if (errorElement) {
+            errorElement.style.display = 'block';
+        } else {
+            // Create error element if it doesn't exist
+            element.innerHTML = `
+                <div id="map-error" style="text-align: center; padding: 20px;">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 32px; color: #e74c3c; margin-bottom: 15px;"></i>
+                    <h3>Map Loading Error</h3>
+                    <p>We're having trouble loading the map. Please try again later.</p>
+                    <div style="margin-top: 15px; font-size: 14px; color: #666;">
+                        <p><strong>Mountain Edge Location:</strong> 36.0051°N, 115.2552°W</p>
+                        <p>A beautiful master-planned community in southwest Las Vegas.</p>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Show fallback if it exists
+        const fallback = element.querySelector('.static-map-fallback');
+        if (fallback) {
+            fallback.style.display = 'flex';
+        }
+    }
     
     // Function to handle map script loading
     function loadMapScript() {
@@ -188,33 +215,36 @@ window.addEventListener('load', function() {
             const script = document.createElement('script');
             
             // Use hardcoded coordinates if Google Maps fails to load
-            if (mapElement) {
-                // Add a basic static map as fallback using a div with styling 
-                // that displays the Mountain Edge area
-                mapElement.innerHTML += `
-                    <div class="static-map-fallback" style="display: none; height: 100%; background-color: #f0f0f0; 
-                        display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 20px;">
-                        <h3>Mountain Edge, Las Vegas</h3>
-                        <p>Coordinates: 36.0051°N, 115.2552°W</p>
-                        <p>A beautiful master-planned community in southwest Las Vegas.</p>
-                    </div>
-                `;
-            }
+            // Add a basic static map as fallback using a div with styling 
+            mapElement.innerHTML += `
+                <div class="static-map-fallback" style="display: none; height: 100%; background-color: #f0f0f0; 
+                    display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 20px;">
+                    <h3>Mountain Edge, Las Vegas</h3>
+                    <p>Coordinates: 36.0051°N, 115.2552°W</p>
+                    <p>A beautiful master-planned community in southwest Las Vegas.</p>
+                </div>
+            `;
             
-            // Load Maps API with your key
+            // Load Maps API with your key - using a newer API key
             script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDt84u_m6IGyrNZ9Eyc2W0fAIx6yD3peTo&callback=initMap';
             script.async = true;
             script.defer = true;
             
             // Handle script loading errors
             script.onerror = function() {
-                if (mapElement) {
-                    document.getElementById('map-error').style.display = 'block';
-                    document.querySelector('.static-map-fallback').style.display = 'flex';
-                    console.error('Failed to load Google Maps API');
-                }
+                console.error('Failed to load Google Maps API');
+                showMapError(mapElement);
             };
             
+            // Set a timeout to show error if maps doesn't load within 10 seconds
+            const mapTimeout = setTimeout(function() {
+                if (typeof google === 'undefined') {
+                    console.error('Google Maps API timeout');
+                    showMapError(mapElement);
+                }
+            }, 10000);
+            
+            // Add script to page
             document.head.appendChild(script);
         } else {
             // Google Maps is already loaded, just initialize the map
@@ -224,4 +254,7 @@ window.addEventListener('load', function() {
     
     // Load the map
     loadMapScript();
+    
+    // Log for debugging
+    console.log('Map initialization attempted');
 });
