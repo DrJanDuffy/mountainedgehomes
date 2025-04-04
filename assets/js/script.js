@@ -2,15 +2,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // Announcement banner close functionality
     const announcementBanner = document.getElementById('announcement-banner');
     const closeBanner = document.getElementById('close-banner');
-    
+
     if (closeBanner && announcementBanner) {
         closeBanner.addEventListener('click', function() {
             announcementBanner.style.display = 'none';
-            
+
             // Store in session storage that the banner was closed
             sessionStorage.setItem('bannerClosed', 'true');
         });
-        
+
         // Check if banner was previously closed in this session
         if (sessionStorage.getItem('bannerClosed') === 'true') {
             announcementBanner.style.display = 'none';
@@ -105,43 +105,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const stickyHeader = function() {
             if (window.scrollY > heroSection.offsetHeight / 2) {
                 header.classList.add('scrolled');
-
-    // Advanced search toggle
-    const searchToggle = document.getElementById('search-toggle');
-    const advancedSearchForm = document.getElementById('advanced-property-search');
-    const advancedFields = document.querySelectorAll('.advanced-field');
-    
-    if (searchToggle && advancedSearchForm) {
-        // Initially hide advanced fields
-        advancedFields.forEach(field => {
-            field.style.display = 'none';
-        });
-        
-        searchToggle.addEventListener('click', function() {
-            // Toggle advanced fields visibility
-            const isCollapsed = searchToggle.classList.contains('collapsed');
-            
-            if (isCollapsed) {
-                // Show advanced fields
-                advancedFields.forEach(field => {
-                    field.style.display = 'block';
-                });
-                searchToggle.classList.remove('collapsed');
-                advancedSearchForm.classList.add('search-form-full');
-            } else {
-                // Hide advanced fields
-                advancedFields.forEach(field => {
-                    field.style.display = 'none';
-                });
-                searchToggle.classList.add('collapsed');
-                advancedSearchForm.classList.remove('search-form-full');
-            }
-        });
-        
-        // Initialize in collapsed state
-        searchToggle.classList.add('collapsed');
-    }
-
             } else {
                 header.classList.remove('scrolled');
             }
@@ -188,23 +151,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-
-// Copy RSS feed URL to clipboard
-function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(function() {
-        // Show brief success message
-        const copyBtn = document.querySelector('.copy-btn');
-        const originalText = copyBtn.innerHTML;
-        copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-        
-        setTimeout(function() {
-            copyBtn.innerHTML = originalText;
-        }, 2000);
-    }).catch(function(err) {
-        console.error('Could not copy text: ', err);
-    });
-}
-
             e.preventDefault();
 
             const targetId = this.getAttribute('href');
@@ -231,8 +177,24 @@ function copyToClipboard(text) {
 
     console.log("Window loaded");
 
+    // Copy RSS feed URL to clipboard
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(function() {
+            // Show brief success message
+            const copyBtn = document.querySelector('.copy-btn');
+            const originalText = copyBtn.innerHTML;
+            copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+
+            setTimeout(function() {
+                copyBtn.innerHTML = originalText;
+            }, 2000);
+        }).catch(function(err) {
+            console.error('Could not copy text: ', err);
+        });
+    }
+
     // Check for RealScout components and refresh if needed
-    const realscoutElements = document.querySelectorAll('realscout-office-listings, realscout-simple-search');
+    const realscoutElements = document.querySelectorAll('realscout-office-listings, realscout-simple-search, realscout-home-value');
     if (realscoutElements.length > 0) {
         console.log("RealScout element found");
 
@@ -242,5 +204,62 @@ function copyToClipboard(text) {
             // This is a placeholder - the actual refresh method would depend on the RealScout API
             console.log("RealScout component refreshed");
         });
+    }
+
+    // Initialize RealScout components
+    setTimeout(() => {
+        // Handle office listings component
+        const realscoutListingsElement = document.querySelector('realscout-office-listings');
+        if (realscoutListingsElement) {
+            console.log('RealScout listings element found, initializing...');
+            // Complete initialization if needed
+            realscoutListingsElement.setAttribute('refresh', 'true');
+            console.log('RealScout listings component refreshed');
+        }
+
+        // Handle home value component
+        const realscoutHomeValueElement = document.querySelector('realscout-home-value');
+        if (realscoutHomeValueElement) {
+            console.log('RealScout home value element found, initializing...');
+            // Complete initialization if needed
+            realscoutHomeValueElement.setAttribute('refresh', 'true');
+            console.log('RealScout home value component refreshed');
+        }
+    }, 1000);
+
+    // Advanced search toggle
+    const searchToggle = document.getElementById('search-toggle');
+    const advancedSearchForm = document.getElementById('advanced-property-search');
+    const advancedFields = document.querySelectorAll('.advanced-field');
+
+    if (searchToggle && advancedSearchForm) {
+        // Initially hide advanced fields
+        advancedFields.forEach(field => {
+            field.style.display = 'none';
+        });
+
+        searchToggle.addEventListener('click', function() {
+            // Toggle advanced fields visibility
+            const isCollapsed = searchToggle.classList.contains('collapsed');
+
+            if (isCollapsed) {
+                // Show advanced fields
+                advancedFields.forEach(field => {
+                    field.style.display = 'block';
+                });
+                searchToggle.classList.remove('collapsed');
+                advancedSearchForm.classList.add('search-form-full');
+            } else {
+                // Hide advanced fields
+                advancedFields.forEach(field => {
+                    field.style.display = 'none';
+                });
+                searchToggle.classList.add('collapsed');
+                advancedSearchForm.classList.remove('search-form-full');
+            }
+        });
+
+        // Initialize in collapsed state
+        searchToggle.classList.add('collapsed');
     }
 });
