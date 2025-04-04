@@ -131,6 +131,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const realscoutElement = document.querySelector('realscout-office-listings');
         if (realscoutElement) {
             console.log('RealScout element found, initializing...');
+            // Complete initialization if needed
+            realscoutElement.setAttribute('refresh', 'true');
+            console.log('RealScout component refreshed');
         }
     }, 1000);
 });

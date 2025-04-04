@@ -1,46 +1,16 @@
+// FollowupBoss CRM Integration
+let followupBossInitialized = false;
 
-// FollowupBoss integration
-document.addEventListener('DOMContentLoaded', function() {
-    const API_KEY = 'fka_0N4mnNtlF88f0RohNGJG47N2NQcVvy5QQO';
-    const FOLLOWUP_BOSS_URL = 'https://api.followupboss.com/v1/people';
-    
-    // Add focus animation to form inputs
-    const formInputs = document.querySelectorAll('.neighborhood-form input, .neighborhood-form textarea, .neighborhood-form select, .contact-form input, .contact-form textarea, .contact-form select');
-    
-    formInputs.forEach(input => {
-        // Add floating label animation
-        const parent = input.parentElement;
-        if (!input.hasAttribute('placeholder')) return;
-        
-        const placeholder = input.getAttribute('placeholder');
-        input.setAttribute('data-placeholder', placeholder);
-        
-        // Add focus/blur effects
-        input.addEventListener('focus', function() {
-            this.parentElement.classList.add('input-focused');
-            // Random encouraging messages when field is focused
-            const encouragingMessages = [
-                "Great! Tell us about yourself",
-                "We'd love to know your name!",
-                "Your dream home awaits...",
-                "You're one step closer!",
-                "Almost there!",
-                "We can't wait to help you!",
-                "Nice to meet you!"
-            ];
-            
-            if (this.getAttribute('id') === 'name' || this.getAttribute('id') === 'email') {
-                const randomMessage = encouragingMessages[Math.floor(Math.random() * encouragingMessages.length)];
-                this.setAttribute('placeholder', randomMessage);
-            }
-        });
-        
-        input.addEventListener('blur', function() {
-            this.parentElement.classList.remove('input-focused');
-            this.setAttribute('placeholder', this.getAttribute('data-placeholder'));
-        });
-    });
-    
+function initializeFollowupBoss() {
+    if (followupBossInitialized) {
+        return;
+    }
+
+    // Prevent multiple initializations
+    followupBossInitialized = true;
+
+    console.log('FollowupBoss integration initialized.');
+
     // Function to handle form submissions
     const handleFormSubmit = function(event) {
         event.preventDefault();
@@ -79,11 +49,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Send data to FollowupBoss
-        fetch(FOLLOWUP_BOSS_URL, {
+        fetch('https://api.followupboss.com/v1/people', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Basic ' + btoa(API_KEY + ':')
+                'Authorization': 'Basic ' + btoa('fka_0N4mnNtlF88f0RohNGJG47N2NQcVvy5QQO:')
             },
             body: JSON.stringify(data)
         })
@@ -131,11 +101,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
     
+
     // Find all forms and attach the submit handler
     const forms = document.querySelectorAll('form');
     forms.forEach(form => {
         form.addEventListener('submit', handleFormSubmit);
     });
-    
-    console.log('FollowupBoss integration initialized.');
-});
+}
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', initializeFollowupBoss);
