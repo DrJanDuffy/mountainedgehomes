@@ -1,6 +1,38 @@
 
 /* Team Page Styles */
 
+/* Animations */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 /* Page Banner */
 .page-banner {
     height: 40vh;
@@ -41,16 +73,59 @@
     gap: 40px;
     margin-bottom: 60px;
     align-items: flex-start;
+    position: relative;
+}
+
+.profile-header::after {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, rgba(var(--primary-rgb), 0.5), transparent);
 }
 
 .profile-image {
     flex: 0 0 300px;
+    animation: fadeInUp 0.8s ease-out;
+    position: relative;
+}
+
+.profile-image::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 50px;
+    height: 50px;
+    border-top: 3px solid var(--accent-color);
+    border-left: 3px solid var(--accent-color);
+    z-index: -1;
+}
+
+.profile-image::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    width: 50px;
+    height: 50px;
+    border-bottom: 3px solid var(--accent-color);
+    border-right: 3px solid var(--accent-color);
+    z-index: -1;
 }
 
 .profile-image img {
     width: 100%;
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.5s ease;
+}
+
+.profile-image img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
 }
 
 .profile-intro {
@@ -148,7 +223,18 @@
     margin-bottom: 60px;
     padding-bottom: 40px;
     border-bottom: 1px solid rgba(0,0,0,0.05);
+    animation: fadeIn 0.8s ease forwards;
+    opacity: 0;
 }
+
+.profile-section:nth-child(1) { animation-delay: 0.1s; }
+.profile-section:nth-child(2) { animation-delay: 0.2s; }
+.profile-section:nth-child(3) { animation-delay: 0.3s; }
+.profile-section:nth-child(4) { animation-delay: 0.4s; }
+.profile-section:nth-child(5) { animation-delay: 0.5s; }
+.profile-section:nth-child(6) { animation-delay: 0.6s; }
+.profile-section:nth-child(7) { animation-delay: 0.7s; }
+.profile-section:nth-child(8) { animation-delay: 0.8s; }
 
 .profile-section:last-child {
     border-bottom: none;
@@ -161,10 +247,20 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.profile-section h3:hover {
+    transform: translateX(5px);
 }
 
 .profile-section h3 i {
     color: var(--accent-color);
+    transition: transform 0.3s ease;
+}
+
+.profile-section:hover h3 i {
+    transform: scale(1.2);
 }
 
 /* Reviews Grid */
@@ -176,33 +272,54 @@
 
 .review-card {
     background-color: white;
-    padding: 25px;
+    padding: 30px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     transition: all 0.3s ease;
+    position: relative;
+    border-top: 3px solid var(--accent-color);
 }
 
 .review-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+}
+
+.review-card::before {
+    content: '"';
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-size: 60px;
+    color: rgba(var(--primary-rgb), 0.1);
+    font-family: 'Georgia', serif;
+    line-height: 1;
 }
 
 .review-stars {
     color: #FFD700;
     font-size: 1.2rem;
     margin-bottom: 15px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 2px;
 }
 
 .review-text {
     font-style: italic;
-    margin-bottom: 15px;
-    line-height: 1.6;
+    margin-bottom: 20px;
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
 }
 
 .review-author {
     text-align: right;
     font-weight: 600;
     color: var(--primary-color);
+    border-top: 1px solid rgba(0,0,0,0.05);
+    padding-top: 12px;
+    margin-top: 5px;
 }
 
 /* Gallery Grid */
@@ -217,6 +334,8 @@
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     transition: all 0.3s ease;
+    position: relative;
+    background-color: white;
 }
 
 .gallery-item:hover {
@@ -226,9 +345,14 @@
 
 .gallery-item img {
     width: 100%;
-    height: 200px;
+    height: 220px;
     object-fit: cover;
     display: block;
+    transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
 }
 
 .gallery-item p {
@@ -236,6 +360,8 @@
     background-color: white;
     font-size: 0.9rem;
     text-align: center;
+    font-weight: 500;
+    color: var(--primary-color);
 }
 
 /* Services & Booking Grids */
@@ -382,6 +508,108 @@
 .featured-listings {
     padding: 80px 0;
     background-color: var(--light-color);
+}
+
+/* Animation and Interactive Elements */
+.success-message {
+    background-color: #dff0d8;
+    color: #3c763d;
+    padding: 15px 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.success-message i {
+    font-size: 1.5rem;
+}
+
+.success-message.fade-out {
+    animation: fadeOut 0.5s ease forwards;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.animated-star {
+    display: inline-block;
+    animation: starPulse 1.5s ease infinite;
+    animation-play-state: paused;
+}
+
+.review-card:hover .animated-star {
+    animation-play-state: running;
+}
+
+@keyframes starPulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.caption-hover {
+    color: var(--accent-color);
+    transform: translateY(-3px);
+}
+
+.profile-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.profile-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Scroll to Top Button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 999;
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-to-top:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
 /* Responsive Styles */
