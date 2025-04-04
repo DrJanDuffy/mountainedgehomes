@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mountain Edge Homes | Real Estate Market Blog</title>
+    <meta name="description" content="Stay updated with the latest Las Vegas real estate market trends, insights, and Mountain's Edge community news on our blog.">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/blog.css">
+    <link rel="stylesheet" href="assets/css/global-map.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>Mountain Edge Homes</h1>
+            </div>
+            <nav>
+                <button class="menu-toggle" aria-label="Toggle navigation menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#properties">Properties</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="our-team.html">Our Team</a></li>
+                    <li><a href="blog.html" class="active">Blog</a></li>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                    <li><a href="index.html#booking">Schedule</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Blog Hero Section -->
+    <section class="blog-hero">
+        <div class="container">
+            <h1>Mountain's Edge Real Estate Market Insights</h1>
+            <p>Stay informed with the latest trends, tips, and news about Las Vegas luxury real estate</p>
+        </div>
+    </section>
+
+    <!-- Blog Content Section -->
+    <section class="blog-content">
+        <div class="container">
+            <div class="blog-main">
+                <div class="blog-feed-container">
+                    <h2>Latest Real Estate Market Updates</h2>
+                    <p class="blog-intro">Get the most current insights about the Las Vegas housing market, mortgage rates, home buying tips, and more. Our blog is updated regularly with valuable information to help you make informed real estate decisions in Mountain's Edge and beyond.</p>
+                    
+                    <!-- RSS Feed Embedded via iFrame -->
+                    <div class="rss-feed-container">
+                        <iframe 
+                            src="https://www.simplifyingthemarket.com/en/?a=956758-ef2edda2f940e018328655620ea05f18" 
+                            scrolling="yes" 
+                            frameborder="0" 
+                            marginheight="0" 
+                            marginwidth="0" 
+                            height="800px" 
+                            width="100%" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="blog-sidebar">
+                <div class="sidebar-section about-author">
+                    <h3>About Dr. Jan Duffy</h3>
+                    <img src="assets/images/profile-placeholder.jpg" alt="Dr. Jan Duffy, Mountain's Edge Real Estate Expert" class="author-image">
+                    <p>Dr. Jan Duffy is a Las Vegas real estate expert specializing in the Mountain's Edge community. With years of experience and deep market knowledge, she provides valuable insights to help clients make informed real estate decisions.</p>
+                    <a href="our-team.html" class="btn btn-sm">Learn More</a>
+                </div>
+                
+                <div class="sidebar-section cta-box">
+                    <h3>Looking to Buy or Sell?</h3>
+                    <p>Contact us today for a personalized consultation about Mountain's Edge real estate opportunities.</p>
+                    <a href="index.html#contact" class="btn btn-contact btn-sm">Contact Now</a>
+                </div>
+                
+                <div class="sidebar-section featured-neighborhoods">
+                    <h3>Featured Mountain's Edge Neighborhoods</h3>
+                    <ul class="neighborhood-links">
+                        <li><a href="neighborhood-aspire.html">Aspire</a></li>
+                        <li><a href="neighborhood-cascade.html">Cascade at Mountain Pass</a></li>
+                        <li><a href="neighborhood-collina.html">Collina</a></li>
+                        <li><a href="neighborhood-sierra-madre.html">Sierra Madre</a></li>
+                        <li><a href="index.html#neighborhoods">View All Neighborhoods</a></li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-section subscribe-box">
+                    <h3>Subscribe to Our Newsletter</h3>
+                    <p>Get the latest Mountain's Edge real estate updates delivered to your inbox.</p>
+                    <form class="subscribe-form">
+                        <input type="email" placeholder="Your Email Address" required>
+                        <button type="submit" class="btn btn-sm">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Information Section -->
+    <section class="business-info-section">
+        <div class="container">
+            <div class="info-cards">
+                <div class="info-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Our Office</h3>
+                    <p>8015 Blue Diamond Rd<br>Las Vegas, Nevada 89178, US</p>
+                </div>
+                
+                <div class="info-card">
+                    <i class="fas fa-phone"></i>
+                    <h3>Phone</h3>
+                    <p>(702) 919-5002</p>
+                </div>
+                
+                <div class="info-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email</h3>
+                    <p>DrJanSells@MountainEdgeHomes.com</p>
+                </div>
+                
+                <div class="info-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>Office Hours</h3>
+                    <p>Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 4:00 PM<br>Sunday: By Appointment</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Include global map component -->
+    <div id="global-map-container"></div>
+    <script>
+        // Load the global map component
+        fetch('assets/html/global-map.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('global-map-container').innerHTML = html;
+                // Load the map script after inserting the HTML
+                const script = document.createElement('script');
+                script.src = 'assets/js/global-map.js';
+                document.body.appendChild(script);
+            });
+    </script>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>Mountain Edge Homes</h3>
+                    <p>Your trusted partner in mountain real estate. We help you find the perfect property that matches your lifestyle and preferences.</p>
+                    <div class="business-info">
+                        <p><strong>Address:</strong> 8015 Blue Diamond Rd, Las Vegas, Nevada 89178, US</p>
+                        <p><strong>Phone:</strong> (702) 919-5002</p>
+                        <p><strong>Email:</strong> DrJanSells@MountainEdgeHomes.com</p>
+                        <p><strong>Office Hours:</strong> Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 4:00 PM<br>Sunday: By Appointment</p>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <div class="link-column">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="index.html#properties">Properties</a></li>
+                            <li><a href="index.html#about">About Us</a></li>
+                            <li><a href="index.html#services">Services</a></li>
+                            <li><a href="our-team.html">Our Team</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="testimonials.html">Testimonials</a></li>
+                            <li><a href="index.html#booking">Schedule</a></li>
+                            <li><a href="index.html#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-column">
+                        <h4>Properties</h4>
+                        <ul>
+                            <li><a href="#">Luxury Homes</a></li>
+                            <li><a href="#">Mountain Retreats</a></li>
+                            <li><a href="#">Cabins</a></li>
+                            <li><a href="#">Land</a></li>
+                            <li><a href="#">View All</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-column">
+                        <h4>Neighborhoods</h4>
+                        <ul>
+                            <li><a href="neighborhood-aspire.html">Aspire</a></li>
+                            <li><a href="neighborhood-cascade.html">Cascade</a></li>
+                            <li><a href="neighborhood-collina.html">Collina</a></li>
+                            <li><a href="neighborhood-mesa-valla.html">Mesa/Valla</a></li>
+                            <li><a href="neighborhood-montelano.html">Montelano</a></li>
+                            <li><a href="neighborhood-quintessa.html">Quintessa</a></li>
+                            <li><a href="neighborhood-san-gabriel.html">San Gabriel</a></li>
+                            <li><a href="neighborhood-sierra-madre.html">Sierra Madre</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Mountain Edge Homes. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
