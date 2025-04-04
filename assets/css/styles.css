@@ -1019,3 +1019,340 @@ footer::before {
     margin-top: 20px;
     min-height: 500px;
 }
+
+/* Neighborhood Landing Page Styles */
+.neighborhood-hero {
+    position: relative;
+    background: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80') no-repeat center;
+    background-size: cover;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    padding: 3rem 1rem;
+}
+
+.neighborhood-hero .container {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+}
+
+.neighborhood-hero h1 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.neighborhood-hero h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.neighborhood-hero .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cta-button:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.neighborhood-highlights-section {
+    padding: 5rem 0;
+    background-color: #f9f9f9;
+}
+
+.highlights-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.highlights-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.highlights-text h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+}
+
+.highlights-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 2rem;
+}
+
+.highlights-list li {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+}
+
+.highlights-list i {
+    color: #27ae60;
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+.secondary-cta {
+    display: inline-block;
+    background-color: #3498db;
+    color: #fff;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.secondary-cta:hover {
+    background-color: #2980b9;
+}
+
+.highlights-gallery {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+    min-width: 300px;
+}
+
+.highlights-gallery .gallery-item {
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.highlights-gallery .gallery-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.highlights-gallery .gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+.featured-homes {
+    padding: 5rem 0;
+}
+
+.featured-homes .section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2rem;
+    color: #2c3e50;
+}
+
+.testimonials {
+    padding: 5rem 0;
+    background-color: #f5f7fa;
+}
+
+.testimonial-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.testimonial-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    max-width: 500px;
+    flex: 1;
+    min-width: 300px;
+}
+
+.testimonial-content {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #34495e;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+}
+
+.testimonial-author img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 1rem;
+}
+
+.author-name {
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+    color: #2c3e50;
+}
+
+.author-details {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.contact-form {
+    padding: 5rem 0;
+    background-color: #2c3e50;
+    color: #fff;
+}
+
+.form-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.form-header h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.neighborhood-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.neighborhood-form input,
+.neighborhood-form select,
+.neighborhood-form textarea {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.neighborhood-form input::placeholder,
+.neighborhood-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.neighborhood-form select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+}
+
+.form-group:nth-child(5) {
+    grid-column: span 2;
+}
+
+.form-button {
+    grid-column: span 2;
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.form-button:hover {
+    background-color: #c0392b;
+}
+
+.privacy-note {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.privacy-note a {
+    color: #3498db;
+    text-decoration: underline;
+}
+
+.contact-alternative {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.poi-list {
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.poi-list h3 {
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+    font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .neighborhood-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .neighborhood-hero h2 {
+        font-size: 1.2rem;
+    }
+    
+    .highlights-content {
+        flex-direction: column;
+    }
+    
+    .neighborhood-form {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-group:nth-child(5),
+    .form-button {
+        grid-column: span 1;
+    }
+}

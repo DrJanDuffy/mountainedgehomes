@@ -8,8 +8,7 @@
     <meta name="description" content="Discover luxury homes in the Cascade at Mountain Pass guard-gated community of Mountain's Edge with Mountain Edge Homes, the premier real estate agency.">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js"></script>
 </head>
 <body>
     <header>
@@ -31,65 +30,147 @@
         </div>
     </header>
 
-    <section class="neighborhood-banner">
+    <!-- Hero Section -->
+    <section class="neighborhood-hero">
         <div class="container">
-            <h1 class="neighborhood-title">Cascade at Mountain Pass</h1>
-            <p class="neighborhood-subtitle">Guard-Gated Community in Mountain's Edge</p>
+            <h1>Cascade at Mountain Pass - Luxury Guard-Gated Community</h1>
+            <h2>Prestigious estates with 24/7 security and panoramic views from $850,000</h2>
+            <a href="#contact-form" class="cta-button">Schedule a Private Tour</a>
+            <div class="hero-overlay"></div>
         </div>
     </section>
 
-    <section class="neighborhood-details">
+    <!-- Brief Community Highlights -->
+    <section class="neighborhood-highlights-section">
         <div class="container">
-            <div class="neighborhood-content">
-                <div class="neighborhood-description">
-                    <h2>About Cascade at Mountain Pass</h2>
-                    <p>Cascade at Mountain Pass is one of the most prestigious neighborhoods in Mountain's Edge, offering 24/7 guard-gated security. Known for its luxury homes with premium finishes and architectural designs, Cascade provides an exclusive living experience.</p>
-                    <p>Built by premier homebuilders between 2005 and 2013, homes in Cascade feature expansive floor plans, designer kitchens, and outdoor living spaces designed to maximize mountain and city views. The community's landscaping and shared spaces are meticulously maintained.</p>
-                    
-                    <h3>Neighborhood Highlights</h3>
-                    <ul class="neighborhood-highlights">
-                        <li><i class="fas fa-home"></i> <strong>Home Types:</strong> Luxury single-family estates</li>
-                        <li><i class="fas fa-ruler-combined"></i> <strong>Square Footage:</strong> 3,200 - 5,500 sq ft</li>
-                        <li><i class="fas fa-calendar-alt"></i> <strong>Year Built:</strong> 2005-2013</li>
-                        <li><i class="fas fa-dollar-sign"></i> <strong>Price Range:</strong> $850,000 - $1,500,000</li>
-                        <li><i class="fas fa-shield-alt"></i> <strong>Security:</strong> 24/7 guard-gated entrance</li>
-                        <li><i class="fas fa-swimming-pool"></i> <strong>Amenities:</strong> Private park, community center, walking trails</li>
+            <div class="highlights-content">
+                <div class="highlights-text">
+                    <h2>Community Highlights</h2>
+                    <ul class="highlights-list">
+                        <li><i class="fas fa-check-circle"></i> 24/7 guard-gated security with patrol services</li>
+                        <li><i class="fas fa-check-circle"></i> Luxury homes with designer finishes and premium materials</li>
+                        <li><i class="fas fa-check-circle"></i> Private community park and recreation center</li>
+                        <li><i class="fas fa-check-circle"></i> Panoramic mountain and city views</li>
                     </ul>
+                    <a href="#contact-form" class="secondary-cta">Request Community Information</a>
                 </div>
-                <div class="neighborhood-image">
-                    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Cascade at Mountain Pass Neighborhood">
+                <div class="highlights-gallery">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Cascade Guard Gate">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1598228723793-52759bba239c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Cascade Park">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Mountain Views">
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="neighborhood-properties">
+    <!-- Featured Available Homes -->
+    <section class="featured-homes">
         <div class="container">
-            <h2 class="section-title">Available Properties in Cascade at Mountain Pass</h2>
-            <div class="properties-grid" id="neighborhood-properties">
-                <!-- Properties will be loaded from JS -->
-                <p class="loading-properties">Loading properties...</p>
+            <h2 class="section-title">Featured Available Homes in Cascade</h2>
+            <div class="realscout-container">
+                <realscout-office-listings agent-encoded-id="QWdlbnQtMjI1MDUw" sort-order="PRICE_HIGH" listing-status="For Sale" property-types="TC,SFR,MF" price-min="850000" max-results="3" custom-search="Cascade Mountain Edge"></realscout-office-listings>
             </div>
         </div>
     </section>
 
+    <!-- Neighborhood Map -->
     <section class="neighborhood-map">
         <div class="container">
-            <h2 class="section-title">Location & Amenities</h2>
+            <h2 class="section-title">Neighborhood Map</h2>
             <div class="map-content">
-                <div class="map-info">
-                    <h3>Nearby Amenities</h3>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26376.02482596!2d-115.2552!3d36.0051!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c8c67a0333ff33%3A0x2c7ffe4df688c898!2sMountain's%20Edge%2C%20Las%20Vegas%2C%20NV!5e0!3m2!1sen!2sus!4v1620581000000!5m2!1sen!2sus" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+                <div class="poi-list">
+                    <h3>Points of Interest</h3>
                     <ul class="amenities-list">
-                        <li><i class="fas fa-tree"></i> <strong>Parks:</strong> Exploration Peak Park (1.2 miles)</li>
                         <li><i class="fas fa-graduation-cap"></i> <strong>Schools:</strong> Vassiliadis Elementary School (2.1 miles)</li>
                         <li><i class="fas fa-shopping-cart"></i> <strong>Shopping:</strong> Mountain's Edge Marketplace (2.5 miles)</li>
                         <li><i class="fas fa-utensils"></i> <strong>Dining:</strong> Mountain West Eatery (2.2 miles)</li>
+                        <li><i class="fas fa-tree"></i> <strong>Recreation:</strong> Exploration Peak Park (1.2 miles)</li>
                         <li><i class="fas fa-car"></i> <strong>Commute:</strong> 27 minutes to Las Vegas Strip</li>
                     </ul>
                 </div>
-                <div class="map-placeholder">
-                    <img src="https://via.placeholder.com/600x400?text=Cascade+at+Mountain+Pass+Map" alt="Cascade at Mountain Pass Neighborhood Map">
-                    <!-- This would be replaced with an actual map in a production environment -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Residents Are Saying</h2>
+            <div class="testimonial-cards">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"The security and privacy at Cascade are unmatched in Las Vegas. After living here for three years, we couldn't imagine living anywhere else in the valley."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Testimonial Author">
+                        <div class="author-info">
+                            <p class="author-name">Elizabeth Chen</p>
+                            <p class="author-details">Resident since 2020</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"We built our dream home in Cascade and couldn't be happier with the community. The views are stunning and neighbors are fantastic."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Testimonial Author">
+                        <div class="author-info">
+                            <p class="author-name">Robert Taylor</p>
+                            <p class="author-details">Resident since 2018</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lead Capture Form -->
+    <section class="contact-form" id="contact-form">
+        <div class="container">
+            <div class="form-content">
+                <div class="form-header">
+                    <h2>Request More Information About Cascade</h2>
+                    <p>Complete the form below to receive detailed information about available homes in Cascade or to schedule a private tour.</p>
+                </div>
+                <form class="neighborhood-form">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="phone" name="phone" placeholder="Your Phone">
+                    </div>
+                    <div class="form-group">
+                        <select id="interest" name="interest">
+                            <option value="" disabled selected>I'm interested in...</option>
+                            <option value="buying">Buying a home in Cascade</option>
+                            <option value="selling">Selling my Cascade home</option>
+                            <option value="tour">Scheduling a community tour</option>
+                            <option value="info">General information</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder="Your Message" rows="4"></textarea>
+                    </div>
+                    <button type="submit" class="form-button">Submit Request</button>
+                </form>
+                <div class="privacy-note">
+                    <p>Your information is secure and will never be shared with third parties. <a href="#">Privacy Policy</a></p>
+                </div>
+                <div class="contact-alternative">
+                    <p>Prefer to speak directly? Call Dr. Jan Duffy at (702) 222-1988 for immediate assistance.</p>
                 </div>
             </div>
         </div>
@@ -123,10 +204,10 @@
                         <ul>
                             <li><a href="neighborhood-aspire.html">Aspire (gated)</a></li>
                             <li><a href="neighborhood-cascade.html">Cascade (guard-gated)</a></li>
-                            <li><a href="neighborhood-chaco-canyon.html">Chaco Canyon</a></li>
-                            <li><a href="neighborhood-denali.html">Denali</a></li>
-                            <li><a href="neighborhood-azure-canyon.html">Azure Canyon</a></li>
-                            <li><a href="index.html#neighborhoods">View All</a></li>
+                            <li><a href="neighborhood-collina.html">Collina</a></li>
+                            <li><a href="neighborhood-mesa-valla.html">Mesa/Valla</a></li>
+                            <li><a href="neighborhood-quintessa.html">Quintessa</a></li>
+                            <li><a href="neighborhood-sierra-madre.html">Sierra Madre</a></li>
                         </ul>
                     </div>
                     <div class="link-column">
@@ -152,8 +233,11 @@
         </div>
     </footer>
 
-    <script src="assets/js/utils.js"></script>
-    <script src="assets/js/properties.js"></script>
+    <button id="scrollToTop" class="scroll-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="assets/js/script.js"></script>
     <script src="assets/js/neighborhood.js"></script>
 </body>
 </html>

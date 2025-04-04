@@ -155,3 +155,89 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+// Neighborhood landing page functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Set unique background for each neighborhood
+    const pageTitle = document.title;
+    const heroSection = document.querySelector('.neighborhood-hero');
+    
+    if (heroSection) {
+        if (pageTitle.includes('Aspire')) {
+            heroSection.style.backgroundImage = "url('https://images.unsplash.com/photo-1585773690161-7b1cd0accfcf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80')";
+        } else if (pageTitle.includes('Cascade')) {
+            heroSection.style.backgroundImage = "url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80')";
+        } else if (pageTitle.includes('Collina')) {
+            heroSection.style.backgroundImage = "url('https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80')";
+        } else if (pageTitle.includes('Mesa/Valla')) {
+            heroSection.style.backgroundImage = "url('https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80')";
+        } else if (pageTitle.includes('Quintessa')) {
+            heroSection.style.backgroundImage = "url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80')";
+        } else if (pageTitle.includes('Sierra Madre')) {
+            heroSection.style.backgroundImage = "url('https://images.unsplash.com/photo-1600607687939-ce8a6c349279?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80')";
+        }
+    }
+
+    // Form submission handler
+    const neighborhoodForm = document.querySelector('.neighborhood-form');
+    if (neighborhoodForm) {
+        neighborhoodForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            let formValues = {};
+            
+            formData.forEach((value, key) => {
+                formValues[key] = value;
+            });
+            
+            // In a real implementation, you'd send this data to a server
+            console.log('Form submitted:', formValues);
+            
+            // Show success message
+            this.innerHTML = `
+                <div class="form-success">
+                    <i class="fas fa-check-circle" style="font-size: 3rem; color: #27ae60; margin-bottom: 1rem;"></i>
+                    <h3>Thank You!</h3>
+                    <p>Your request has been submitted successfully. Dr. Jan Duffy will contact you shortly.</p>
+                </div>
+            `;
+        });
+    }
+
+    // Smooth scroll for CTA buttons
+    const ctaButtons = document.querySelectorAll('.cta-button, .secondary-cta');
+    ctaButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            if (href.startsWith('#')) {
+                e.preventDefault();
+                const targetElement = document.querySelector(href);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+
+    // Check if RealScout components are loaded
+    const realscoutContainer = document.querySelector('.realscout-container');
+    if (realscoutContainer) {
+        // Add loading indicator
+        const loadingIndicator = document.createElement('div');
+        loadingIndicator.className = 'loading-indicator';
+        loadingIndicator.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading properties...';
+        realscoutContainer.appendChild(loadingIndicator);
+        
+        // Check if RealScout has loaded (in a real implementation, you'd use their API events)
+        setTimeout(() => {
+            loadingIndicator.style.display = 'none';
+            console.log('RealScout component refreshed');
+        }, 2000);
+    }
+});
