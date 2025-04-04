@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neighborhood Name | Mountain Edge Homes</title>
-    <meta name="description" content="Discover luxury homes in the Neighborhood Name neighborhood of Mountain's Edge with Mountain Edge Homes, the premier real estate agency.">
+    <title>[Neighborhood Name] | Mountain Edge Homes</title>
+    <meta name="description" content="Discover luxury homes in [Neighborhood Name] at Mountain's Edge with Dr. Jan Duffy, your Mountain's Edge real estate specialist.">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Favicon -->
@@ -31,65 +31,144 @@
         </div>
     </header>
 
-    <section class="neighborhood-banner">
+    <!-- Hero Section -->
+    <section class="neighborhood-hero">
         <div class="container">
-            <h1 class="neighborhood-title">Neighborhood Name</h1>
-            <p class="neighborhood-subtitle">Neighborhood Type in Mountain's Edge</p>
+            <div class="hero-content">
+                <h1>Live Exclusively in [Neighborhood Name]</h1>
+                <h2>Luxury homes with stunning mountain views from $[Price Range]</h2>
+                <a href="#contact-form" class="btn btn-primary">Schedule a Private Tour</a>
+            </div>
         </div>
     </section>
 
-    <section class="neighborhood-details">
+    <!-- Community Highlights -->
+    <section class="community-highlights">
         <div class="container">
-            <div class="neighborhood-content">
-                <div class="neighborhood-description">
-                    <h2>About This Neighborhood</h2>
-                    <p>Detailed information about the neighborhood goes here. This should include details about the typical home styles, price ranges, amenities, builder information, when it was developed, and any special features.</p>
-                    <p>Additional paragraph with more neighborhood details.</p>
-                    
-                    <h3>Neighborhood Highlights</h3>
-                    <ul class="neighborhood-highlights">
-                        <li><i class="fas fa-home"></i> <strong>Home Types:</strong> Single-family homes, townhomes, etc.</li>
-                        <li><i class="fas fa-ruler-combined"></i> <strong>Square Footage:</strong> 1,800 - 4,500 sq ft</li>
-                        <li><i class="fas fa-calendar-alt"></i> <strong>Year Built:</strong> 2004-2015</li>
-                        <li><i class="fas fa-dollar-sign"></i> <strong>Price Range:</strong> $450,000 - $850,000</li>
-                        <li><i class="fas fa-shield-alt"></i> <strong>Security:</strong> Gated entrance (if applicable)</li>
-                        <li><i class="fas fa-swimming-pool"></i> <strong>Amenities:</strong> Community pool, park, etc.</li>
+            <h2 class="section-title">Community Highlights</h2>
+            <div class="highlights-container">
+                <div class="highlights-text">
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check-circle"></i> [Feature 1: e.g., Gated security with 24/7 monitoring]</li>
+                        <li><i class="fas fa-check-circle"></i> [Feature 2: e.g., Resort-style community pool and spa]</li>
+                        <li><i class="fas fa-check-circle"></i> [Feature 3: e.g., Walking distance to award-winning schools]</li>
+                        <li><i class="fas fa-check-circle"></i> [Feature 4: e.g., Mountain and city views from premium lots]</li>
                     </ul>
+                    <a href="#contact-form" class="btn btn-secondary">Request Community Information</a>
                 </div>
-                <div class="neighborhood-image">
-                    <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Neighborhood Name">
+                <div class="highlights-gallery">
+                    <div class="gallery-grid">
+                        <img src="[Image URL 1]" alt="[Neighborhood Name] Community Feature">
+                        <img src="[Image URL 2]" alt="[Neighborhood Name] Community Feature">
+                        <img src="[Image URL 3]" alt="[Neighborhood Name] Community Feature">
+                        <img src="[Image URL 4]" alt="[Neighborhood Name] Community Feature">
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="neighborhood-properties">
+    <!-- Featured Available Homes -->
+    <section class="featured-homes">
         <div class="container">
-            <h2 class="section-title">Available Properties in Neighborhood Name</h2>
-            <div class="properties-grid" id="neighborhood-properties">
-                <!-- Properties will be loaded from JS -->
-                <p class="loading-properties">Loading properties...</p>
+            <h2 class="section-title">Featured Available Homes</h2>
+            <div class="realscout-container">
+                <realscout-office-listings agent-encoded-id="QWdlbnQtMjI1MDUw" sort-order="PRICE_HIGH" listing-status="For Sale" property-types="TC,SFR,MF" price-min="500000" max-results="3" custom-search="[Neighborhood Name] Mountain Edge"></realscout-office-listings>
             </div>
         </div>
     </section>
 
+    <!-- Neighborhood Map -->
     <section class="neighborhood-map">
         <div class="container">
             <h2 class="section-title">Location & Amenities</h2>
             <div class="map-content">
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26376.02482596!2d-115.2552!3d36.0051!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c8c67a0333ff33%3A0x2c7ffe4df688c898!2sMountain's%20Edge%2C%20Las%20Vegas%2C%20NV!5e0!3m2!1sen!2sus!4v1620581000000!5m2!1sen!2sus" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
                 <div class="map-info">
                     <h3>Nearby Amenities</h3>
                     <ul class="amenities-list">
-                        <li><i class="fas fa-tree"></i> <strong>Parks:</strong> Exploration Peak Park (0.5 miles)</li>
-                        <li><i class="fas fa-graduation-cap"></i> <strong>Schools:</strong> Mathis Elementary School (1.2 miles)</li>
-                        <li><i class="fas fa-shopping-cart"></i> <strong>Shopping:</strong> Mountain's Edge Marketplace (2.1 miles)</li>
-                        <li><i class="fas fa-utensils"></i> <strong>Dining:</strong> El Luchador Mexican Kitchen (2.3 miles)</li>
-                        <li><i class="fas fa-car"></i> <strong>Commute:</strong> 25 minutes to Las Vegas Strip</li>
+                        <li><i class="fas fa-graduation-cap"></i> <strong>Schools:</strong> [Nearby schools with ratings]</li>
+                        <li><i class="fas fa-shopping-cart"></i> <strong>Shopping:</strong> [Nearby shopping centers]</li>
+                        <li><i class="fas fa-utensils"></i> <strong>Dining:</strong> [Popular restaurants in the area]</li>
+                        <li><i class="fas fa-tree"></i> <strong>Recreation:</strong> [Parks and recreational facilities]</li>
+                        <li><i class="fas fa-car"></i> <strong>Commute:</strong> [Distance to major employment centers]</li>
                     </ul>
                 </div>
-                <div class="map-placeholder">
-                    <img src="https://via.placeholder.com/600x400?text=Neighborhood+Map" alt="Neighborhood Map">
-                    <!-- This would be replaced with an actual map in a production environment -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Residents Say</h2>
+            <div class="testimonials-container">
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"[Testimonial text from a resident about living in the neighborhood]"</p>
+                        <div class="testimonial-author">
+                            <img src="[Resident photo URL]" alt="[Resident Name]">
+                            <div class="author-info">
+                                <h4>[Resident Name]</h4>
+                                <p>[Neighborhood Name] Resident Since [Year]</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"[Another testimonial text from a different resident]"</p>
+                        <div class="testimonial-author">
+                            <img src="[Resident photo URL]" alt="[Resident Name]">
+                            <div class="author-info">
+                                <h4>[Resident Name]</h4>
+                                <p>[Neighborhood Name] Resident Since [Year]</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lead Capture Form -->
+    <section class="contact-form" id="contact-form">
+        <div class="container">
+            <h2 class="section-title">Request Information</h2>
+            <div class="form-container">
+                <form id="neighborhood-info-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="interest">I'm Interested In:</label>
+                        <select id="interest" name="interest">
+                            <option value="buying">Buying a home in [Neighborhood Name]</option>
+                            <option value="selling">Selling my home in [Neighborhood Name]</option>
+                            <option value="information">General information about [Neighborhood Name]</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Additional Information</label>
+                        <textarea id="message" name="message" rows="4"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Request</button>
+                </form>
+                <div class="form-contact-info">
+                    <h3>Or Call Us Directly</h3>
+                    <p><i class="fas fa-phone"></i> <a href="tel:7022221988">(702) 222-1988</a></p>
+                    <p class="privacy-note">Your information will never be shared with third parties. By submitting this form, you agree to our privacy policy.</p>
                 </div>
             </div>
         </div>
@@ -100,7 +179,10 @@
             <div class="footer-content">
                 <div class="footer-logo">
                     <h3>Mountain Edge Homes</h3>
-                    <p>Your trusted partner in mountain real estate</p>
+                    <p>Your trusted partner in Mountain's Edge real estate</p>
+                    <p>Dr. Jan Duffy, REALTOR®</p>
+                    <p>8015 Blue Diamond Rd, Las Vegas, Nevada 89178, US</p>
+                    <p>(702) 222-1988</p>
                 </div>
                 <div class="footer-links">
                     <div class="link-column">
@@ -120,10 +202,10 @@
                         <ul>
                             <li><a href="neighborhood-aspire.html">Aspire (gated)</a></li>
                             <li><a href="neighborhood-cascade.html">Cascade (guard-gated)</a></li>
-                            <li><a href="neighborhood-chaco-canyon.html">Chaco Canyon</a></li>
-                            <li><a href="neighborhood-denali.html">Denali</a></li>
-                            <li><a href="neighborhood-azure-canyon.html">Azure Canyon</a></li>
-                            <li><a href="index.html#neighborhoods">View All</a></li>
+                            <li><a href="neighborhood-collina.html">Collina</a></li>
+                            <li><a href="neighborhood-mesa-valla.html">Mesa/Valla</a></li>
+                            <li><a href="neighborhood-quintessa.html">Quintessa</a></li>
+                            <li><a href="neighborhood-sierra-madre.html">Sierra Madre</a></li>
                         </ul>
                     </div>
                     <div class="link-column">

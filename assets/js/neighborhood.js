@@ -18,6 +18,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.title = formattedName + ' | Mountain Edge Homes';
 
+    // Update hero content if it exists
+    const heroContent = document.querySelector('.hero-content h1');
+    if (heroContent) {
+        heroContent.textContent = `Live Exclusively in ${formattedName}`;
+    }
+
+    // Update interest dropdown in contact form
+    const interestSelect = document.getElementById('interest');
+    if (interestSelect) {
+        const options = interestSelect.querySelectorAll('option');
+        options.forEach(option => {
+            option.textContent = option.textContent.replace('[Neighborhood Name]', formattedName);
+        });
+    }
+
     // Update property listings
     const propertiesContainer = document.getElementById('neighborhood-properties');
     if (propertiesContainer) {
@@ -42,9 +57,30 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Update RealScout custom search parameter
+    const realscoutElements = document.querySelectorAll('realscout-office-listings');
+    realscoutElements.forEach(element => {
+        if (element.hasAttribute('custom-search')) {
+            const currentSearch = element.getAttribute('custom-search');
+            if (currentSearch.includes('Mountain Edge')) {
+                element.setAttribute('custom-search', `${formattedName} Mountain Edge`);
+            }
+        }
+    });
+
+    // Form submission handler
+    const neighborhoodForm = document.getElementById('neighborhood-info-form');
+    if (neighborhoodForm) {
+        neighborhoodForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your interest in ' + formattedName + '! A representative will contact you shortly.');
+            neighborhoodForm.reset();
+        });
+    }
+
     // Animate elements when they come into view
     const animateOnScroll = () => {
-        const elements = document.querySelectorAll('.neighborhood-description, .neighborhood-image, .amenities-list, .gallery-item');
+        const elements = document.querySelectorAll('.neighborhood-description, .neighborhood-image, .amenities-list, .gallery-item, .testimonial, .feature-list li');
 
         elements.forEach(element => {
             const elementTop = element.getBoundingClientRect().top;
@@ -63,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', animateOnScroll);
 
     // Gallery image lightbox effect
-    const galleryItems = document.querySelectorAll('.gallery-item img');
+    const galleryItems = document.querySelectorAll('.gallery-grid img');
 
     galleryItems.forEach(item => {
         item.addEventListener('click', function() {
