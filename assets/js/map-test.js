@@ -30,9 +30,45 @@ window.addEventListener('load', function() {
             
             if (typeof google !== 'undefined') {
                 console.log('Google Maps object exists:', typeof google.maps !== 'undefined');
+                
+                // If maps exists but there was an issue with initMap
+                if (typeof google.maps !== 'undefined') {
+                    if (mainMap && !mainMap.querySelector('.gm-style')) {
+                        console.log('Manually initializing main map');
+                        if (typeof initMap === 'function') {
+                            initMap();
+                        }
+                    }
+                    
+                    if (globalMap && !globalMap.querySelector('.gm-style')) {
+                        console.log('Manually initializing global map');
+                        if (typeof initGlobalMap === 'function') {
+                            initGlobalMap();
+                        }
+                    }
+                }
+                
             } else {
                 console.error('Google API not loaded');
-                alert('Google Maps API is not loaded. Check the console for details.');
+                alert('Google Maps API is not loaded. Attempting to load it now...');
+                
+                // Reset loading flag if it exists
+                window.googleMapsLoading = false;
+                
+                // Function to run when testing the API
+                window.testMapCallback = function() {
+                    console.log('Google Maps API loaded successfully via test');
+                    alert('Google Maps API loaded successfully!');
+                    
+                    // Try to initialize maps if they exist
+                    if (mainMap && typeof initMap === 'function') {
+                        initMap();
+                    }
+                    
+                    if (globalMap && typeof initGlobalMap === 'function') {
+                        initGlobalMap();
+                    }
+                };
                 
                 // Try to reload the maps API
                 const script = document.createElement('script');
@@ -40,16 +76,10 @@ window.addEventListener('load', function() {
                 script.async = true;
                 script.defer = true;
                 
-                // Create a callback to test the API
-                window.testMapCallback = function() {
-                    console.log('Google Maps API loaded successfully via test');
-                    alert('Google Maps API loaded successfully. Refresh the page to see maps.');
-                };
-                
                 // Handle script loading errors
                 script.onerror = function() {
                     console.error('Failed to load Google Maps API during test');
-                    alert('Failed to load Google Maps API. Your API key may be invalid or restricted.');
+                    alert('Failed to load Google Maps API. Check your internet connection or API key restrictions.');
                 };
                 
                 document.head.appendChild(script);
@@ -57,5 +87,20 @@ window.addEventListener('load', function() {
         });
         
         document.body.appendChild(testButton);
+        
+        // Add diagnostics to the console
+        console.log('Map initialization diagnostics:');
+        console.log('- window.google exists:', typeof window.google !== 'undefined');
+        console.log('- window.googleMapsLoading:', window.googleMapsLoading);
+        console.log('- initMap function exists:', typeof window.initMap === 'function');
+        console.log('- initGlobalMap function exists:', typeof window.initGlobalMap === 'function');
+        
+        // Check for API key issues in URL
+        const scripts = document.querySelectorAll('script');
+        scripts.forEach(script => {
+            if (script.src && script.src.includes('maps.googleapis.com')) {
+                console.log('Found Google Maps script:', script.src);
+            }
+        });
     }
 });

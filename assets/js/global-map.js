@@ -5,6 +5,8 @@ window.addEventListener('load', function() {
     const mapElement = document.getElementById('global-mountain-edge-map');
     if (!mapElement) return;
     
+    console.log('Global map element found');
+    
     // Hide error initially
     const errorElement = document.getElementById('global-map-error');
     if (errorElement) {
@@ -16,6 +18,7 @@ window.addEventListener('load', function() {
     
     // Function to show map error
     function showMapError() {
+        console.error('Showing global map error');
         if (errorElement) {
             errorElement.style.display = 'block';
         } else {
@@ -49,52 +52,79 @@ window.addEventListener('load', function() {
     }
     
     // Function to handle map script loading
-    function loadMapScript() {
-        if (typeof google === 'undefined') {
-            // Create script element
-            const script = document.createElement('script');
-            
-            // Add a basic static map as fallback using a div with styling 
-            mapElement.innerHTML += `
+    function loadGlobalMapScript() {
+        console.log('Attempting to load Google Maps API for global map');
+        
+        // First add fallback regardless of script loading status
+        if (!mapElement.querySelector('.static-map-fallback')) {
+            mapElement.insertAdjacentHTML('beforeend', `
                 <div class="static-map-fallback" style="display: none; height: 100%; background-color: #f0f0f0; 
                     display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 20px;">
                     <h3>Mountain Edge, Las Vegas</h3>
                     <p>Coordinates: 36.0051°N, 115.2552°W</p>
                     <p>A beautiful master-planned community in southwest Las Vegas.</p>
                 </div>
-            `;
-            
-            // Load Maps API with your key
-            script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDt84u_m6IGyrNZ9Eyc2W0fAIx6yD3peTo&callback=initGlobalMap';
-            script.async = true;
-            script.defer = true;
-            
-            // Handle script loading errors
-            script.onerror = function() {
-                console.error('Failed to load Google Maps API');
-                showMapError();
-            };
-            
-            // Set a timeout to show error if maps doesn't load within 10 seconds
-            const mapTimeout = setTimeout(function() {
-                if (typeof google === 'undefined') {
-                    console.error('Google Maps API timeout');
-                    showMapError();
-                }
-            }, 10000);
-            
-            document.head.appendChild(script);
-        } else {
-            // Google Maps is already loaded, just initialize the map
-            initGlobalMap();
+            `);
         }
+        
+        // Check if Google Maps API is already loaded or loading
+        if (window.googleMapsLoading) {
+            console.log('Google Maps API already loading for global map');
+            // Wait for the loading to complete and then initialize
+            const checkInterval = setInterval(function() {
+                if (typeof google !== 'undefined' && typeof google.maps !== 'undefined') {
+                    clearInterval(checkInterval);
+                    console.log('Google Maps loaded, initializing global map');
+                    initGlobalMap();
+                }
+            }, 500);
+            return;
+        }
+        
+        if (typeof google !== 'undefined' && typeof google.maps !== 'undefined') {
+            console.log('Google Maps API already loaded, initializing global map');
+            initGlobalMap();
+            return;
+        }
+        
+        // Set flag to prevent duplicate loading
+        window.googleMapsLoading = true;
+        
+        // Create script element
+        const script = document.createElement('script');
+        
+        // Load Maps API with your key
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDt84u_m6IGyrNZ9Eyc2W0fAIx6yD3peTo&callback=initGlobalMap';
+        script.async = true;
+        script.defer = true;
+        
+        // Handle script loading errors
+        script.onerror = function() {
+            console.error('Failed to load Google Maps API for global map');
+            window.googleMapsLoading = false;
+            showMapError();
+        };
+        
+        // Set a timeout to show error if maps doesn't load within 10 seconds
+        const mapTimeout = setTimeout(function() {
+            if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
+                console.error('Google Maps API timeout for global map');
+                window.googleMapsLoading = false;
+                showMapError();
+            }
+        }, 10000);
+        
+        // Add script to page
+        document.head.appendChild(script);
+        
+        console.log('Google Maps script added to head for global map');
     }
     
-    // Load the map
-    loadMapScript();
+    // Try to load the map after a short delay to ensure the DOM is ready
+    setTimeout(loadGlobalMapScript, 1000);
     
     // Log for debugging
-    console.log('Global map initialization attempted');
+    console.log('Global map initialization scheduled');
 });
 
 // Initialize the global map

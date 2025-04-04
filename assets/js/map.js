@@ -182,6 +182,7 @@ window.addEventListener('load', function() {
     
     // Function to show map error
     function showMapError(element) {
+        console.error('Showing map error');
         // Make sure the error element exists
         const errorElement = document.getElementById('map-error');
         if (errorElement) {
@@ -210,51 +211,68 @@ window.addEventListener('load', function() {
     
     // Function to handle map script loading
     function loadMapScript() {
-        if (typeof google === 'undefined') {
-            // Create script element
-            const script = document.createElement('script');
-            
-            // Use hardcoded coordinates if Google Maps fails to load
-            // Add a basic static map as fallback using a div with styling 
-            mapElement.innerHTML += `
+        console.log('Attempting to load Google Maps API');
+        
+        // First add fallback regardless of script loading status
+        if (!mapElement.querySelector('.static-map-fallback')) {
+            mapElement.insertAdjacentHTML('beforeend', `
                 <div class="static-map-fallback" style="display: none; height: 100%; background-color: #f0f0f0; 
                     display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 20px;">
                     <h3>Mountain Edge, Las Vegas</h3>
                     <p>Coordinates: 36.0051°N, 115.2552°W</p>
                     <p>A beautiful master-planned community in southwest Las Vegas.</p>
                 </div>
-            `;
-            
-            // Load Maps API with your key - using a newer API key
-            script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDt84u_m6IGyrNZ9Eyc2W0fAIx6yD3peTo&callback=initMap';
-            script.async = true;
-            script.defer = true;
-            
-            // Handle script loading errors
-            script.onerror = function() {
-                console.error('Failed to load Google Maps API');
-                showMapError(mapElement);
-            };
-            
-            // Set a timeout to show error if maps doesn't load within 10 seconds
-            const mapTimeout = setTimeout(function() {
-                if (typeof google === 'undefined') {
-                    console.error('Google Maps API timeout');
-                    showMapError(mapElement);
-                }
-            }, 10000);
-            
-            // Add script to page
-            document.head.appendChild(script);
-        } else {
-            // Google Maps is already loaded, just initialize the map
-            initMap();
+            `);
         }
+        
+        // Check if Google Maps API is already loading or loaded
+        if (window.googleMapsLoading) {
+            console.log('Google Maps API already loading');
+            return;
+        }
+        
+        if (typeof google !== 'undefined' && typeof google.maps !== 'undefined') {
+            console.log('Google Maps API already loaded, initializing map');
+            initMap();
+            return;
+        }
+        
+        // Set flag to prevent duplicate loading
+        window.googleMapsLoading = true;
+        
+        // Create script element
+        const script = document.createElement('script');
+        
+        // Load Maps API with your key
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDt84u_m6IGyrNZ9Eyc2W0fAIx6yD3peTo&callback=initMap';
+        script.async = true;
+        script.defer = true;
+        
+        // Handle script loading errors
+        script.onerror = function() {
+            console.error('Failed to load Google Maps API');
+            window.googleMapsLoading = false;
+            showMapError(mapElement);
+        };
+        
+        // Set a timeout to show error if maps doesn't load within 10 seconds
+        const mapTimeout = setTimeout(function() {
+            if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
+                console.error('Google Maps API timeout');
+                window.googleMapsLoading = false;
+                showMapError(mapElement);
+            }
+        }, 10000);
+        
+        // Add script to page
+        document.head.appendChild(script);
+        
+        console.log('Google Maps script added to head');
     }
     
-    // Load the map
-    loadMapScript();
+    // Try to load the map after a short delay to ensure the DOM is ready
+    setTimeout(loadMapScript, 500);
     
     // Log for debugging
-    console.log('Map initialization attempted');
+    console.log('Map initialization scheduled');
 });
