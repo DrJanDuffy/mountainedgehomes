@@ -78,6 +78,82 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
+/* RSS Email Marketing Section Styles */
+.rss-email-info {
+    padding: 15px 0;
+}
+
+.rss-email-info h3 {
+    color: var(--primary-color);
+    margin: 25px 0 15px;
+    font-size: 1.5rem;
+}
+
+.rss-email-info h4 {
+    color: #444;
+    margin: 20px 0 10px;
+    font-size: 1.2rem;
+}
+
+.rss-feed-url {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    border-left: 4px solid var(--primary-color);
+}
+
+.feed-url-box {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+}
+
+.feed-url-box code {
+    flex: 1;
+    overflow-x: auto;
+    padding: 5px;
+    font-family: monospace;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.copy-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.copy-btn:hover {
+    background-color: #1e3163;
+}
+
+.email-platform-list, .email-tips ul {
+    margin-left: 20px;
+    line-height: 1.6;
+}
+
+.email-platform-list li, .email-tips li {
+    margin-bottom: 10px;
+}
+
+.email-tips {
+    background-color: #f0f7ff;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
 /* Sidebar Styles */
 .sidebar-section {
     background-color: white;
