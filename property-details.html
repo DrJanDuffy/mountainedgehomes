@@ -8,6 +8,13 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/property-details.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module"></script>
+    <style>
+        realscout-office-listings {
+            --rs-listing-divider-color: #4a90e2;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -41,6 +48,10 @@
             <h2 class="section-title">Similar Properties</h2>
             <div class="properties-grid" id="similar-properties">
                 <!-- Similar properties will be loaded here via JavaScript -->
+            </div>
+            <div class="realscout-properties">
+                <h3 class="section-subtitle">More Listings</h3>
+                <realscout-office-listings agent-encoded-id="QWdlbnQtMjI1MDUw" sort-order="PRICE_LOW" listing-status="For Sale" property-types="TC,SFR,MF" price-min="500000"></realscout-office-listings>
             </div>
         </div>
     </section>

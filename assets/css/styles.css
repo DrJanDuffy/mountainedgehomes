@@ -324,6 +324,23 @@ nav ul li a.active::after {
     margin-top: 40px;
 }
 
+#realscout-listings {
+    margin-top: 30px;
+    width: 100%;
+}
+
+.realscout-properties {
+    margin-top: 60px;
+    width: 100%;
+}
+
+.section-subtitle {
+    color: var(--primary-color);
+    font-size: 1.6rem;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
 /* About Section */
 .about-section {
     padding: 80px 0;

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +7,14 @@
     <meta name="description" content="Discover luxury mountain properties in breathtaking locations with Mountain Edge Homes, the premier real estate agency for high-end mountain homes.">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module"></script>
+    <style>
+        realscout-office-listings {
+            --rs-listing-divider-color: #4a90e2;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+    </style>
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
 </head>
@@ -103,6 +110,7 @@
             <h2 class="section-title">Featured Properties</h2>
             <div class="properties-grid" id="featured-properties">
                 <!-- Properties will be loaded dynamically from properties.js -->
+                <realscout-office-listings agent-encoded-id="QWdlbnQtMjI1MDUw" sort-order="PRICE_LOW" listing-status="For Sale" property-types="TC,SFR,MF" price-min="500000"></realscout-office-listings>
             </div>
             <div class="center-btn">
                 <a href="#" class="btn">View All Properties</a>
@@ -326,7 +334,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const featuredPropertiesContainer = document.getElementById('featured-properties');
             const featuredProperties = properties.filter(property => property.featured);
-            
+
             featuredPropertiesContainer.innerHTML = featuredProperties.map(property => 
                 generatePropertyCard(property)
             ).join('');
@@ -335,18 +343,17 @@
 </body>
 </html>
 
-
     <section id="neighborhoods" class="neighborhoods-section">
         <div class="container">
             <h2 class="section-title">Mountain's Edge Neighborhoods</h2>
             <p class="section-intro">Discover the diverse communities within Mountain's Edge, from gated luxury enclaves to family-friendly neighborhoods with unique character and amenities.</p>
-            
+
             <div class="neighborhoods-content">
                 <div class="neighborhoods-text">
                     <p>Mountain's Edge is home to over 40 distinct neighborhoods, each with its own character and charm. Many neighborhoods feature gated or guard-gated security, while others offer open community designs with easy access to parks and amenities.</p>
                     <p>The variety of builders and home designs means you'll find everything from cozy single-story homes to expansive luxury estates, with properties dating from the community's founding in 2004 to new construction opportunities still available today.</p>
                 </div>
-                
+
                 <div class="neighborhoods-grid">
                     <div class="neighborhood-category">
                         <h3>Gated Communities</h3>
@@ -362,7 +369,7 @@
                             <li><a href="neighborhood-stonebridge.html">Stonebridge</a></li>
                         </ul>
                     </div>
-                    
+
                     <div class="neighborhood-category">
                         <h3>Popular Neighborhoods</h3>
                         <ul>
@@ -375,18 +382,17 @@
                         </ul>
                     </div>
                 </div>
-                
+
                 <a href="#search" class="btn">Find Your Neighborhood</a>
             </div>
         </div>
     </section>
 
-
     <section id="schools" class="schools-section">
         <div class="container">
             <h2 class="section-title">Local Schools</h2>
             <p class="section-intro">Mountain's Edge is served by several highly-rated schools in the Clark County School District, providing excellent educational opportunities for residents.</p>
-            
+
             <div class="schools-grid">
                 <div class="school-category">
                     <h3>Elementary Schools</h3>
@@ -401,7 +407,7 @@
                         <p>Highly rated with a 10/10 on GreatSchools, serving parts of the western Las Vegas area.</p>
                     </div>
                 </div>
-                
+
                 <div class="school-category">
                     <h3>Middle Schools</h3>
                     <div class="school-card">
@@ -410,7 +416,7 @@
                         <p>Located in the Enterprise Southwest area with an 8/10 rating on GreatSchools and a favorable student-teacher ratio of 21 to 1.</p>
                     </div>
                 </div>
-                
+
                 <div class="school-category">
                     <h3>High Schools</h3>
                     <div class="school-card">
