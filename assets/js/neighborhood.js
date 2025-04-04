@@ -177,33 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Form submission handler
-    const neighborhoodForm = document.querySelector('.neighborhood-form');
-    if (neighborhoodForm) {
-        neighborhoodForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            let formValues = {};
-            
-            formData.forEach((value, key) => {
-                formValues[key] = value;
-            });
-            
-            // In a real implementation, you'd send this data to a server
-            console.log('Form submitted:', formValues);
-            
-            // Show success message
-            this.innerHTML = `
-                <div class="form-success">
-                    <i class="fas fa-check-circle" style="font-size: 3rem; color: #27ae60; margin-bottom: 1rem;"></i>
-                    <h3>Thank You!</h3>
-                    <p>Your request has been submitted successfully. Dr. Jan Duffy will contact you shortly.</p>
-                </div>
-            `;
-        });
-    }
+    // Form submission handler is now in followupboss.js
 
     // Smooth scroll for CTA buttons
     const ctaButtons = document.querySelectorAll('.cta-button, .secondary-cta');

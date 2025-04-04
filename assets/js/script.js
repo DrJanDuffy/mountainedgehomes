@@ -64,4 +64,6 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('RealScout element not found');
         }
     });
+    
+    // Form submission handling is now in followupboss.js
 });
