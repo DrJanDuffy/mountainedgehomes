@@ -232,7 +232,7 @@ function copyToClipboard(text) {
     console.log("Window loaded");
 
     // Check for RealScout components and refresh if needed
-    const realscoutElements = document.querySelectorAll('realscout-office-listings');
+    const realscoutElements = document.querySelectorAll('realscout-office-listings, realscout-simple-search');
     if (realscoutElements.length > 0) {
         console.log("RealScout element found");
 
