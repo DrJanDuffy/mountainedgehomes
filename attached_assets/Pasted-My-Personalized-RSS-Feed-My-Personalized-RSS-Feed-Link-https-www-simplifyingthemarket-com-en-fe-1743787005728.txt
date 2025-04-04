@@ -1,0 +1,45 @@
+My Personalized RSS Feed
+My Personalized RSS Feed Link:
+https://www.simplifyingthemarket.com/en/feed?a=956758-ef2edda2f940e018328655620ea05f18
+What is RSS?
+RSS (Rich Site Summary): often called Really Simple Syndication, uses a family of standard web feed formats to publish frequently updated information: blog entries, news headlines, audio, video. KCM uses RSS feed technology to integrate and automatically publish your Blog Posts to many third party service providers.
+
+How Do I Use It?
+KCM can only provide access to an RSS feed. Utilizing an RSS feed will always be done with other platforms or third-party apps. Below we will look at some of the most common uses.
+
+Email Your Blog Posts
+Your CRM or email platform may provide the ability to use an RSS feed to automatically generate content for your emails. While each email system has its own unique settings and limitations, you can review the RSS feed capabilities within your platform to start scheduling or automatically sending out emails.
+
+Automatically Post to Social Media Accounts
+While we recommend reading each post before sharing, we know some Members will still want to automatically share their Blog Posts to social networks. You can use a free third-party platform such as Dlvr.it or Buffer to set this up with your RSS Feed, or you can set up Automation directly within your KCM Member Area. You can read more about setting up KCM Automation here.
+
+Share it to Your Own Blog
+Many websites can accept an RSS feed to automatically post or display content. Implementing the RSS will vary greatly depending on your platform, themes, plugins, and other services you are currently using. You will need to contact your website developer or support documentation on how to utilize an RSS feed to publish content to your website.
+
+FAQs
+If you click the RSS feed link in the Chrome browser it will show up this way. The RSS feed is not meant to be clicked, viewed or shared to your blog directly. It is a feed of content that can be utilized by third-party software or other web technology.
+RSS feeds do not show content in that way. The personalization is on the post itself, not the excerpt which the feed displays. If you were to click the title of a post in your RSS feed, it would take you to the personalized version of the post.
+Resources
+Click the links below for more information:
+
+Automated Social Media Postings
+Automating Sharing on Your Website
+Setting up the Spanish Version of RSS Feed
+Embed the Blog on One Page of Your Site
+An easy option to bring in every blog post to your site is using what’s called an ‘iFrame.’
+
+Click here to view an example of a current Member who added their Personalized Posts blog using an iFrame on their website. 
+
+Below is a basic iFrame code snippet you can put on any page on your website to pull in your Personalized Posts. Your readers can then click on any of the articles from that page to read them directly on your website!
+
+Just copy the code below and add it to a page on your website, or provide it to your website administrator to put on your site.
+
+
+My Personalized Embed Code:
+<iframe src="https://www.simplifyingthemarket.com/en/?a=956758-ef2edda2f940e018328655620ea05f18" scrolling="yes" frameborder="1" marginheight="0px" marginwidth="0px" height="800px" width="1090px" allowfullscreen></iframe>
+You can adjust the size of the iFrame box to fit best on your site by changing the width and height pixels within the code.
+
+If you’d like additional assistance with this option, the best place to start is your web administrator or the tech person in your office. We’re happy to help as much as we can, but whoever knows your website will be best equipped to help you put this in place!
+
+We believe every family should feel confident when buying and selling a home.
+Keeping Current Matters, Inc. © 2025 | 8720 Stony Point Pkwy Suite 400 Richmond, VA 23235 | Support Center | All Rights Reserved | Privacy Policy | 1.250312.10
