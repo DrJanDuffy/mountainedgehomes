@@ -3,14 +3,19 @@
   "name": "mountain-edge-homes",
   "version": "1.0.0",
   "description": "Mountain Edge Homes Real Estate Website",
-  "main": "script.js",
+  "main": "index.html",
   "scripts": {
-    "start": "npx serve -s ."
+    "start": "npx serve -s .",
+    "build": "echo 'No build step needed for static site'",
+    "dev": "npx serve -s ."
   },
   "keywords": ["real-estate", "mountain-homes"],
   "author": "",
   "license": "MIT",
   "dependencies": {
     "serve": "^14.2.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }
