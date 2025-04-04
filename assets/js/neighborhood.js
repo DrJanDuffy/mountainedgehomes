@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update hero content if it exists
     const heroContent = document.querySelector('.hero-content h1');
     if (heroContent) {
-        heroContent.textContent = `Live Exclusively in ${formattedName}`;
+        heroContent.textContent = `${formattedName} - Las Vegas Premium Mountain's Edge Living`;
     }
 
     // Update interest dropdown in contact form
