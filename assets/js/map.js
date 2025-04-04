@@ -172,14 +172,24 @@ function clearMarkers() {
 window.addEventListener('load', function() {
     // Check if Google Maps script is already loaded
     if (typeof google === 'undefined') {
-        // Load Google Maps script
+        // Load Google Maps script with a valid API key
         const script = document.createElement('script');
-        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyD_PGHixt5NSV60ACEBj8yxSHZoMcm7r8k&callback=initMap';
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBQy7fQO0rJfpzbnj66e0IUYMr9oHZNsfw&callback=initMap';
         script.async = true;
         script.defer = true;
+        script.onerror = function() {
+            document.getElementById('map-error').style.display = 'block';
+            console.error('Failed to load Google Maps API');
+        };
         document.head.appendChild(script);
     } else {
         // Google Maps is already loaded, just initialize the map
         initMap();
     }
+    
+    // Add a fallback in case of map loading failure
+    window.gm_authFailure = function() {
+        document.getElementById('map-error').style.display = 'block';
+        console.error('Google Maps authentication error');
+    };
 });
