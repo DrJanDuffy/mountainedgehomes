@@ -170,26 +170,58 @@ function clearMarkers() {
 
 // Load the map when the window is fully loaded
 window.addEventListener('load', function() {
-    // Check if Google Maps script is already loaded
-    if (typeof google === 'undefined') {
-        // Load Google Maps script with a valid API key
-        const script = document.createElement('script');
-        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDt84u_m6IGyrNZ9Eyc2W0fAIx6yD3peTo&callback=initMap';
-        script.async = true;
-        script.defer = true;
-        script.onerror = function() {
+    // Create fallback map content first
+    const mapElement = document.getElementById('mountain-edge-map');
+    
+    // Define error handler for Google Maps authentication failures
+    window.gm_authFailure = function() {
+        if (mapElement) {
             document.getElementById('map-error').style.display = 'block';
-            console.error('Failed to load Google Maps API');
-        };
-        document.head.appendChild(script);
-    } else {
-        // Google Maps is already loaded, just initialize the map
-        initMap();
+            console.error('Google Maps authentication error');
+        }
+    };
+    
+    // Function to handle map script loading
+    function loadMapScript() {
+        if (typeof google === 'undefined') {
+            // Create script element
+            const script = document.createElement('script');
+            
+            // Use hardcoded coordinates if Google Maps fails to load
+            if (mapElement) {
+                // Add a basic static map as fallback using a div with styling 
+                // that displays the Mountain Edge area
+                mapElement.innerHTML += `
+                    <div class="static-map-fallback" style="display: none; height: 100%; background-color: #f0f0f0; 
+                        display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 20px;">
+                        <h3>Mountain Edge, Las Vegas</h3>
+                        <p>Coordinates: 36.0051°N, 115.2552°W</p>
+                        <p>A beautiful master-planned community in southwest Las Vegas.</p>
+                    </div>
+                `;
+            }
+            
+            // Load Maps API with your key
+            script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDt84u_m6IGyrNZ9Eyc2W0fAIx6yD3peTo&callback=initMap';
+            script.async = true;
+            script.defer = true;
+            
+            // Handle script loading errors
+            script.onerror = function() {
+                if (mapElement) {
+                    document.getElementById('map-error').style.display = 'block';
+                    document.querySelector('.static-map-fallback').style.display = 'flex';
+                    console.error('Failed to load Google Maps API');
+                }
+            };
+            
+            document.head.appendChild(script);
+        } else {
+            // Google Maps is already loaded, just initialize the map
+            initMap();
+        }
     }
     
-    // Add a fallback in case of map loading failure
-    window.gm_authFailure = function() {
-        document.getElementById('map-error').style.display = 'block';
-        console.error('Google Maps authentication error');
-    };
+    // Load the map
+    loadMapScript();
 });
