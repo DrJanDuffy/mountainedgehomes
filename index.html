@@ -8,10 +8,19 @@
     <meta name="keywords" content="Mountain's Edge real estate, Las Vegas luxury homes, Mountain's Edge homes for sale, Las Vegas 89178 properties, Sierra Madre homes, Aspire gated community, Southwest Las Vegas real estate">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/property-search.css">
+    <link rel="stylesheet" href="assets/css/booking.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js"></script>
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 </head>
 <body>
+    <!-- Announcement Banner -->
+    <div class="announcement-banner" id="announcement-banner">
+        <p>🗓️ New! Schedule a meeting with Dr. Jan Duffy directly on our website. <a href="#booking">Book Now</a></p>
+        <button class="close-banner" id="close-banner"><i class="fas fa-times"></i></button>
+    </div>
+
     <!-- Header -->
     <header>
         <div class="container">
@@ -28,6 +37,7 @@
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="our-team.html">Our Team</a></li>
+                    <li><a href="#booking">Schedule</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -422,6 +432,174 @@
             </div>
         </div>
     </section>
+    
+    <!-- Booking Section -->
+    <section id="booking" class="booking-section">
+        <div class="container">
+            <div class="booking-header">
+                <h2>Schedule Your Mountain's Edge Real Estate Experience</h2>
+                <p>Choose from a variety of meeting options to connect with Dr. Jan Duffy, your Mountain's Edge real estate expert. Select the appointment type that best fits your needs.</p>
+            </div>
+            
+            <div class="booking-container">
+                <div class="booking-card">
+                    <div class="booking-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="booking-info">
+                        <h3>Schedule Your Home Showing Experience</h3>
+                        <span class="duration"><i class="far fa-clock"></i> 30 min</span>
+                        <span class="meeting-type"><i class="fas fa-user"></i> One-on-One</span>
+                        <p>Book a personalized showing of Mountain's Edge properties that match your preferences.</p>
+                        <a href="#" class="btn-book-now" data-calendly-url="https://calendly.com/drjanduffy/schedule-your-home-showing-experience">Book Now</a>
+                    </div>
+                </div>
+                
+                <div class="booking-card">
+                    <div class="booking-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="booking-info">
+                        <h3>30-Minute Phone Call</h3>
+                        <span class="duration"><i class="far fa-clock"></i> 30 min</span>
+                        <span class="meeting-type"><i class="fas fa-users"></i> Group</span>
+                        <p>Discuss your real estate needs and questions with Dr. Jan Duffy over a convenient phone call.</p>
+                        <a href="#" class="btn-book-now" data-calendly-url="https://calendly.com/drjanduffy/30-minute-phone-call-with-dr-jan-duffy">Book Now</a>
+                    </div>
+                </div>
+                
+                <div class="booking-card">
+                    <div class="booking-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="booking-info">
+                        <h3>In-Person Real Estate Consultation</h3>
+                        <span class="duration"><i class="far fa-clock"></i> 1 hour</span>
+                        <span class="meeting-type"><i class="fas fa-users"></i> Group</span>
+                        <p>Meet face-to-face to discuss your Mountain's Edge real estate goals and strategy.</p>
+                        <a href="#" class="btn-book-now" data-calendly-url="https://calendly.com/drjanduffy/in-person-real-estate-consultation">Book Now</a>
+                    </div>
+                </div>
+                
+                <div class="booking-card">
+                    <div class="booking-icon">
+                        <i class="fas fa-coffee"></i>
+                    </div>
+                    <div class="booking-info">
+                        <h3>Let's Meet for Starbucks Coffee</h3>
+                        <span class="duration"><i class="far fa-clock"></i> 1 hour</span>
+                        <span class="meeting-type"><i class="fas fa-user"></i> One-on-One</span>
+                        <p>Discuss your real estate dreams over coffee in a relaxed, informal setting.</p>
+                        <a href="#" class="btn-book-now" data-calendly-url="https://calendly.com/drjanduffy/let-s-meet-for-starbucks-coffee-with-dr-jan-duffy">Book Now</a>
+                    </div>
+                </div>
+                
+                <div class="booking-card">
+                    <div class="booking-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <div class="booking-info">
+                        <h3>Virtual Meeting on Zoom</h3>
+                        <span class="duration"><i class="far fa-clock"></i> 30 min</span>
+                        <span class="meeting-type"><i class="fas fa-user"></i> One-on-One</span>
+                        <p>Connect virtually with Dr. Jan Duffy to discuss your Mountain's Edge real estate needs.</p>
+                        <a href="#" class="btn-book-now" data-calendly-url="https://calendly.com/drjanduffy/virtual-meeting-on-zoom-with-dr-jan-duffy">Book Now</a>
+                    </div>
+                </div>
+                
+                <div class="booking-card">
+                    <div class="booking-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="booking-info">
+                        <h3>Real Estate Transition Consultation</h3>
+                        <span class="duration"><i class="far fa-clock"></i> 30 min</span>
+                        <span class="meeting-type"><i class="fas fa-user"></i> One-on-One</span>
+                        <p>Get expert guidance on transitioning between properties in the Mountain's Edge area.</p>
+                        <a href="#" class="btn-book-now" data-calendly-url="https://calendly.com/drjanduffy/real-estate-transition-consultation">Book Now</a>
+                    </div>
+                </div>
+                
+                <div class="booking-card">
+                    <div class="booking-icon">
+                        <i class="fas fa-search-location"></i>
+                    </div>
+                    <div class="booking-info">
+                        <h3>15-Minute Property Tour</h3>
+                        <span class="duration"><i class="far fa-clock"></i> 15 min</span>
+                        <span class="meeting-type"><i class="fas fa-user"></i> One-on-One</span>
+                        <p>Quick tour of a specific Mountain's Edge property you're interested in seeing.</p>
+                        <a href="#" class="btn-book-now" data-calendly-url="https://calendly.com/drjanduffy/15-minute-property-tour">Book Now</a>
+                    </div>
+                </div>
+                
+                <div class="booking-card">
+                    <div class="booking-icon">
+                        <i class="fas fa-door-open"></i>
+                    </div>
+                    <div class="booking-info">
+                        <h3>Open House Tour</h3>
+                        <span class="duration"><i class="far fa-clock"></i> 30 min</span>
+                        <span class="meeting-type"><i class="fas fa-user"></i> One-on-One</span>
+                        <p>Schedule a time to visit an open house in the Mountain's Edge community.</p>
+                        <a href="#" class="btn-book-now" data-calendly-url="https://calendly.com/drjanduffy/open-house-tour">Book Now</a>
+                    </div>
+                </div>
+                
+                <div class="booking-card">
+                    <div class="booking-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="booking-info">
+                        <h3>15-Minute Meeting</h3>
+                        <span class="duration"><i class="far fa-clock"></i> 15 min</span>
+                        <span class="meeting-type"><i class="fas fa-user"></i> One-on-One</span>
+                        <p>Quick consultation to answer your specific questions about Mountain's Edge real estate.</p>
+                        <a href="#" class="btn-book-now" data-calendly-url="https://calendly.com/drjanduffy/15-minute-meeting-with-dr-jan-duffy">Book Now</a>
+                    </div>
+                </div>
+                
+                <div class="booking-card">
+                    <div class="booking-icon">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <div class="booking-info">
+                        <h3>Listing Consultation</h3>
+                        <span class="duration"><i class="far fa-clock"></i> 30 min</span>
+                        <span class="meeting-type"><i class="fas fa-user"></i> One-on-One</span>
+                        <p>Get expert advice on listing your Mountain's Edge property for maximum value.</p>
+                        <a href="#" class="btn-book-now" data-calendly-url="https://calendly.com/drjanduffy/listing-consultation">Book Now</a>
+                    </div>
+                </div>
+                
+                <div class="booking-card">
+                    <div class="booking-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="booking-info">
+                        <h3>1 Home Tour (30 Mins)</h3>
+                        <span class="duration"><i class="far fa-clock"></i> 30 min</span>
+                        <span class="meeting-type"><i class="fas fa-user"></i> One-on-One</span>
+                        <p>Focused tour of a specific Mountain's Edge home you're interested in purchasing.</p>
+                        <a href="#" class="btn-book-now" data-calendly-url="https://calendly.com/drjanduffy/1-home-tour-with-dr-jan-duffy-30-mins">Book Now</a>
+                    </div>
+                </div>
+                
+                <div class="booking-card">
+                    <div class="booking-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="booking-info">
+                        <h3>2-3 Home Tour</h3>
+                        <span class="duration"><i class="far fa-clock"></i> 1 hour 30 min</span>
+                        <span class="meeting-type"><i class="fas fa-user"></i> One-on-One</span>
+                        <p>Comprehensive tour of multiple Mountain's Edge properties in one session.</p>
+                        <a href="#" class="btn-book-now" data-calendly-url="https://calendly.com/drjanduffy/2-3-home-tour-90-mins">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Map Section -->
     <section id="map-section" class="map-section">
@@ -549,6 +727,7 @@
                             <li><a href="#about">About Us</a></li>
                             <li><a href="#services">Services</a></li>
                             <li><a href="our-team.html">Our Team</a></li>
+                            <li><a href="#booking">Schedule</a></li>
                             <li><a href="#contact">Contact</a></li>
                         </ul>
                     </div>
@@ -594,5 +773,6 @@
     <script src="assets/js/property-search.js"></script>
     <script src="assets/js/followupboss.js"></script>
     <script src="assets/js/map.js"></script>
+    <script src="assets/js/booking.js"></script>
 </body>
 </html>

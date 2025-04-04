@@ -1,4 +1,22 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Announcement banner close functionality
+    const announcementBanner = document.getElementById('announcement-banner');
+    const closeBanner = document.getElementById('close-banner');
+    
+    if (closeBanner && announcementBanner) {
+        closeBanner.addEventListener('click', function() {
+            announcementBanner.style.display = 'none';
+            
+            // Store in session storage that the banner was closed
+            sessionStorage.setItem('bannerClosed', 'true');
+        });
+        
+        // Check if banner was previously closed in this session
+        if (sessionStorage.getItem('bannerClosed') === 'true') {
+            announcementBanner.style.display = 'none';
+        }
+    }
+
     // Mobile menu toggle functionality
     const menuToggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('nav');

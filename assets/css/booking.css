@@ -1,0 +1,116 @@
+
+.booking-section {
+    padding: 80px 0;
+    background-color: #f9f9f9;
+}
+
+.booking-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.booking-header h2 {
+    color: var(--primary-color);
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+.booking-header p {
+    max-width: 700px;
+    margin: 0 auto;
+    color: #666;
+    line-height: 1.6;
+}
+
+.booking-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.booking-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.booking-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.booking-icon {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    text-align: center;
+    padding: 25px 0 15px;
+}
+
+.booking-info {
+    padding: 0 25px 25px;
+    text-align: center;
+}
+
+.booking-info h3 {
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.booking-info p {
+    color: #666;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.booking-info .duration {
+    display: inline-block;
+    background: #f0f0f0;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.booking-info .meeting-type {
+    display: inline-block;
+    background: #e8f4ff;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #3a5e8c;
+    margin-bottom: 15px;
+    margin-left: 5px;
+}
+
+.btn-book-now {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-book-now:hover {
+    background-color: #3a5e8c;
+}
+
+@media (max-width: 768px) {
+    .booking-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .booking-section {
+        padding: 60px 0;
+    }
+}
