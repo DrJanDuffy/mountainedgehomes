@@ -1,0 +1,16 @@
+
+{
+  "name": "mountain-edge-homes",
+  "version": "1.0.0",
+  "description": "Mountain Edge Homes Real Estate Website",
+  "main": "script.js",
+  "scripts": {
+    "start": "npx serve -s ."
+  },
+  "keywords": ["real-estate", "mountain-homes"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "serve": "^14.2.1"
+  }
+}
