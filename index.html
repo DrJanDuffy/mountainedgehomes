@@ -1,0 +1,347 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mountain Edge Homes | Luxury Real Estate</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>Mountain Edge Homes</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#properties">Properties</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Find Your Dream Mountain Home</h1>
+            <p>Discover luxury properties in breathtaking mountain locations</p>
+            <a href="#properties" class="btn">View Properties</a>
+        </div>
+    </section>
+
+    <section id="search" class="search-section">
+        <div class="container">
+            <div class="search-container">
+                <h2>Find Your Perfect Property</h2>
+                <form class="search-form">
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <select id="location">
+                            <option value="">All Locations</option>
+                            <option value="aspen">Aspen</option>
+                            <option value="vail">Vail</option>
+                            <option value="telluride">Telluride</option>
+                            <option value="park-city">Park City</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="property-type">Property Type</label>
+                        <select id="property-type">
+                            <option value="">All Types</option>
+                            <option value="house">House</option>
+                            <option value="condo">Condo</option>
+                            <option value="cabin">Cabin</option>
+                            <option value="land">Land</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="price-range">Price Range</label>
+                        <select id="price-range">
+                            <option value="">Any Price</option>
+                            <option value="500000-1000000">$500k - $1M</option>
+                            <option value="1000000-2000000">$1M - $2M</option>
+                            <option value="2000000-5000000">$2M - $5M</option>
+                            <option value="5000000+">$5M+</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn">Search</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section id="properties" class="properties-section">
+        <div class="container">
+            <h2 class="section-title">Featured Properties</h2>
+            <div class="properties-grid">
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Luxury Mountain Home">
+                        <div class="property-price">$2,450,000</div>
+                    </div>
+                    <div class="property-details">
+                        <h3>Mountain View Estate</h3>
+                        <p class="property-location"><i class="fas fa-map-marker-alt"></i> Aspen, CO</p>
+                        <div class="property-specs">
+                            <span><i class="fas fa-bed"></i> 5 Beds</span>
+                            <span><i class="fas fa-bath"></i> 4.5 Baths</span>
+                            <span><i class="fas fa-ruler-combined"></i> 4,200 Sq Ft</span>
+                        </div>
+                        <p class="property-description">Stunning mountain estate with panoramic views, gourmet kitchen, and luxury finishes throughout.</p>
+                        <a href="#" class="btn btn-secondary">View Details</a>
+                    </div>
+                </div>
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Modern Luxury Home">
+                        <div class="property-price">$3,200,000</div>
+                    </div>
+                    <div class="property-details">
+                        <h3>Eagle's Nest Retreat</h3>
+                        <p class="property-location"><i class="fas fa-map-marker-alt"></i> Vail, CO</p>
+                        <div class="property-specs">
+                            <span><i class="fas fa-bed"></i> 6 Beds</span>
+                            <span><i class="fas fa-bath"></i> 5.5 Baths</span>
+                            <span><i class="fas fa-ruler-combined"></i> 5,500 Sq Ft</span>
+                        </div>
+                        <p class="property-description">Spectacular mountain home with floor-to-ceiling windows, home theater, and outdoor entertaining spaces.</p>
+                        <a href="#" class="btn btn-secondary">View Details</a>
+                    </div>
+                </div>
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Luxury Cabin">
+                        <div class="property-price">$1,850,000</div>
+                    </div>
+                    <div class="property-details">
+                        <h3>Alpine Timber Lodge</h3>
+                        <p class="property-location"><i class="fas fa-map-marker-alt"></i> Telluride, CO</p>
+                        <div class="property-specs">
+                            <span><i class="fas fa-bed"></i> 4 Beds</span>
+                            <span><i class="fas fa-bath"></i> 3.5 Baths</span>
+                            <span><i class="fas fa-ruler-combined"></i> 3,800 Sq Ft</span>
+                        </div>
+                        <p class="property-description">Charming timber frame lodge with stone fireplace, chef's kitchen, and private hot tub on deck.</p>
+                        <a href="#" class="btn btn-secondary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="center-btn">
+                <a href="#" class="btn">View All Properties</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 class="section-title">About Mountain Edge Homes</h2>
+                    <p>Mountain Edge Homes is the premier luxury real estate agency specializing in exceptional mountain properties. With over 20 years of experience, our team of dedicated professionals provides unparalleled expertise and personalized service.</p>
+                    <p>We understand that purchasing a mountain home is not just about buying property—it's about embracing a lifestyle. Our intimate knowledge of mountain communities allows us to match clients with homes that perfectly complement their vision and needs.</p>
+                    <a href="#" class="btn">Meet Our Team</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Real Estate Team">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services-section">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Property Sales</h3>
+                    <p>Expert guidance through every step of the buying and selling process, with tailored marketing strategies for luxury mountain properties.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <h3>Property Management</h3>
+                    <p>Comprehensive property management services to protect your investment and maximize rental revenue when you're away.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Property Search</h3>
+                    <p>Personalized property search services to find the perfect mountain home that meets all your requirements and dreams.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Investment Advisory</h3>
+                    <p>Strategic investment advice to help you make informed decisions about mountain real estate opportunities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">What Our Clients Say</h2>
+            <div class="testimonials-slider">
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"Mountain Edge Homes made our dream of owning a mountain retreat a reality. Their knowledge and dedication exceeded our expectations at every turn."</p>
+                        <div class="client-info">
+                            <h4>Michael & Sarah Johnson</h4>
+                            <p>Aspen, CO</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"The team's expertise in luxury mountain properties is unmatched. They found us the perfect ski-in/ski-out property and negotiated a deal that we couldn't be happier with."</p>
+                        <div class="client-info">
+                            <h4>Robert Williams</h4>
+                            <p>Vail, CO</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"From start to finish, Mountain Edge Homes provided exceptional service. Their local knowledge and attention to detail made all the difference in our property search."</p>
+                        <div class="client-info">
+                            <h4>Jennifer & David Miller</h4>
+                            <p>Telluride, CO</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Our Location</h3>
+                            <p>123 Mountain View Drive<br>Aspen, CO 81611</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h3>Phone</h3>
+                            <p>(970) 555-1234</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email</h3>
+                            <p>info@mountainedgehomes.com</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="inquiry-type">Inquiry Type</label>
+                            <select id="inquiry-type">
+                                <option value="buying">Buying a Property</option>
+                                <option value="selling">Selling a Property</option>
+                                <option value="rental">Rental Inquiry</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>Mountain Edge Homes</h3>
+                    <p>Your trusted partner in mountain real estate</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-column">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#properties">Properties</a></li>
+                            <li><a href="#about">About Us</a></li>
+                            <li><a href="#services">Services</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-column">
+                        <h4>Properties</h4>
+                        <ul>
+                            <li><a href="#">Aspen</a></li>
+                            <li><a href="#">Vail</a></li>
+                            <li><a href="#">Telluride</a></li>
+                            <li><a href="#">Park City</a></li>
+                            <li><a href="#">View All</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="#">Buyer's Guide</a></li>
+                            <li><a href="#">Seller's Guide</a></li>
+                            <li><a href="#">Market Reports</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Mountain Edge Homes. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
