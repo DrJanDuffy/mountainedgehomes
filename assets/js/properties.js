@@ -9,7 +9,7 @@ const properties = [
         bathrooms: 3.5,
         area: "3,200",
         description: "Beautiful two-story Spanish-style home in the upscale gated Bella Monte community, featuring mountain views, gourmet kitchen, and private backyard. Enjoy community amenities including heated pool and playground.",
-        image: "assets/images/property1.jpg",
+        image: "https://images.unsplash.com/photo-1560448204-603b3fc33ddc?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
         featured: true,
         year_built: "2008",
         neighborhood: "Bella Monte"
@@ -23,7 +23,7 @@ const properties = [
         bathrooms: 4.5,
         area: "4,500",
         description: "Spectacular semi-custom home in the premier gated Denali neighborhood. Features outdoor entertaining space, heated pool, and mountain views. One of Mountain's Edge standout communities.",
-        image: "assets/images/property2.jpg",
+        image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
         featured: true,
         year_built: "2006",
         neighborhood: "Denali"
@@ -37,7 +37,7 @@ const properties = [
         bathrooms: 2.5,
         area: "2,100",
         description: "Charming single-story ranch with open floor plan, upgraded kitchen, and easy access to Exploration Peak Park. Tularosa is known for its convenient one-level living with homes up to 2,100 square feet.",
-        image: "assets/images/property3.jpg",
+        image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
         featured: true,
         year_built: "2010",
         neighborhood: "Tularosa"
