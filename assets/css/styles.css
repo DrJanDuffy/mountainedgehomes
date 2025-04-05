@@ -1,22 +1,27 @@
 /* Enhanced Anti-flicker styles */
-body:not(.content-visible) {
+html, body {
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    -webkit-transform: translate3d(0,0,0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000;
+    transform: translate3d(0,0,0);
+    transform: translateZ(0);
+}
+
+body {
     opacity: 0;
+    transition: opacity 0.3s ease-in;
+    overflow-x: hidden;
+    display: block !important;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body.content-visible {
     opacity: 1;
-    transition: opacity 0.5s ease-out;
-}
-
-/* Optimize rendering */
-body {
-    display: block !important; /* Ensure body displays correctly immediately */
-    min-height: 100vh;
-    overflow-x: hidden;
-    transform: translateZ(0); /* Hardware acceleration */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    will-change: opacity;
 }
 
 /* Page loader styles */
@@ -31,7 +36,7 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 9999;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.3s ease;
 }
 
 .loader-spinner {
@@ -50,19 +55,28 @@ body {
 
 .loader-hidden {
     opacity: 0;
+    pointer-events: none;
 }
 
-/* Prevent image flicker */
+/* Prevent image flicker and improve rendering */
 img {
     opacity: 1;
     transition: opacity 0.2s ease-out;
-    transform: translateZ(0); /* Hardware acceleration */
+    transform: translateZ(0);
     backface-visibility: hidden;
+    position: relative;
+    will-change: transform, opacity;
 }
 
 img[data-src]:not(.loaded) {
     opacity: 0;
-    background-color: transparent !important;
+    min-height: 1px;
+    min-width: 1px;
+}
+
+img.error-handled {
+    border: none !important;
+    background: none !important;
 }
 
 /* Prevent cumulative layout shift */
@@ -76,6 +90,7 @@ main, header, footer, section {
     transform: translateZ(0);
     will-change: opacity, transform;
     transition: opacity 0.2s ease-out;
+    position: relative;
 }
 
 /* Prevent layout shift for hero image */
@@ -84,6 +99,16 @@ main, header, footer, section {
     transition: opacity 0.15s ease-out;
     will-change: opacity;
     transform: translateZ(0);
+}
+
+/* Hide invisible preload elements */
+.preload-hero {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    z-index: -1;
+    visibility: hidden;
 }
 
 /* Critical rendering path optimization */

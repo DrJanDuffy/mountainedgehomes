@@ -1,6 +1,6 @@
 
 /**
- * Page Loader for Mountain Edge Homes
+ * Enhanced Page Loader for Mountain Edge Homes
  * Prevents page flickering by ensuring content is shown only when critical images are loaded
  */
 
@@ -39,15 +39,24 @@
     
     .loader-hidden {
       opacity: 0;
+      pointer-events: none;
     }
     
-    body:not(.content-visible) {
-      overflow: hidden;
+    body {
+      opacity: 0;
+      transition: opacity 0.3s ease-in;
     }
     
-    .content-visible {
+    body.content-visible {
       opacity: 1;
-      transition: opacity 0.5s ease;
+    }
+    
+    .preload-hero {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      z-index: -1;
     }
   `;
   document.head.appendChild(style);
@@ -70,6 +79,9 @@
   window.pageLoader = pageLoader;
 })();
 
+// Create inline SVG for fallback image
+const FALLBACK_SVG = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%23f0f0f0'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%23999' font-family='Arial' font-size='14'%3EImage not found%3C/text%3E%3C/svg%3E`;
+
 // Primary loader functionality
 document.addEventListener('DOMContentLoaded', () => {
   const body = document.body;
@@ -81,47 +93,28 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
   
-  // Create a placeholder image path checker
-  const checkImageExists = (imagePath) => {
-    return new Promise(resolve => {
-      const img = new Image();
-      img.onload = () => resolve(true);
-      img.onerror = () => resolve(false);
-      img.src = imagePath;
-    });
-  };
-  
-  // Handle missing placeholder images
-  const handleMissingPlaceholders = async () => {
-    const placeholderPath = 'assets/images/placeholders/image-not-found.jpg';
-    const exists = await checkImageExists(placeholderPath);
-    
-    if (!exists) {
-      console.warn('Creating fallback for missing placeholder images');
-      // Create a simple fallback for the missing placeholder
-      window.IMAGE_LOAD_ERROR_PLACEHOLDER = 'data:image/svg+xml;charset=UTF-8,%3csvg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200"%3e%3crect width="300" height="200" fill="%23f0f0f0"/%3e%3ctext x="50%25" y="50%25" text-anchor="middle" fill="%23999" font-family="Arial" font-size="14"%3eImage not found%3c/text%3e%3c/svg%3e';
-    }
-  };
-  
-  // Call immediately
-  handleMissingPlaceholders();
+  // Set global fallback image
+  window.IMAGE_LOAD_ERROR_PLACEHOLDER = FALLBACK_SVG;
   
   // Get critical images - hero and above-the-fold content only
-  const criticalImages = Array.from(document.querySelectorAll('.hero img, .hero-background, img[loading="eager"]'));
+  const criticalImages = Array.from(document.querySelectorAll('.hero img, .hero-background, img[loading="eager"], .preload-hero'));
   let loadedCriticalImagesCount = 0;
+  let totalCriticalImages = criticalImages.length;
   
   // Function to check if critical images are loaded
   const criticalImageLoaded = () => {
     loadedCriticalImagesCount++;
-    if (loadedCriticalImagesCount >= criticalImages.length) {
+    
+    if (loadedCriticalImagesCount >= totalCriticalImages) {
       // Critical images loaded, remove loader
       setTimeout(() => {
         pageLoader.classList.add('loader-hidden');
+        body.classList.add('content-visible');
+        
         setTimeout(() => {
           if (document.body.contains(pageLoader)) {
             pageLoader.remove();
           }
-          body.classList.add('content-visible');
           
           // Now handle remaining non-critical images with lazy loading
           initLazyLoading();
@@ -130,63 +123,83 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
   
+  // Handle image error - replace with fallback
+  const handleImageError = (img) => {
+    if (!img.src.includes('data:image')) {
+      console.warn(`Failed to load image: ${img.src}`);
+      img.src = window.IMAGE_LOAD_ERROR_PLACEHOLDER;
+    }
+    criticalImageLoaded();
+  };
+  
   // Check if critical images are cached or need loading
-  if (criticalImages.length === 0) {
+  if (totalCriticalImages === 0) {
     // No critical images, remove loader after a brief delay
     setTimeout(() => {
       pageLoader.classList.add('loader-hidden');
+      body.classList.add('content-visible');
+      
       setTimeout(() => {
-        pageLoader.remove();
-        body.classList.add('content-visible');
+        if (document.body.contains(pageLoader)) {
+          pageLoader.remove();
+        }
         
         // Initialize lazy loading for remaining images
         initLazyLoading();
       }, 500);
     }, 300);
   } else {
-    // Load critical images
-    criticalImages.forEach(img => {
-      // For images with data-src, load them directly
-      if (img.dataset.src && !img.src.includes(img.dataset.src)) {
-        // Create a new image object to preload
-        const tempImg = new Image();
-        tempImg.onload = () => {
-          img.src = img.dataset.src;
-          img.classList.add('loaded');
+    // Preload hero images first
+    preloadHeroImages().then(() => {
+      // Process critical images
+      criticalImages.forEach(img => {
+        // For images with data-src, load them directly
+        if (img.dataset.src && !img.src.includes(img.dataset.src)) {
+          const tempImg = new Image();
+          tempImg.onload = () => {
+            img.src = img.dataset.src;
+            img.classList.add('loaded');
+            criticalImageLoaded();
+          };
+          tempImg.onerror = () => {
+            handleImageError(img);
+          };
+          tempImg.src = img.dataset.src;
+        } else if (img.complete) {
+          // Image is already loaded
           criticalImageLoaded();
-        };
-        tempImg.onerror = () => {
-          console.warn('Failed to load critical image:', img.dataset.src);
-          criticalImageLoaded();
-        };
-        tempImg.src = img.dataset.src;
-      } else if (img.complete) {
-        // Image is already loaded
-        criticalImageLoaded();
-      } else {
-        // Image is loading normally
-        img.addEventListener('load', criticalImageLoaded);
-        img.addEventListener('error', () => {
-          console.warn('Error loading image:', img.src);
-          criticalImageLoaded();
-        });
-      }
+        } else {
+          // Image is loading normally
+          img.addEventListener('load', criticalImageLoaded);
+          img.addEventListener('error', () => handleImageError(img));
+        }
+      });
     });
   }
   
   // Safety timeout in case some images fail to load
   setTimeout(() => {
-    if (document.body.contains(pageLoader)) {
-      console.log('Safety timeout reached, removing loader');
+    if (!body.classList.contains('content-visible')) {
+      console.log('Safety timeout reached, showing content');
       pageLoader.classList.add('loader-hidden');
+      body.classList.add('content-visible');
+      
       setTimeout(() => {
         if (document.body.contains(pageLoader)) {
           pageLoader.remove();
         }
-        body.classList.add('content-visible');
       }, 500);
     }
-  }, 8000); // 8 second timeout (increased from 5 for slower connections)
+  }, 5000);
+  
+  // Global error handler for all images
+  document.addEventListener('error', function(e) {
+    if (e.target.tagName === 'IMG' && !e.target.classList.contains('error-handled')) {
+      e.target.src = window.IMAGE_LOAD_ERROR_PLACEHOLDER;
+      e.target.classList.add('error-handled');
+      e.preventDefault();
+    }
+  }, true);
 });
 
 // Initialize lazy loading for non-critical images
@@ -199,7 +212,18 @@ function initLazyLoading() {
           
           // Replace src with data-src
           if (lazyImage.dataset.src) {
-            lazyImage.src = lazyImage.dataset.src;
+            const img = new Image();
+            img.onload = () => {
+              lazyImage.src = lazyImage.dataset.src;
+              lazyImage.classList.remove('lazy');
+              lazyImage.classList.add('loaded');
+            };
+            img.onerror = () => {
+              lazyImage.src = window.IMAGE_LOAD_ERROR_PLACEHOLDER;
+              lazyImage.classList.remove('lazy');
+              lazyImage.classList.add('error-handled');
+            };
+            img.src = lazyImage.dataset.src;
           }
           
           // Replace srcset with data-srcset
@@ -207,11 +231,12 @@ function initLazyLoading() {
             lazyImage.srcset = lazyImage.dataset.srcset;
           }
           
-          lazyImage.classList.remove('lazy');
-          lazyImage.classList.add('loaded');
-          lazyImageObserver.unobserve(lazyImage);
+          observer.unobserve(lazyImage);
         }
       });
+    }, {
+      rootMargin: '200px', // Load images when they're 200px from viewport
+      threshold: 0.01
     });
     
     // Target all images with lazy class and data-src
@@ -233,17 +258,67 @@ function initLazyLoading() {
 
 // Preload hero images
 function preloadHeroImages() {
-  const heroImages = [
-    'assets/images/hero-mountains-edge-1600w.jpg',
-    'assets/images/hero-mountains-edge-800w.jpg'
-  ];
-  
-  heroImages.forEach(src => {
-    const img = new Image();
-    img.fetchPriority = 'high';
-    img.src = src;
+  return new Promise(resolve => {
+    const heroImages = [
+      'assets/images/hero-mountains-edge-1600w.jpg',
+      'assets/images/hero-mountains-edge-800w.jpg'
+    ];
+    
+    let loadedCount = 0;
+    const totalImages = heroImages.length;
+    
+    // If no hero images to preload, resolve immediately
+    if (totalImages === 0) {
+      resolve();
+      return;
+    }
+    
+    heroImages.forEach(src => {
+      const img = new Image();
+      img.onload = () => {
+        loadedCount++;
+        if (loadedCount >= totalImages) {
+          resolve();
+        }
+      };
+      img.onerror = () => {
+        loadedCount++;
+        console.warn(`Failed to preload hero image: ${src}`);
+        if (loadedCount >= totalImages) {
+          resolve();
+        }
+      };
+      img.fetchPriority = 'high';
+      img.src = src;
+    });
+    
+    // Safety timeout
+    setTimeout(() => {
+      if (loadedCount < totalImages) {
+        console.warn('Hero image preload timeout reached');
+        resolve();
+      }
+    }, 3000);
   });
 }
 
-// Call preload function immediately
-preloadHeroImages();
+// Generate a data URI for a placeholder
+function generatePlaceholder(width = 300, height = 200, text = 'Image not found') {
+  const canvas = document.createElement('canvas');
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext('2d');
+  
+  // Fill background
+  ctx.fillStyle = '#f0f0f0';
+  ctx.fillRect(0, 0, width, height);
+  
+  // Add text
+  ctx.fillStyle = '#999';
+  ctx.font = '14px Arial';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(text, width/2, height/2);
+  
+  return canvas.toDataURL();
+}
