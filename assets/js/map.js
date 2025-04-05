@@ -4,7 +4,12 @@ let markers = [];
 const mountainEdgeCenter = { lat: 36.0051, lng: -115.2552 }; // Mountain Edge, Las Vegas coordinates
 
 // Get Google Maps API key from environment variable
-const googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY;
+const googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY || '';
+
+// Log a warning if API key is missing (but don't expose it in console)
+if (!googleMapsApiKey) {
+    console.warn('Google Maps API key is missing. Maps functionality will be limited.');
+}
 
 // Points of Interest data 
 const pointsOfInterest = {
