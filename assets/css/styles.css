@@ -579,13 +579,57 @@ nav ul li a.active {
     margin-bottom: 20px;
 }
 
-.home-value-section .section-subtitle {
+.section-subtitle {
     margin-bottom: 40px;
     font-size: 1.2rem;
     color: #666;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
+}
+
+.home-value-section .section-subtitle {
+    margin-bottom: 40px;
+}
+
+.featured-listing-cta {
+    margin-top: 60px;
+    background-color: #f5f7fa;
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+.featured-listing-cta h3 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.featured-listing-cta p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 25px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.btn-accent {
+    background-color: var(--accent-color);
+}
+
+.btn-accent:hover {
+    background-color: var(--accent-hover);
 }
 
 .realscout-home-value {
