@@ -8,14 +8,35 @@ function optimizeDOMOperations(callback) {
     });
 }
 
-// Create a page load performance tracker
+// Create a page load performance tracker with improved metrics
 let pageLoadStart = Date.now();
 
-// Add page load complete handler
+// Add page load complete handler with improved performance
 window.addEventListener('load', function() {
-    // Remove loading class to show page
-    document.documentElement.classList.remove('loading');
-    console.log('Page fully loaded in ' + (Date.now() - pageLoadStart) + 'ms');
+    // Use requestAnimationFrame for smoother transition
+    window.requestAnimationFrame(function() {
+        // Remove loading class to show page
+        document.documentElement.classList.remove('loading');
+        const loadTime = Date.now() - pageLoadStart;
+        console.log('Page fully loaded in ' + loadTime + 'ms');
+        
+        // Report performance metrics
+        if (window.performance && window.performance.mark) {
+            window.performance.mark('fullLoad');
+            window.performance.measure('fullPageLoad', 'navigationStart', 'fullLoad');
+        }
+    });
+});
+
+// Add a DOMContentLoaded handler for initial UI display optimization
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if page has been visible for more than 2 seconds and still loading
+    setTimeout(function() {
+        if (document.documentElement.classList.contains('loading')) {
+            console.log('Forcing page display after timeout');
+            document.documentElement.classList.remove('loading');
+        }
+    }, 2000);
 });
 
 document.addEventListener('DOMContentLoaded', function() {

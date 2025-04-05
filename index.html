@@ -1,14 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Anti-flicker snippet -->
+    <!-- Anti-flicker snippet with improved implementation -->
+    <style>
+        /* Inline critical styles to prevent FOUC */
+        html.loading { opacity: 0; visibility: hidden; }
+        html { opacity: 1; visibility: visible; transition: opacity 0.5s ease; }
+    </style>
     <script>
         // Add loading class to prevent FOUC
         document.documentElement.classList.add('loading');
-        window.addEventListener('load', function() {
-            // Remove loading class once everything is loaded
-            document.documentElement.classList.remove('loading');
-        });
+        
+        // Better load event handling with timeout fallback
+        var readyTimer;
+        function removeLoading() {
+            clearTimeout(readyTimer);
+            // Use requestAnimationFrame for smoother transition
+            window.requestAnimationFrame(function() {
+                document.documentElement.classList.remove('loading');
+            });
+        }
+        
+        // Set a maximum wait time - will show content even if some resources fail
+        readyTimer = setTimeout(removeLoading, 2000);
+        
+        // Remove loading class once everything is properly loaded
+        window.addEventListener('load', removeLoading);
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

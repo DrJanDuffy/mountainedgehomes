@@ -180,19 +180,35 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Load critical images first (those marked with loading="eager")
+    // Better critical images handling
     const criticalImages = Array.from(images).filter(img => img.getAttribute('loading') === 'eager');
     const nonCriticalImages = Array.from(images).filter(img => img.getAttribute('loading') !== 'eager');
 
-    // Load critical images immediately, then load non-critical ones
+    // Preload hero images immediately with high priority
+    const heroImages = criticalImages.filter(img => img.classList.contains('hero-background'));
+    if (heroImages.length > 0) {
+        heroImages.forEach(img => {
+            img.style.willChange = 'opacity';
+            loadImage(img);
+        });
+    }
+    
+    // Load remaining critical images immediately with high priority
     Promise.all(criticalImages.map(loadImage))
         .then(() => {
+            // Signal that critical content is ready
+            if (window.performance && window.performance.mark) {
+                window.performance.mark('criticalImagesLoaded');
+            }
+            
             // Load non-critical images after critical ones
-            nonCriticalImages.forEach(img => {
-                loadImage(img).catch(() => {
-                    // Error handling already done in loadImage
+            setTimeout(() => {
+                nonCriticalImages.forEach(img => {
+                    loadImage(img).catch(() => {
+                        // Error handling already done in loadImage
+                    });
                 });
-            });
+            }, 100); // Small delay to prioritize UI rendering first
         });
 
     // Set up error handler for all images
