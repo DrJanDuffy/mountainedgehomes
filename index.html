@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Simplified Anti-Flicker System - Aggressive Fix -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mountain Edge Homes | Luxury Mountain Real Estate</title>
+    <meta name="description" content="Discover luxury Mountain's Edge homes in Las Vegas 89178 with Mountain Edge Homes, the premier real estate agency specializing in Mountain's Edge neighborhoods and properties.">
+    
+    <!-- Ultra-aggressive anti-flicker style - inline critical CSS -->
     <style>
-        /* Immediate display styles to prevent white screen */
         html, body { 
             display: block !important;
             visibility: visible !important;
@@ -11,7 +15,6 @@
             background-color: #fff;
         }
         
-        /* Page loader to show progress */
         .page-loader {
             position: fixed;
             top: 0;
@@ -23,7 +26,6 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: opacity 0.3s ease;
         }
         
         .loader-spinner {
@@ -40,64 +42,26 @@
             100% { transform: rotate(360deg); }
         }
         
-        .loader-hidden {
-            opacity: 0;
-            pointer-events: none;
+        /* Immediately load the hero image */
+        .hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('assets/images/hero-background.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
         }
         
         /* Prevent image loading causing layout shifts */
-        img[data-src] {
+        img {
             opacity: 1;
-            transition: opacity 0.2s;
-            min-height: 100px;
-            background-color: #f5f5f5;
+            min-height: 1px;
+            min-width: 1px;
         }
     </style>
-    <script>
-        // Force page visibility - aggressive approach
-        document.documentElement.style.visibility = 'visible';
-        document.documentElement.style.opacity = '1';
-        
-        // Create loader immediately
-        document.addEventListener('DOMContentLoaded', function() {
-            // Ensure body is visible
-            document.body.style.visibility = 'visible';
-            document.body.style.opacity = '1';
-            
-            // Create a simple loader
-            if (!document.querySelector('.page-loader')) {
-                const loader = document.createElement('div');
-                loader.className = 'page-loader';
-                loader.innerHTML = '<div class="loader-spinner"></div>';
-                document.body.appendChild(loader);
-                
-                // Remove loader after a short delay
-                setTimeout(function() {
-                    loader.classList.add('loader-hidden');
-                    setTimeout(function() { 
-                        if (document.body.contains(loader)) {
-                            loader.remove(); 
-                        }
-                    }, 300);
-                }, 600);
-            }
-        });
-        
-        // Global image error handler
-        window.IMAGE_LOAD_ERROR_PLACEHOLDER = 'assets/images/placeholders/fallback.svg';
-    </script>
     
-    <!-- Load page loader script immediately with highest priority -->
+    <!-- Immediately execute page loader script with highest priority -->
     <script src="assets/js/page-loader.js" fetchpriority="high"></script>
     
-    <!-- Preload critical assets -->
-    <link rel="preload" href="assets/images/hero-mountains-edge-1600w.jpg" as="image" fetchpriority="high">
-    <link rel="preload" href="assets/css/styles.css" as="style">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mountain Edge Homes | Luxury Mountain Real Estate</title>
-    <meta name="description" content="Discover luxury Mountain's Edge homes in Las Vegas 89178 with Mountain Edge Homes, the premier real estate agency specializing in Mountain's Edge neighborhoods and properties.">
-    <meta name="keywords" content="Mountain's Edge real estate, Las Vegas luxury homes, Mountain's Edge homes for sale, Las Vegas 89178 properties, Sierra Madre homes, Aspire gated community, Southwest Las Vegas real estate">
+    <!-- CSS files -->
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/property-search.css">
     <link rel="stylesheet" href="assets/css/booking.css">
@@ -105,37 +69,11 @@
     <link rel="stylesheet" href="assets/css/image-accessibility.css">
     <link rel="stylesheet" href="assets/css/form-enhancements.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- External scripts -->
     <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js"></script>
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-    
-    <!-- Preload hero image with high priority -->
-    <link rel="preload" href="assets/images/hero-mountains-edge-1600w.jpg" as="image" fetchpriority="high">
-    
-    <!-- Preload critical CSS -->
-    <link rel="preload" href="assets/css/styles.css" as="style">
-    
-    <!-- Add preload for critical fonts to avoid FOIT (Flash of Invisible Text) -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
-    
-    <!-- Add invisible hero image preload -->
-    <img src="assets/images/hero-mountains-edge-1600w.jpg" class="preload-hero" aria-hidden="true" alt="">
-    
-    <!-- Define fallback image for errors -->
-    <script>
-        window.IMAGE_LOAD_ERROR_PLACEHOLDER = 'assets/images/placeholders/image-not-found.jpg';
-        
-        // Prevent image errors from causing layout shifts
-        window.addEventListener('error', function(e) {
-            if (e.target.tagName === 'IMG') {
-                if (!e.target.classList.contains('error-handled')) {
-                    e.target.src = window.IMAGE_LOAD_ERROR_PLACEHOLDER;
-                    e.target.classList.add('error-handled');
-                }
-                e.preventDefault();
-            }
-        }, true);
-    </script>
 </head>
 <body>
     <!-- Announcement Banner -->

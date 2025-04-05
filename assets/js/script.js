@@ -84,45 +84,70 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Handle content visibility as soon as DOM is ready
-document.addEventListener('DOMContentLoaded', function() {
-    // Force layout calculation to ensure styles are applied
-    void document.documentElement.offsetHeight;
-    
-    // Make sure critical content is ready to display
-    setTimeout(function() {
-        document.documentElement.classList.add('content-loaded');
-    }, 50);
-});
+// Track page load start time
+const pageLoadStart = Date.now();
 
-// Add page load complete handler with improved performance
-window.addEventListener('load', function() {
-    // Ensure page is fully visible
+// Emergency visibility handler - runs immediately
+(function forceVisibility() {
+    document.documentElement.style.visibility = 'visible';
+    document.documentElement.style.opacity = '1';
+    document.documentElement.style.display = 'block';
+})();
+
+// Force visibility as soon as DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM content loaded in ' + (Date.now() - pageLoadStart) + 'ms');
+    
+    // Force visibility immediately
+    document.documentElement.style.visibility = 'visible';
+    document.documentElement.style.opacity = '1';
     document.documentElement.classList.add('content-loaded');
+    
+    // Remove any loading classes that may hide content
     document.documentElement.classList.remove('loading');
     
-    const loadTime = Date.now() - pageLoadStart;
-    console.log('Page fully loaded in ' + loadTime + 'ms');
-    
-    // Report performance metrics
-    if (window.performance && window.performance.mark) {
-        window.performance.mark('fullLoad');
-        window.performance.measure('fullPageLoad', 'navigationStart', 'fullLoad');
+    if (document.body) {
+        document.body.style.visibility = 'visible';
+        document.body.style.opacity = '1';
+        document.body.classList.add('content-visible');
     }
     
-    // Lazy load remaining images after critical content is displayed
-    const nonCriticalImages = document.querySelectorAll('img[data-src]:not(.loaded):not(.hero-background)');
-    if (nonCriticalImages.length > 0) {
-        setTimeout(() => {
-            nonCriticalImages.forEach(img => {
-                if (img.dataset && img.dataset.src) {
-                    img.src = img.dataset.src;
-                    img.classList.add('loaded');
-                }
-            });
-        }, 100);
-    }
+    // Load all images immediately for reliable display
+    document.querySelectorAll('img[data-src]').forEach(img => {
+        if (img.dataset && img.dataset.src) {
+            img.src = img.dataset.src;
+            img.classList.add('loaded');
+        }
+    });
+    
+    console.log("Window loaded");
 });
+
+// Complete page load handler
+window.addEventListener('load', function() {
+    // Final force visibility
+    document.documentElement.style.visibility = 'visible';
+    document.documentElement.style.opacity = '1';
+    
+    // Load any remaining images
+    const allImages = document.querySelectorAll('img[data-src]:not(.loaded)');
+    allImages.forEach(img => {
+        if (img.dataset && img.dataset.src) {
+            img.src = img.dataset.src;
+            img.classList.add('loaded');
+        }
+    });
+});
+
+// Set viewport height fix for mobile browsers
+function setVhProperty() {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+// Set initially and on resize
+setVhProperty();
+window.addEventListener('resize', setVhProperty);
 
 document.addEventListener('DOMContentLoaded', function() {
     // Cache frequently accessed DOM elements to reduce lookups

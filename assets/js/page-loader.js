@@ -1,30 +1,53 @@
 /**
- * Mountain Edge Homes - Simplified Page Loader
- * No-nonsense approach to prevent white screen and flickering
+ * Mountain Edge Homes - Ultra-Aggressive Page Loader
+ * Immediate content display approach to eliminate white screen
  */
 
 // Define a fallback SVG for image errors
 const FALLBACK_SVG = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200"%3E%3Crect width="300" height="200" fill="%23f0f0f0"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23999" font-family="Arial" font-size="14"%3EImage not found%3C/text%3E%3C/svg%3E';
 
-// Create page loader immediately in the head to prevent flash
+// Make content visible immediately - highest priority
 (function() {
-  // Aggressively block rendering until critical content is ready
-  document.documentElement.style.visibility = 'hidden';
-  document.documentElement.style.opacity = '0';
+  // Force content visibility - fail-safe approach
   document.documentElement.style.display = 'block';
+  document.documentElement.style.visibility = 'visible';
+  document.documentElement.style.opacity = '1';
+
+  // Prevent other scripts from hiding content
+  const originalSetProperty = CSSStyleDeclaration.prototype.setProperty;
+  CSSStyleDeclaration.prototype.setProperty = function(propertyName, value, priority) {
+    if (propertyName === 'visibility' && value === 'hidden') {
+      // Prevent setting visibility to hidden
+      return;
+    }
+    if (propertyName === 'opacity' && parseFloat(value) < 0.5) {
+      // Prevent low opacity
+      return;
+    }
+    originalSetProperty.call(this, propertyName, value, priority);
+  };
 
   // Create a style element for the loader
   const style = document.createElement('style');
   style.textContent = `
-    html {
-      visibility: hidden;
-      opacity: 0;
-      transition: opacity 0.3s ease;
+    /* Force content visibility */
+    html, body {
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      background-color: #fff;
     }
-    html.content-loaded {
-      visibility: visible;
-      opacity: 1;
+
+    /* Override any styles that might hide content */
+    [style*="visibility: hidden"], 
+    [style*="opacity: 0"], 
+    [style*="display: none"] {
+      visibility: visible !important;
+      opacity: 1 !important;
+      display: block !important;
     }
+
+    /* Simple loader */
     .page-loader {
       position: fixed;
       top: 0;
@@ -58,102 +81,88 @@ const FALLBACK_SVG = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/sv
       pointer-events: none;
     }
 
-    body {
-      opacity: 0;
-      transition: opacity 0.3s ease-in;
-    }
-
-    body.content-visible {
-      opacity: 1;
-    }
-
-    .preload-hero {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      opacity: 0;
-      z-index: -1;
-    }
-
-    img[data-src]:not(.loaded) {
-      opacity: 0;
+    /* Image placeholders */
+    img[data-src] {
       min-height: 1px;
       min-width: 1px;
     }
   `;
   document.head.appendChild(style);
 
-  // Create and add the loader
+  // Create a simple loader
   const pageLoader = document.createElement('div');
   pageLoader.className = 'page-loader';
   pageLoader.innerHTML = '<div class="loader-spinner"></div>';
 
+  // Try to add loader immediately
   if (document.body) {
     document.body.appendChild(pageLoader);
   } else {
-    document.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('DOMContentLoaded', () => {
       document.body.appendChild(pageLoader);
     });
   }
 
-  // Store reference to the loader in window for access by other scripts
+  // Store loader reference
   window.pageLoader = pageLoader;
-
-  // Allow rendering once the DOM is ready but maintain opacity control
-  window.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-      document.documentElement.style.display = 'block';
-    }, 10);
-  });
 })();
 
-
-// Force content visibility after a short timeout regardless of loading state
+// Force content visibility after 200ms (ultra-aggressive)
 setTimeout(function() {
   document.documentElement.style.visibility = 'visible';
   document.documentElement.style.opacity = '1';
+  document.documentElement.style.display = 'block';
 
   if (document.body) {
     document.body.style.visibility = 'visible';
     document.body.style.opacity = '1';
   }
 
+  // Remove loader
   const pageLoader = document.querySelector('.page-loader');
-  if (pageLoader && document.body.contains(pageLoader)) {
+  if (pageLoader && document.body && document.body.contains(pageLoader)) {
     pageLoader.classList.add('loader-hidden');
-    setTimeout(() => pageLoader.remove(), 300);
-  }
-
-  console.log('Force showing content after safety timeout');
-}, 800); // Reduced timeout to 800ms
-
-// Create page loader and add to DOM immediately
-document.addEventListener('DOMContentLoaded', function() {
-  // Ensure all content is visible
-  document.documentElement.style.visibility = 'visible';
-  document.documentElement.style.opacity = '1';
-  document.documentElement.classList.add('content-loaded');
-
-  if (document.body) {
-    document.body.classList.add('content-visible');
-    document.body.style.visibility = 'visible';
-    document.body.style.opacity = '1';
-  }
-
-  // Remove loader after a short delay
-  const pageLoader = document.querySelector('.page-loader');
-  if (pageLoader) {
     setTimeout(() => {
-      pageLoader.classList.add('loader-hidden');
-      setTimeout(() => {
-        if (document.body.contains(pageLoader)) {
-          pageLoader.remove();
-        }
-      }, 300);
+      if (document.body.contains(pageLoader)) {
+        pageLoader.remove();
+      }
     }, 300);
   }
 
-  // Handle image errors gracefully
+  console.log('Force showing content after safety timeout');
+}, 200); // Ultra-short timeout
+
+// Handle DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function() {
+  // Double ensure content visibility
+  document.documentElement.style.visibility = 'visible';
+  document.documentElement.style.opacity = '1';
+
+  if (document.body) {
+    document.body.style.visibility = 'visible';
+    document.body.style.opacity = '1';
+  }
+
+  // Remove loader
+  const pageLoader = document.querySelector('.page-loader');
+  if (pageLoader) {
+    pageLoader.classList.add('loader-hidden');
+    setTimeout(() => {
+      if (document.body.contains(pageLoader)) {
+        pageLoader.remove();
+      }
+    }, 300);
+  }
+
+  // Load all images immediately
+  document.querySelectorAll('img[data-src]').forEach(img => {
+    if (img.dataset.src) {
+      img.src = img.dataset.src;
+      img.classList.add('loaded');
+    }
+  });
+
+  // Handle image errors
   document.querySelectorAll('img').forEach(img => {
     img.onerror = function() {
       if (!this.src.includes('fallback') && !this.classList.contains('error-handled')) {
@@ -161,15 +170,6 @@ document.addEventListener('DOMContentLoaded', function() {
         this.classList.add('error-handled');
       }
     };
-  });
-
-  // Show all lazy-loaded images immediately in a controlled way
-  const lazyImages = document.querySelectorAll('img[data-src]');
-  lazyImages.forEach(img => {
-    if (img.dataset.src && !img.src.includes(img.dataset.src)) {
-      img.src = img.dataset.src;
-      img.classList.add('loaded');
-    }
   });
 });
 
@@ -185,23 +185,18 @@ window.addEventListener('error', function(e) {
 // Set global fallback image
 window.IMAGE_LOAD_ERROR_PLACEHOLDER = FALLBACK_SVG;
 
-//Function to generate placeholder image - moved here to avoid unnecessary loading
+// Function to generate placeholder image
 function generatePlaceholder(width = 300, height = 200, text = 'Image not found') {
   const canvas = document.createElement('canvas');
   canvas.width = width;
   canvas.height = height;
   const ctx = canvas.getContext('2d');
-
-  // Fill background
   ctx.fillStyle = '#f0f0f0';
   ctx.fillRect(0, 0, width, height);
-
-  // Add text
   ctx.fillStyle = '#999';
   ctx.font = '14px Arial';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText(text, width / 2, height / 2);
-
   return canvas.toDataURL();
 }
