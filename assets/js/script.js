@@ -11,32 +11,72 @@ function optimizeDOMOperations(callback) {
 // Create a page load performance tracker with improved metrics
 let pageLoadStart = Date.now();
 
-// Add page load complete handler with improved performance
-window.addEventListener('load', function() {
-    // Use requestAnimationFrame for smoother transition
-    window.requestAnimationFrame(function() {
-        // Remove loading class to show page
-        document.documentElement.classList.remove('loading');
-        const loadTime = Date.now() - pageLoadStart;
-        console.log('Page fully loaded in ' + loadTime + 'ms');
-        
-        // Report performance metrics
-        if (window.performance && window.performance.mark) {
-            window.performance.mark('fullLoad');
-            window.performance.measure('fullPageLoad', 'navigationStart', 'fullLoad');
+// Preconnect to important domains
+function setupPreconnect() {
+    const domains = ['https://fonts.googleapis.com', 'https://fonts.gstatic.com'];
+    const fragment = document.createDocumentFragment();
+    
+    domains.forEach(domain => {
+        const link = document.createElement('link');
+        link.rel = 'preconnect';
+        link.href = domain;
+        link.crossOrigin = 'anonymous';
+        fragment.appendChild(link);
+    });
+    
+    document.head.appendChild(fragment);
+}
+
+// Call immediately
+setupPreconnect();
+
+// Mark critical CSS as loaded early
+document.addEventListener('DOMContentLoaded', function() {
+    // Immediately remove loading class when critical content is parsed
+    // This prevents the white flash before full page load
+    setTimeout(() => {
+        if (document.documentElement.classList.contains('loading')) {
+            console.log('Revealing critical content');
+            document.documentElement.classList.remove('loading');
+        }
+    }, 100); // Small timeout to ensure critical CSS is applied
+    
+    // Pre-load hero image immediately
+    const heroImages = document.querySelectorAll('.hero-background, .hero img');
+    heroImages.forEach(img => {
+        if (img.dataset && img.dataset.src) {
+            img.src = img.dataset.src;
+            img.classList.add('loaded');
         }
     });
 });
 
-// Add a DOMContentLoaded handler for initial UI display optimization
-document.addEventListener('DOMContentLoaded', function() {
-    // Check if page has been visible for more than 2 seconds and still loading
-    setTimeout(function() {
-        if (document.documentElement.classList.contains('loading')) {
-            console.log('Forcing page display after timeout');
-            document.documentElement.classList.remove('loading');
-        }
-    }, 2000);
+// Add page load complete handler with improved performance
+window.addEventListener('load', function() {
+    // Ensure page is fully visible
+    document.documentElement.classList.remove('loading');
+    
+    const loadTime = Date.now() - pageLoadStart;
+    console.log('Page fully loaded in ' + loadTime + 'ms');
+    
+    // Report performance metrics
+    if (window.performance && window.performance.mark) {
+        window.performance.mark('fullLoad');
+        window.performance.measure('fullPageLoad', 'navigationStart', 'fullLoad');
+    }
+    
+    // Lazy load remaining images after critical content is displayed
+    const nonCriticalImages = document.querySelectorAll('img[data-src]:not(.loaded):not(.hero-background)');
+    if (nonCriticalImages.length > 0) {
+        setTimeout(() => {
+            nonCriticalImages.forEach(img => {
+                if (img.dataset && img.dataset.src) {
+                    img.src = img.dataset.src;
+                    img.classList.add('loaded');
+                }
+            });
+        }, 100);
+    }
 });
 
 document.addEventListener('DOMContentLoaded', function() {

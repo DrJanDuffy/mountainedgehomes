@@ -84,8 +84,12 @@ function generateContextualAlt(img) {
     }
     
     // Extract filename as last resort
-    const filename = img.src.split('/').pop().split('.')[0].replace(/[-_]/g, ' ');
+    const filename = img.src ? img.src.split('/').pop().split('.')[0].replace(/[-_]/g, ' ') : '';
     if (filename && filename.length > 3) {
+        return 'Image: ' + filename.charAt(0).toUpperCase() + filename.slice(1);
+    }
+    
+    return 'Mountain Edge Homes property image';
         return 'Image: ' + filename.charAt(0).toUpperCase() + filename.slice(1);
     }
     

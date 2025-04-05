@@ -2,6 +2,13 @@
 <html lang="en">
 <head>
     <!-- Anti-flicker snippet with improved implementation -->
+    <script>
+        // Prevent Flash of Unstyled Content (FOUC)
+        document.documentElement.classList.add('loading');
+        
+        // Set image error fallback
+        window.IMAGE_LOAD_ERROR_PLACEHOLDER = 'assets/images/placeholders/image-not-found.jpg';
+    </script>
     <style>
         /* Inline critical styles to prevent FOUC */
         html.loading { opacity: 0; visibility: hidden; }

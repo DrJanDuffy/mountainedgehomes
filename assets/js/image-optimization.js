@@ -231,20 +231,39 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Function to preload critical images
 function preloadCriticalImages() {
-    const imagesToPreload = document.querySelectorAll('img.preload');
+    // Preload critical images
+    const imagesToPreload = document.querySelectorAll('img.preload, img.hero-background, .hero img');
+    
+    // Create a batch of preload links at once
+    const fragment = document.createDocumentFragment();
+    
     imagesToPreload.forEach(img => {
         if (img.dataset.src) {
             const preloadLink = document.createElement('link');
             preloadLink.rel = 'preload';
             preloadLink.href = img.dataset.src;
             preloadLink.as = 'image';
-            document.head.appendChild(preloadLink);
+            preloadLink.fetchpriority = 'high';
+            fragment.appendChild(preloadLink);
+            
+            // Pre-load the image immediately for faster display
+            const tempImg = new Image();
+            tempImg.onload = function() {
+                img.src = img.dataset.src;
+                img.classList.add('loaded');
+            };
+            tempImg.src = img.dataset.src;
         }
     });
+    
+    document.head.appendChild(fragment);
 }
 
-// Call preload on window load
-window.addEventListener('load', preloadCriticalImages);
+// Immediately execute preload for critical images
+document.addEventListener('DOMContentLoaded', preloadCriticalImages);
+
+// Set up error handler once for placeholder images
+const IMAGE_LOAD_ERROR_PLACEHOLDER = 'assets/images/placeholders/image-not-found.jpg';
 
 // Export for use in other scripts
 if (typeof module !== 'undefined') {
