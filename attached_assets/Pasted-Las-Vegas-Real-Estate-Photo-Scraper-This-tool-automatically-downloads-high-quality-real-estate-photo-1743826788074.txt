@@ -1,0 +1,119 @@
+Las Vegas Real Estate Photo Scraper
+This tool automatically downloads high-quality real estate photos for your Las Vegas realtor website using the Unsplash API.
+Features
+
+Automatically downloads categorized real estate photos:
+
+Exterior home shots
+Kitchen designs
+Living rooms
+Bedrooms
+Bathrooms
+Pool areas
+Aerial neighborhood views
+
+
+Creates proper attribution files for each photo
+Organizes photos by category
+Customizable search queries and photo counts
+
+Prerequisites
+
+Node.js installed on your system
+Unsplash API access key (free tier available)
+
+Setup Instructions
+
+Create a Replit Account
+
+Go to Replit and sign up for a free account if you don't have one
+
+
+Create a New Repl
+
+Click the "+ Create Repl" button
+Select "Node.js" as the template
+Give your project a name (e.g., "las-vegas-realestate-photos")
+Click "Create Repl"
+
+
+Get an Unsplash API Key
+
+Go to Unsplash Developers
+Sign up for a developer account
+Create a new application
+Copy your Access Key
+
+
+Install Required Packages
+
+In your Repl, open the Shell tab and run:
+
+Copynpm install axios unsplash-js node-fetch
+
+Add the Code
+
+Copy the entire script from the artifact into the index.js file
+Replace YOUR_UNSPLASH_ACCESS_KEY with your actual Unsplash API key
+
+
+
+Usage
+
+Customize the Script (Optional)
+
+Modify the photoCategories array to change search queries or photo counts
+Add new categories or remove existing ones as needed
+
+
+Run the Script
+
+Click the "Run" button at the top of your Repl
+The script will:
+
+Create a real_estate_photos directory
+Download photos for each category
+Create metadata files for proper attribution
+Display progress in the console
+
+
+
+
+Access Your Photos
+
+All downloaded photos will be in the real_estate_photos directory
+Each photo has a corresponding credit JSON file
+A master metadata file lists all categories and download information
+
+
+
+Adding Photos to Your Website
+
+Download from Replit
+
+In the Files panel, right-click on the real_estate_photos folder
+Select "Download" to get a zip file of all photos
+
+
+Upload to Your Website
+
+Add the photos to your website's media library
+Make sure to properly attribute photographers as specified in the credit files
+
+
+
+Important Notes
+
+The free tier of Unsplash API has rate limits (50 requests per hour)
+Always provide proper attribution for Unsplash photos as required by their license
+For production use, consider upgrading to a paid Unsplash plan
+This tool is meant for initial setup - for ongoing needs, consider a more sustainable solution
+
+Troubleshooting
+
+If you encounter rate limit errors, reduce the number of photos requested or wait an hour
+If photos aren't downloading, check your API key and internet connection
+For any errors, check the console output for detailed information
+
+Legal Considerations
+Always review the licensing terms for any images you use on your realtor website. While Unsplash provides free-to-use images, some may have specific attribution requirements or restrictions for commercial use.
