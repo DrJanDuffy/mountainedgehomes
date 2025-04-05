@@ -1,0 +1,105 @@
+// 1. Add this JavaScript to your main JS file
+document.addEventListener('DOMContentLoaded', () => {
+  // Create a page loader that will hide content until images are ready
+  const body = document.body;
+  const pageLoader = document.createElement('div');
+  pageLoader.className = 'page-loader';
+  pageLoader.innerHTML = '<div class="loader-spinner"></div>';
+  body.appendChild(pageLoader);
+  
+  // Get all images on the page
+  const images = document.querySelectorAll('img');
+  let loadedImagesCount = 0;
+  
+  // Function to check if all images are loaded
+  const imageLoaded = () => {
+    loadedImagesCount++;
+    if (loadedImagesCount === images.length) {
+      // All images loaded, remove the loader
+      setTimeout(() => {
+        pageLoader.classList.add('loader-hidden');
+        setTimeout(() => {
+          pageLoader.remove();
+          body.classList.add('content-visible');
+        }, 500);
+      }, 300);
+    }
+  };
+  
+  // Check if images are cached already
+  if (images.length === 0) {
+    // No images to load, remove loader immediately
+    pageLoader.remove();
+    body.classList.add('content-visible');
+  } else {
+    // Add load event listeners to all images
+    images.forEach(img => {
+      if (img.complete) {
+        imageLoaded();
+      } else {
+        img.addEventListener('load', imageLoaded);
+        img.addEventListener('error', imageLoaded); // Handle error case too
+      }
+    });
+    
+    // Safety timeout in case some images fail to load
+    setTimeout(() => {
+      if (document.body.contains(pageLoader)) {
+        pageLoader.classList.add('loader-hidden');
+        setTimeout(() => {
+          if (document.body.contains(pageLoader)) {
+            pageLoader.remove();
+          }
+          body.classList.add('content-visible');
+        }, 500);
+      }
+    }, 5000); // 5 second timeout
+  }
+
+  // Implement image lazy loading
+  if ('IntersectionObserver' in window) {
+    const lazyImageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const lazyImage = entry.target;
+          
+          // Replace src with data-src
+          if (lazyImage.dataset.src) {
+            lazyImage.src = lazyImage.dataset.src;
+          }
+          
+          // Replace srcset with data-srcset
+          if (lazyImage.dataset.srcset) {
+            lazyImage.srcset = lazyImage.dataset.srcset;
+          }
+          
+          lazyImage.classList.remove('lazy');
+          lazyImageObserver.unobserve(lazyImage);
+        }
+      });
+    });
+    
+    // Target all images with lazy class
+    const lazyImages = document.querySelectorAll('img.lazy');
+    lazyImages.forEach(lazyImage => {
+      lazyImageObserver.observe(lazyImage);
+    });
+  }
+});
+
+// 2. Implement image preloading for critical hero images
+function preloadHeroImages() {
+  const heroImages = [
+    '/path/to/hero1.jpg',
+    '/path/to/hero2.jpg',
+    '/path/to/hero3.jpg'
+  ];
+  
+  heroImages.forEach(src => {
+    const img = new Image();
+    img.src = src;
+  });
+}
+
+// Call preload function early
+preloadHeroImages();
