@@ -7,11 +7,22 @@
   contain-intrinsic-size: auto 300px;
 }
 
+/* Aggressive anti-flicker styles */
+.image-container {
+  background-color: #f5f5f5;
+  position: relative;
+  overflow: hidden;
+  transform: translateZ(0);
+  will-change: opacity;
+  min-height: 50px;
+}
+
 /* Low-quality image placeholder styles */
 .lqip-container {
   position: relative;
   overflow: hidden;
   background-color: #f6f6f6;
+  will-change: transform;
 }
 
 .lqip-container canvas {
@@ -21,7 +32,7 @@
   width: 100%;
   height: 100%;
   opacity: 1;
-  transition: opacity 0.3s ease-out;
+  transition: opacity 0.2s ease-out;
   z-index: 1;
 }
 
@@ -29,7 +40,8 @@
   position: relative;
   z-index: 2;
   opacity: 0;
-  transition: opacity 0.3s ease-out;
+  transition: opacity 0.2s ease-out;
+  contain: paint;
 }
 
 .lqip-container img.loaded {
@@ -43,11 +55,13 @@
 /* Prevent layout shift during image load */
 img[data-src], img.lazy-load, img.lazy {
   opacity: 0;
-  transition: opacity 0.3s ease-out;
+  transition: opacity 0.2s ease-out;
   min-height: 1px;
   min-width: 1px;
   transform: translateZ(0);
   background-color: transparent;
+  contain: layout style paint;
+  will-change: opacity;
 }
 
 /* Style for loaded images */
@@ -55,19 +69,28 @@ img.loaded {
   opacity: 1;
   background-color: transparent;
   transform: translateZ(0);
+  contain: layout style;
 }
 
 /* Static placeholder for images before loading */
 .img-placeholder {
-  background-color: #f9f9f9;
+  background-color: #f5f5f5;
+  background-image: url('../images/placeholders/fallback.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100px auto;
   position: relative;
   overflow: hidden;
+  min-height: 1px;
+  min-width: 1px;
 }
 
 /* Error state for images */
 img.error, img.error-handled {
   opacity: 1;
   background-color: transparent;
+  min-height: 1px;
+  min-width: 1px;
 }
 
 /* Fix for Safari image loading */
@@ -76,6 +99,53 @@ img.error, img.error-handled {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
   }
+}
+
+/* Aggressive property fixes for all image elements */
+img {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+  will-change: opacity, transform;
+  transition: opacity 0.2s ease-out;
+  object-fit: cover;
+}
+
+/* Hero section specific flicker prevention */
+.hero-background {
+  min-height: 100px;
+  min-width: 100px;
+  transform: translateZ(0);
+  will-change: opacity;
+  transition: opacity 0.15s ease;
+  contain: layout style paint;
+}
+
+/* Temporary spinner for image placeholders */
+.image-container::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  border: 3px solid rgba(0,0,0,0.1);
+  border-top-color: rgba(0,0,0,0.3);
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: image-loader-spin 0.8s linear infinite;
+  z-index: 0;
+}
+
+.image-container.loaded::after {
+  display: none;
+}
+
+@keyframes image-loader-spin {
+  to { transform: rotate(360deg); }
 }
 
 /* Fix for Firefox image loading */

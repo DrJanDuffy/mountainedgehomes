@@ -1,4 +1,8 @@
 /* Enhanced Anti-flicker styles */
+html {
+    display: block; /* Overridden by JS initially */
+}
+
 html, body {
     -webkit-backface-visibility: hidden;
     -webkit-perspective: 1000;
@@ -8,6 +12,8 @@ html, body {
     perspective: 1000;
     transform: translate3d(0,0,0);
     transform: translateZ(0);
+    min-height: 100%;
+    width: 100%;
 }
 
 body {
@@ -18,6 +24,8 @@ body {
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    will-change: opacity;
+    contain: style layout;
 }
 
 body.content-visible {
@@ -37,6 +45,7 @@ body.content-visible {
     align-items: center;
     z-index: 9999;
     transition: opacity 0.3s ease;
+    will-change: opacity;
 }
 
 .loader-spinner {

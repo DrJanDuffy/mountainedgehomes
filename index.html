@@ -2,21 +2,39 @@
 <html lang="en">
 <head>
     <!-- Enhanced Anti-Flicker System with Page Loader -->
+    <style>
+        /* Critical inline CSS to prevent flicker */
+        html { display: none; }
+        body { visibility: hidden; }
+        .no-js body { visibility: visible; }
+    </style>
     <script>
         // Performance markers
         if (window.performance && window.performance.mark) {
             window.performance.mark('pageStart');
         }
         
-        // Define fallback for image loading errors
-        window.IMAGE_LOAD_ERROR_PLACEHOLDER = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200"%3E%3Crect width="300" height="200" fill="%23f0f0f0"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23999" font-family="Arial" font-size="14"%3EImage not found%3C/text%3E%3C/svg%3E';
+        // Performance optimization: immediately set visibility
+        document.documentElement.className = 'no-fouc';
         
         // Prevent FOUC (Flash Of Unstyled Content)
-        document.documentElement.className = 'no-fouc';
+        (function() {
+            // Force immediate critical render styles to prevent flicker
+            document.documentElement.style.display = 'block';
+            document.body.style.visibility = 'hidden';
+            
+            // Preload critical placeholder
+            window.IMAGE_LOAD_ERROR_PLACEHOLDER = 'assets/images/placeholders/fallback.svg';
+            
+            // Preload the hero image immediately
+            const heroPreloader = new Image();
+            heroPreloader.src = 'assets/images/hero-mountains-edge-1600w.jpg';
+            heroPreloader.fetchPriority = 'high';
+        })();
     </script>
     
-    <!-- Load page loader script immediately -->
-    <script src="assets/js/page-loader.js"></script>
+    <!-- Load page loader script immediately with highest priority -->
+    <script src="assets/js/page-loader.js" fetchpriority="high"></script>
     
     <!-- Preload critical assets -->
     <link rel="preload" href="assets/images/hero-mountains-edge-1600w.jpg" as="image" fetchpriority="high">
