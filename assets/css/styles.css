@@ -356,12 +356,58 @@ nav ul li a.active {
     box-shadow: 0 3px 8px rgba(0,0,0,0.15);
 }
 
+.property-stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.stat-item {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 15px 20px;
+    border-radius: 8px;
+    min-width: 120px;
+    backdrop-filter: blur(5px);
+}
+
+.stat-number {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
 .cta-container {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
     margin: 25px 0;
     justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .property-stats {
+        gap: 15px;
+    }
+    
+    .stat-item {
+        min-width: 100px;
+        padding: 10px 15px;
+    }
+    
+    .stat-number {
+        font-size: 1.5rem;
+    }
 }
 
 .btn-icon {
@@ -390,6 +436,43 @@ nav ul li a.active {
     padding-bottom: 20px;
 }
 
+.about-subtitle {
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.about-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin: 25px 0;
+}
+
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.feature-item i {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    min-width: 25px;
+}
+
+.feature-item span {
+    font-size: 1.05rem;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .about-features {
+        grid-template-columns: 1fr;
+    }
+}
+
 .section-title::after {
     content: '';
     display: block;
@@ -410,6 +493,79 @@ nav ul li a.active {
     height: 10px;
     background-color: var(--accent-color);
     border-radius: 50%;
+}
+
+/* Client Success Section */
+.client-success-section {
+    background-color: var(--primary-color);
+    background-image: linear-gradient(135deg, rgba(42, 65, 106, 0.95), rgba(42, 65, 106, 0.8)), url('../images/hero-background.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 60px 0;
+    color: white;
+    text-align: center;
+}
+
+.success-story {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.success-quote {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.success-quote i.fa-quote-left {
+    position: absolute;
+    top: -20px;
+    left: -10px;
+    font-size: 2rem;
+    color: var(--accent-color);
+    opacity: 0.6;
+}
+
+.success-quote i.fa-quote-right {
+    position: absolute;
+    bottom: -20px;
+    right: -10px;
+    font-size: 2rem;
+    color: var(--accent-color);
+    opacity: 0.6;
+}
+
+.success-quote p {
+    font-size: 1.3rem;
+    line-height: 1.7;
+    font-style: italic;
+}
+
+.client-profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.client-details h3 {
+    margin: 0 0 5px;
+    font-size: 1.2rem;
+}
+
+.client-details p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.success-rating {
+    margin-top: 10px;
+}
+
+.success-rating i {
+    color: #ffd700;
+    margin: 0 2px;
 }
 
 /* Home Value Section */
