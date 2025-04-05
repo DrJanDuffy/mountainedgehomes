@@ -128,6 +128,19 @@ function preloadCriticalImages() {
 document.addEventListener('DOMContentLoaded', () => {
   const body = document.body;
   const pageLoader = window.pageLoader || document.querySelector('.page-loader');
+  
+  // Force content to be visible regardless of load state
+  setTimeout(() => {
+    document.documentElement.style.visibility = 'visible';
+    document.documentElement.style.opacity = '1';
+    document.documentElement.classList.add('content-loaded');
+    if (body) body.classList.add('content-visible');
+    
+    if (pageLoader && document.body.contains(pageLoader)) {
+      pageLoader.classList.add('loader-hidden');
+      setTimeout(() => pageLoader.remove(), 100);
+    }
+  }, 1000); // Show content after 1 second max
 
   if (!pageLoader) {
     console.warn('Page loader element not found');

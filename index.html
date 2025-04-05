@@ -5,17 +5,13 @@
     <style>
         /* Critical inline CSS to prevent flicker */
         html { 
-            visibility: hidden; 
-            opacity: 0;
             display: block !important;
         }
-        body { 
-            visibility: hidden; 
-            opacity: 0;
-        }
+        
+        /* Fallback styles if JS fails */
         .no-js body { 
-            visibility: visible; 
-            opacity: 1;
+            visibility: visible !important; 
+            opacity: 1 !important;
         }
         .content-loaded {
             visibility: visible !important;
@@ -23,46 +19,43 @@
         }
     </style>
     <script>
+        // Force page to be visible after 2 seconds no matter what
+        setTimeout(function() {
+            document.documentElement.style.visibility = 'visible';
+            document.documentElement.style.opacity = '1';
+            document.body.style.visibility = 'visible';
+            document.body.style.opacity = '1';
+            document.documentElement.classList.add('content-loaded');
+            document.body.classList.add('content-visible');
+            console.log("Force showing content after timeout");
+        }, 2000);
+        
         // Performance markers
         if (window.performance && window.performance.mark) {
             window.performance.mark('pageStart');
         }
         
-        // Aggressive FOUC prevention
-        (function() {
-            // Force styles to avoid any flicker during load
-            document.documentElement.style.visibility = 'hidden';
-            document.documentElement.style.opacity = '0';
-            document.documentElement.className = 'no-fouc';
+        // Preload critical placeholder
+        window.IMAGE_LOAD_ERROR_PLACEHOLDER = 'assets/images/placeholders/fallback.svg';
+        
+        // Preload the hero image immediately with ultimate priority
+        const criticalImages = [
+            'assets/images/hero-mountains-edge-1600w.jpg', 
+            'assets/images/hero-mountains-edge-800w.jpg'
+        ];
+        
+        criticalImages.forEach(src => {
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.as = 'image';
+            link.href = src;
+            link.fetchPriority = 'high';
+            document.head.appendChild(link);
             
-            // Override any display:none that might cause flicker
-            document.documentElement.style.display = 'block !important';
-            
-            // Preload critical placeholder
-            window.IMAGE_LOAD_ERROR_PLACEHOLDER = 'assets/images/placeholders/fallback.svg';
-            
-            // Preload the hero image immediately with ultimate priority
-            const criticalImages = [
-                'assets/images/hero-mountains-edge-1600w.jpg', 
-                'assets/images/hero-mountains-edge-800w.jpg'
-            ];
-            
-            criticalImages.forEach(src => {
-                const link = document.createElement('link');
-                link.rel = 'preload';
-                link.as = 'image';
-                link.href = src;
-                link.fetchPriority = 'high';
-                document.head.appendChild(link);
-                
-                const img = new Image();
-                img.src = src;
-                img.fetchPriority = 'high';
-            });
-            
-            // Force layout calculation to ensure styles are applied
-            void document.documentElement.offsetHeight;
-        })();
+            const img = new Image();
+            img.src = src;
+            img.fetchPriority = 'high';
+        });
     </script>
     
     <!-- Load page loader script immediately with highest priority -->
