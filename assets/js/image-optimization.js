@@ -1,4 +1,3 @@
-
 /**
  * Image optimization and loading utilities for Mountain Edge Homes
  * Enhanced with improved lazy loading, alt text verification, and responsive handling
@@ -16,22 +15,22 @@ function initLazyLoading() {
                         img.src = img.dataset.src;
                         img.removeAttribute('data-src');
                     }
-                    
+
                     // Handle srcset if available
                     if (img.dataset.srcset) {
                         img.srcset = img.dataset.srcset;
                         img.removeAttribute('data-srcset');
                     }
-                    
+
                     // Handle sizes attribute if available
                     if (img.dataset.sizes) {
                         img.sizes = img.dataset.sizes;
                         img.removeAttribute('data-sizes');
                     }
-                    
+
                     img.classList.add('loaded');
                     imageObserver.unobserve(img);
-                    
+
                     // Log successful load for debugging
                     console.log(`Image loaded: ${img.alt || 'no alt text'}`);
                 }
@@ -40,7 +39,7 @@ function initLazyLoading() {
             rootMargin: '100px 0px', // Increased margin for earlier loading
             threshold: 0.01
         });
-        
+
         // Target all images with data-src attribute
         const lazyImages = document.querySelectorAll('img[data-src]');
         lazyImages.forEach(img => {
@@ -49,7 +48,7 @@ function initLazyLoading() {
                 img.style.filter = 'blur(5px)';
                 img.style.transition = 'filter 0.5s ease';
             }
-            
+
             // Verify alt text exists
             if (!img.alt || img.alt.trim() === '') {
                 console.warn('Image missing alt text:', img.dataset.src || img.src);
@@ -58,12 +57,12 @@ function initLazyLoading() {
                     img.alt = img.dataset.defaultAlt;
                 }
             }
-            
+
             // Add loading="lazy" attribute for browser-level lazy loading
             if (!img.loading) {
                 img.loading = 'lazy';
             }
-            
+
             imageObserver.observe(img);
         });
     } else {
@@ -88,7 +87,7 @@ function enhanceImageQuality() {
     document.querySelectorAll('.lqip-container').forEach(container => {
         const img = container.querySelector('img');
         const canvas = container.querySelector('canvas');
-        
+
         if (img && canvas) {
             // Draw blurred version of image on canvas
             const ctx = canvas.getContext('2d');
@@ -102,7 +101,7 @@ function enhanceImageQuality() {
             tempImg.src = img.dataset.thumbnail || img.dataset.src;
         }
     });
-    
+
     // Apply WebP format when supported
     if (supportsWebP()) {
         document.querySelectorAll('img[data-webp]').forEach(img => {
@@ -132,34 +131,68 @@ function supportsWebP() {
 
 // Handle image load event to remove blur
 document.addEventListener('DOMContentLoaded', function() {
-    // Apply to all images
-    document.querySelectorAll('img').forEach(img => {
-        img.addEventListener('load', function() {
-            this.style.filter = 'none';
-            this.classList.add('loaded');
-        });
-        
-        // Add error handling
-        img.addEventListener('error', function() {
-            console.error('Failed to load image:', this.src);
-            // Try fallback if available
-            if (this.dataset.fallback && this.src !== this.dataset.fallback) {
-                console.log('Attempting fallback image:', this.dataset.fallback);
-                this.src = this.dataset.fallback;
+    const images = document.querySelectorAll('.optimized-image');
+
+    // Create image loader function that returns a promise
+    function loadImage(img) {
+        return new Promise((resolve, reject) => {
+            if (img.dataset.src) {
+                const tempImage = new Image();
+
+                tempImage.onload = function() {
+                    img.src = img.dataset.src;
+
+                    // If there's a srcset, set it too
+                    if (img.dataset.srcset) {
+                        img.srcset = img.dataset.srcset;
+                    }
+                    resolve(img);
+                };
+
+                tempImage.onerror = function() {
+                    console.log('Failed to load image:', img.dataset.src);
+                    if (typeof window.IMAGE_LOAD_ERROR_PLACEHOLDER !== 'undefined') {
+                        img.src = window.IMAGE_LOAD_ERROR_PLACEHOLDER;
+                    }
+                    reject(img);
+                };
+
+                tempImage.src = img.dataset.src;
             } else {
-                // Show error placeholder
-                this.classList.add('error');
-                // Replace with generic error image if available
-                if (window.IMAGE_LOAD_ERROR_PLACEHOLDER) {
-                    this.src = window.IMAGE_LOAD_ERROR_PLACEHOLDER;
-                }
+                resolve(img);
+            }
+        });
+    }
+
+    // Load critical images first (those marked with loading="eager")
+    const criticalImages = Array.from(images).filter(img => img.getAttribute('loading') === 'eager');
+    const nonCriticalImages = Array.from(images).filter(img => img.getAttribute('loading') !== 'eager');
+
+    // Load critical images immediately, then load non-critical ones
+    Promise.all(criticalImages.map(loadImage))
+        .then(() => {
+            // Load non-critical images after critical ones
+            nonCriticalImages.forEach(img => {
+                loadImage(img).catch(() => {
+                    // Error handling already done in loadImage
+                });
+            });
+        });
+
+    // Set up error handler for all images
+    images.forEach(img => {
+        img.addEventListener('error', function() {
+            console.log('Failed to load image:', img.src);
+            if (typeof window.IMAGE_LOAD_ERROR_PLACEHOLDER !== 'undefined') {
+                this.src = window.IMAGE_LOAD_ERROR_PLACEHOLDER;
             }
         });
     });
-    
+
+
     // Initialize enhanced image features
     enhanceImageQuality();
-    
+
     // Initialize lazy loading
     initLazyLoading();
 });

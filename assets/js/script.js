@@ -1,7 +1,27 @@
+// Create a performance optimization function to batch DOM operations
+function optimizeDOMOperations(callback) {
+    // Use requestAnimationFrame to sync with browser rendering
+    return window.requestAnimationFrame(() => {
+        // Create a document fragment to batch DOM changes
+        const fragment = document.createDocumentFragment();
+        callback(fragment);
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    // Cache frequently accessed DOM elements to reduce lookups
+    const cachedElements = {};
+    
+    function getElement(id) {
+        if (!cachedElements[id]) {
+            cachedElements[id] = document.getElementById(id);
+        }
+        return cachedElements[id];
+    }
+    
     // Announcement banner close functionality
-    const announcementBanner = document.getElementById('announcement-banner');
-    const closeBanner = document.getElementById('close-banner');
+    const announcementBanner = getElement('announcement-banner');
+    const closeBanner = getElement('close-banner');
 
     if (closeBanner && announcementBanner) {
         closeBanner.addEventListener('click', function() {

@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Anti-flicker snippet -->
+    <script>
+        // Add loading class to prevent FOUC
+        document.documentElement.classList.add('loading');
+        window.addEventListener('load', function() {
+            // Remove loading class once everything is loaded
+            document.documentElement.classList.remove('loading');
+        });
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mountain Edge Homes | Luxury Mountain Real Estate</title>

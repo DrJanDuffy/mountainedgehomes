@@ -1,3 +1,16 @@
+
+/* Anti-flicker styles */
+html {
+    visibility: visible;
+    opacity: 1;
+}
+
+html.loading {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 0.1s, opacity 0.1s linear;
+}
+
 /* General Styles */
 * {
     box-sizing: border-box;
