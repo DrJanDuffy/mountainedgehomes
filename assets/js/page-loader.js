@@ -1,6 +1,6 @@
 /**
- * Enhanced Page Loader for Mountain Edge Homes
- * Prevents page flickering by ensuring content is shown only when critical images are loaded
+ * Mountain Edge Homes - Simplified Page Loader
+ * No-nonsense approach to prevent white screen and flickering
  */
 
 // Define a fallback SVG for image errors
@@ -99,9 +99,6 @@ const FALLBACK_SVG = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/sv
   // Store reference to the loader in window for access by other scripts
   window.pageLoader = pageLoader;
 
-  // Preload critical images right away
-  preloadCriticalImages();
-  
   // Allow rendering once the DOM is ready but maintain opacity control
   window.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
@@ -110,113 +107,44 @@ const FALLBACK_SVG = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/sv
   });
 })();
 
-// Preload critical hero images immediately
-function preloadCriticalImages() {
-  const criticalImages = [
-    'assets/images/hero-mountains-edge-1600w.jpg',
-    'assets/images/hero-mountains-edge-800w.jpg'
-  ];
-  
-  criticalImages.forEach(src => {
-    const img = new Image();
-    img.fetchPriority = 'high';
-    img.src = src;
-  });
-}
 
-// Primary loader functionality
-document.addEventListener('DOMContentLoaded', () => {
-  const body = document.body;
-  const pageLoader = window.pageLoader || document.querySelector('.page-loader');
-  
-  // Force content to be visible regardless of load state
-  setTimeout(() => {
-    document.documentElement.style.visibility = 'visible';
-    document.documentElement.style.opacity = '1';
-    document.documentElement.classList.add('content-loaded');
-    if (body) body.classList.add('content-visible');
-    
-    if (pageLoader && document.body.contains(pageLoader)) {
-      pageLoader.classList.add('loader-hidden');
-      setTimeout(() => pageLoader.remove(), 100);
-    }
-  }, 1000); // Show content after 1 second max
+// Force content visibility after a short timeout regardless of loading state
+setTimeout(function() {
+  document.documentElement.style.visibility = 'visible';
+  document.documentElement.style.opacity = '1';
 
-  if (!pageLoader) {
-    console.warn('Page loader element not found');
-    body.classList.add('content-visible');
-    return;
+  if (document.body) {
+    document.body.style.visibility = 'visible';
+    document.body.style.opacity = '1';
   }
 
-  // Set global fallback image
-  window.IMAGE_LOAD_ERROR_PLACEHOLDER = FALLBACK_SVG;
+  const pageLoader = document.querySelector('.page-loader');
+  if (pageLoader && document.body.contains(pageLoader)) {
+    pageLoader.classList.add('loader-hidden');
+    setTimeout(() => pageLoader.remove(), 300);
+  }
 
-  // Get critical images - hero and above-the-fold content only
-  const criticalImages = Array.from(document.querySelectorAll('.hero img, .hero-background, img[loading="eager"], .preload-hero'));
-  let loadedCriticalImagesCount = 0;
-  let totalCriticalImages = criticalImages.length || 1; // Ensure at least 1 to prevent division by zero
+  console.log('Force showing content after safety timeout');
+}, 800); // Reduced timeout to 800ms
 
-  // Function to check if critical images are loaded
-  const criticalImageLoaded = () => {
-    loadedCriticalImagesCount++;
+// Create page loader and add to DOM immediately
+document.addEventListener('DOMContentLoaded', function() {
+  // Ensure all content is visible
+  document.documentElement.style.visibility = 'visible';
+  document.documentElement.style.opacity = '1';
+  document.documentElement.classList.add('content-loaded');
 
-    // Update progress indicator if needed
-    const progressPct = Math.min(90, Math.floor((loadedCriticalImagesCount / totalCriticalImages) * 100));
+  if (document.body) {
+    document.body.classList.add('content-visible');
+    document.body.style.visibility = 'visible';
+    document.body.style.opacity = '1';
+  }
 
-    if (loadedCriticalImagesCount >= totalCriticalImages) {
-      // Critical images loaded, remove loader and make content visible immediately
-      document.documentElement.classList.add('content-loaded');
-      pageLoader.classList.add('loader-hidden');
-      body.classList.add('content-visible');
-
-      // Force immediate reflow to apply styles
-      void document.documentElement.offsetHeight;
-
-      setTimeout(() => {
-        if (document.body.contains(pageLoader)) {
-          pageLoader.remove();
-        }
-
-        // Now handle remaining non-critical images with lazy loading
-        initLazyLoading();
-      }, 100);
-    }
-  };
-
-  // Handle image error - replace with fallback
-  const handleImageError = (img) => {
-    if (!img.src.includes('data:image') && !img.classList.contains('error-handled')) {
-      console.warn('Image failed to load:', img.src);
-      img.src = window.IMAGE_LOAD_ERROR_PLACEHOLDER;
-      img.classList.add('error-handled');
-      if (criticalImages.includes(img)) {
-        criticalImageLoaded();
-      }
-    }
-  };
-
-  // Preload critical images
-  if (criticalImages.length > 0) {
-    criticalImages.forEach(img => {
-      if (img.complete && img.naturalWidth > 0) {
-        // Image is already loaded
-        criticalImageLoaded();
-      } else {
-        img.addEventListener('load', criticalImageLoaded);
-        img.addEventListener('error', () => handleImageError(img));
-
-        // Force load image if it has a data-src attribute
-        if (img.dataset && img.dataset.src && !img.src.includes(img.dataset.src)) {
-          img.src = img.dataset.src;
-        }
-      }
-    });
-  } else {
-    // No critical images found, show content
+  // Remove loader after a short delay
+  const pageLoader = document.querySelector('.page-loader');
+  if (pageLoader) {
     setTimeout(() => {
       pageLoader.classList.add('loader-hidden');
-      body.classList.add('content-visible');
-
       setTimeout(() => {
         if (document.body.contains(pageLoader)) {
           pageLoader.remove();
@@ -225,123 +153,39 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 300);
   }
 
-  // Initialize lazy loading for non-critical images
-  function initLazyLoading() {
-    const lazyImages = document.querySelectorAll('img[data-src]:not(.loaded):not(.hero-background)');
+  // Handle image errors gracefully
+  document.querySelectorAll('img').forEach(img => {
+    img.onerror = function() {
+      if (!this.src.includes('fallback') && !this.classList.contains('error-handled')) {
+        this.src = 'assets/images/placeholders/fallback.svg';
+        this.classList.add('error-handled');
+      }
+    };
+  });
 
-    if ('IntersectionObserver' in window) {
-      const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const img = entry.target;
-            if (img.dataset.src) {
-              img.src = img.dataset.src;
-              img.classList.add('loading');
-
-              img.onload = () => {
-                img.classList.remove('loading');
-                img.classList.add('loaded');
-                imageObserver.unobserve(img);
-              };
-
-              img.onerror = () => {
-                handleImageError(img);
-                img.classList.remove('loading');
-                img.classList.add('loaded', 'error-handled');
-                imageObserver.unobserve(img);
-              };
-            }
-          }
-        });
-      }, { rootMargin: '200px 0px' });
-
-      lazyImages.forEach(img => {
-        imageObserver.observe(img);
-      });
-    } else {
-      // Fallback for browsers without IntersectionObserver
-      lazyImages.forEach(img => {
-        if (img.dataset && img.dataset.src) {
-          img.src = img.dataset.src;
-          img.classList.add('loaded');
-          img.addEventListener('error', () => handleImageError(img));
-        }
-      });
+  // Show all lazy-loaded images immediately in a controlled way
+  const lazyImages = document.querySelectorAll('img[data-src]');
+  lazyImages.forEach(img => {
+    if (img.dataset.src && !img.src.includes(img.dataset.src)) {
+      img.src = img.dataset.src;
+      img.classList.add('loaded');
     }
-  }
-
-  // Safety timeout in case some images fail to load
-  setTimeout(() => {
-    if (!body.classList.contains('content-visible')) {
-      console.log('Safety timeout reached, showing content');
-      pageLoader.classList.add('loader-hidden');
-      body.classList.add('content-visible');
-
-      setTimeout(() => {
-        if (document.body.contains(pageLoader)) {
-          pageLoader.remove();
-        }
-      }, 300);
-    }
-  }, 3000); // Reduced from 5000ms to 3000ms for more aggressive loading
-
-  // Global error handler for all images
-  document.addEventListener('error', function(e) {
-    if (e.target.tagName === 'IMG' && !e.target.classList.contains('error-handled')) {
-      e.target.src = window.IMAGE_LOAD_ERROR_PLACEHOLDER;
-      e.target.classList.add('error-handled');
-      e.preventDefault();
-    }
-  }, true);
+  });
 });
 
-// Preload hero images
-function preloadHeroImages() {
-  return new Promise(resolve => {
-    const heroImages = [
-      'assets/images/hero-mountains-edge-1600w.jpg',
-      'assets/images/hero-mountains-edge-800w.jpg'
-    ];
+// Handle image errors globally
+window.addEventListener('error', function(e) {
+  if (e.target.tagName === 'IMG' && !e.target.classList.contains('error-handled')) {
+    e.target.src = 'assets/images/placeholders/fallback.svg';
+    e.target.classList.add('error-handled');
+    e.preventDefault();
+  }
+}, true);
 
-    let loadedCount = 0;
-    const totalImages = heroImages.length;
+// Set global fallback image
+window.IMAGE_LOAD_ERROR_PLACEHOLDER = FALLBACK_SVG;
 
-    // If no hero images to preload, resolve immediately
-    if (totalImages === 0) {
-      resolve();
-      return;
-    }
-
-    heroImages.forEach(src => {
-      const img = new Image();
-      img.onload = () => {
-        loadedCount++;
-        if (loadedCount >= totalImages) {
-          resolve();
-        }
-      };
-      img.onerror = () => {
-        loadedCount++;
-        console.warn(`Failed to preload hero image: ${src}`);
-        if (loadedCount >= totalImages) {
-          resolve();
-        }
-      };
-      img.fetchPriority = 'high';
-      img.src = src;
-    });
-
-    // Safety timeout
-    setTimeout(() => {
-      if (loadedCount < totalImages) {
-        console.warn('Hero image preload timeout reached');
-        resolve();
-      }
-    }, 3000);
-  });
-}
-
-// Generate a data URI for a placeholder
+//Function to generate placeholder image - moved here to avoid unnecessary loading
 function generatePlaceholder(width = 300, height = 200, text = 'Image not found') {
   const canvas = document.createElement('canvas');
   canvas.width = width;
@@ -357,7 +201,7 @@ function generatePlaceholder(width = 300, height = 200, text = 'Image not found'
   ctx.font = '14px Arial';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText(text, width/2, height/2);
+  ctx.fillText(text, width / 2, height / 2);
 
   return canvas.toDataURL();
 }

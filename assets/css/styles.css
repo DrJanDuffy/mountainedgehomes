@@ -1,8 +1,10 @@
-/* Enhanced Anti-flicker styles - FIXED */
+/* Aggressive Anti-flicker styles - FIXED */
 html {
     display: block !important;
     min-height: 100%;
     width: 100%;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 html.content-loaded {
@@ -19,10 +21,11 @@ html, body {
     transform: translate3d(0,0,0);
     min-height: 100%;
     width: 100%;
+    background-color: #fff;
 }
 
 body {
-    opacity: 1; /* Always start visible */
+    opacity: 1 !important; /* Always visible - force with !important */
     overflow-x: hidden;
     display: block !important;
     min-height: 100vh;
@@ -33,6 +36,12 @@ body {
 
 body.content-visible {
     opacity: 1;
+}
+
+/* Override any JS styles that might hide content */
+.loading, [style*="visibility: hidden"], [style*="opacity: 0"] {
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 /* Page loader styles */
