@@ -35,8 +35,8 @@ window.addEventListener('load', function() {
         // Create script element
         const script = document.createElement('script');
         
-        // Load Maps API with your key
-        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDt84u_m6IGyrNZ9Eyc2W0fAIx6yD3peTo&callback=initGlobalMap';
+        // Load Maps API with your key from environment variables
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAPS_API_KEY}&callback=initGlobalMap`;
         script.async = true;
         script.defer = true;
         

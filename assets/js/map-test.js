@@ -69,7 +69,7 @@ window.addEventListener('load', function() {
                 
                 // Try to reload the maps API
                 const script = document.createElement('script');
-                script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDt84u_m6IGyrNZ9Eyc2W0fAIx6yD3peTo&callback=initMapsCallback';
+                script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAPS_API_KEY}&callback=initMapsCallback`;
                 script.async = true;
                 script.defer = true;
                 

@@ -353,3 +353,599 @@
 .fade-in-slow {
   animation: fadeIn 1.5s forwards;
 }
+/* Enhanced Form Styles */
+
+/* Base Styles for Enhanced Forms */
+.enhanced-form {
+    --form-primary-color: #4a90e2;
+    --form-secondary-color: #304a78;
+    --form-success-color: #4caf50;
+    --form-error-color: #f44336;
+    --form-warning-color: #ff9800;
+    --form-info-color: #2196f3;
+    --form-dark-color: #333;
+    --form-light-color: #fff;
+    --form-border-color: #ddd;
+    --form-gray-color: #f7f7f7;
+    --form-text-color: #333;
+    --form-label-color: #555;
+    --form-placeholder-color: #999;
+    --form-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --form-transition: all 0.3s ease;
+    --form-border-radius: 5px;
+    --form-spacing: 20px;
+    
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--form-spacing);
+    background-color: var(--form-light-color);
+    border-radius: var(--form-border-radius);
+    box-shadow: var(--form-shadow);
+    color: var(--form-text-color);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.enhanced-form * {
+    box-sizing: border-box;
+}
+
+/* Form Heading Styles */
+.enhanced-form h2, 
+.enhanced-form h3 {
+    color: var(--form-secondary-color);
+    margin-top: 0;
+    margin-bottom: var(--form-spacing);
+    text-align: center;
+}
+
+.enhanced-form h2 {
+    font-size: 28px;
+    font-weight: 600;
+    border-bottom: 2px solid var(--form-primary-color);
+    padding-bottom: 15px;
+}
+
+.enhanced-form h3 {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+/* Form Sections */
+.enhanced-form .form-section {
+    margin-bottom: var(--form-spacing);
+    padding: var(--form-spacing);
+    background-color: var(--form-gray-color);
+    border-radius: var(--form-border-radius);
+    border-left: 4px solid var(--form-primary-color);
+}
+
+.enhanced-form .form-section:last-child {
+    margin-bottom: 0;
+}
+
+.enhanced-form fieldset {
+    border: 1px solid var(--form-border-color);
+    border-radius: var(--form-border-radius);
+    padding: 15px;
+    margin-bottom: var(--form-spacing);
+}
+
+.enhanced-form legend {
+    color: var(--form-secondary-color);
+    font-weight: 600;
+    padding: 0 10px;
+}
+
+/* Label Styles */
+.enhanced-form label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--form-label-color);
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/* Input Wrapper */
+.enhanced-form .input-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+/* Input Styles */
+.enhanced-form .enhanced-input {
+    display: block;
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--form-text-color);
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid var(--form-border-color);
+    border-radius: var(--form-border-radius);
+    transition: var(--form-transition);
+}
+
+.enhanced-form .enhanced-input:focus {
+    border-color: var(--form-primary-color);
+    outline: 0;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+.enhanced-form .enhanced-input.error {
+    border-color: var(--form-error-color);
+}
+
+.enhanced-form .enhanced-input.error:focus {
+    box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.2);
+}
+
+.enhanced-form .enhanced-input.has-content {
+    background-color: rgba(74, 144, 226, 0.05);
+}
+
+/* Placeholder style */
+.enhanced-form .enhanced-input::placeholder {
+    color: var(--form-placeholder-color);
+    opacity: 1;
+}
+
+/* Error Message */
+.enhanced-form .error-message {
+    display: block;
+    color: var(--form-error-color);
+    font-size: 13px;
+    margin-top: 5px;
+    font-weight: 500;
+}
+
+/* Custom Checkbox & Radio Styles */
+.enhanced-form .custom-control-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.enhanced-form .custom-control-wrapper label {
+    margin-left: 30px;
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+.enhanced-form .enhanced-checkbox-radio {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.enhanced-form .custom-checkbox,
+.enhanced-form .custom-radio {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #fff;
+    border: 2px solid var(--form-border-color);
+    transition: var(--form-transition);
+}
+
+.enhanced-form .custom-radio {
+    border-radius: 50%;
+}
+
+.enhanced-form .enhanced-checkbox-radio:checked ~ .custom-checkbox,
+.enhanced-form .enhanced-checkbox-radio:checked ~ .custom-radio {
+    background-color: var(--form-primary-color);
+    border-color: var(--form-primary-color);
+}
+
+.enhanced-form .custom-checkbox:after,
+.enhanced-form .custom-radio:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.enhanced-form .enhanced-checkbox-radio:checked ~ .custom-checkbox:after,
+.enhanced-form .enhanced-checkbox-radio:checked ~ .custom-radio:after {
+    display: block;
+}
+
+.enhanced-form .custom-checkbox:after {
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.enhanced-form .custom-radio:after {
+    top: 5px;
+    left: 5px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: white;
+}
+
+.enhanced-form .enhanced-checkbox-radio:focus ~ .custom-checkbox,
+.enhanced-form .enhanced-checkbox-radio:focus ~ .custom-radio {
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+/* Select Dropdown Styling */
+.enhanced-form select.enhanced-input {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 15px;
+    padding-right: 45px;
+}
+
+/* Textarea Styling */
+.enhanced-form textarea.enhanced-input {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Button Styling */
+.enhanced-form .enhanced-button {
+    display: inline-block;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    background-color: var(--form-primary-color);
+    border: 1px solid var(--form-primary-color);
+    padding: 12px 24px;
+    font-size: 16px;
+    line-height: 1.5;
+    border-radius: var(--form-border-radius);
+    transition: var(--form-transition);
+    margin-top: 10px;
+}
+
+.enhanced-form .enhanced-button:hover {
+    background-color: var(--form-secondary-color);
+    border-color: var(--form-secondary-color);
+}
+
+.enhanced-form .enhanced-button:focus {
+    outline: 0;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+.enhanced-form .enhanced-button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+/* Button with loading spinner */
+.enhanced-form .loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top: 3px solid #fff;
+    animation: spin 1s linear infinite;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Floating Label Styles */
+.enhanced-form .floating-label-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.enhanced-form .floating-label-wrapper .enhanced-input {
+    height: 56px;
+    padding: 20px 16px 8px;
+}
+
+.enhanced-form .floating-label-wrapper textarea.enhanced-input {
+    height: auto;
+    min-height: 100px;
+    padding-top: 25px;
+}
+
+.enhanced-form .floating-label-wrapper label {
+    position: absolute;
+    top: 15px;
+    left: 16px;
+    font-size: 16px;
+    color: var(--form-placeholder-color);
+    pointer-events: none;
+    transition: var(--form-transition);
+    margin: 0;
+}
+
+.enhanced-form .floating-label-wrapper.active label {
+    top: 8px;
+    left: 16px;
+    font-size: 12px;
+    color: var(--form-primary-color);
+}
+
+.enhanced-form .floating-label-wrapper .enhanced-input:focus {
+    border-color: var(--form-primary-color);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+.enhanced-form .floating-label-wrapper.active .enhanced-input {
+    padding-top: 24px;
+    padding-bottom: 8px;
+}
+
+/* Form Grid System */
+.enhanced-form .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -10px;
+    margin-left: -10px;
+}
+
+.enhanced-form .form-col {
+    position: relative;
+    width: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.enhanced-form .form-col-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+.enhanced-form .form-col-4 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+}
+
+.enhanced-form .form-col-8 {
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%;
+}
+
+.enhanced-form .form-col-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+}
+
+.enhanced-form .form-col-9 {
+    flex: 0 0 75%;
+    max-width: 75%;
+}
+
+/* Form Progress Bar */
+.enhanced-form .form-progress-container {
+    margin-bottom: 30px;
+}
+
+.enhanced-form .form-steps-indicators {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.enhanced-form .step-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    position: relative;
+}
+
+.enhanced-form .step-indicator:not(:last-child):after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    width: 100%;
+    right: -50%;
+    height: 2px;
+    background-color: var(--form-border-color);
+    z-index: 1;
+}
+
+.enhanced-form .step-number {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 2px solid var(--form-border-color);
+    color: var(--form-text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 5;
+}
+
+.enhanced-form .step-label {
+    font-size: 12px;
+    color: var(--form-label-color);
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    padding: 0 5px;
+}
+
+.enhanced-form .step-indicator.active .step-number {
+    background-color: var(--form-primary-color);
+    border-color: var(--form-primary-color);
+    color: white;
+}
+
+.enhanced-form .step-indicator.active .step-label {
+    color: var(--form-primary-color);
+    font-weight: 600;
+}
+
+.enhanced-form .step-indicator.completed .step-number {
+    background-color: var(--form-success-color);
+    border-color: var(--form-success-color);
+    color: white;
+}
+
+.enhanced-form .step-indicator.completed:after {
+    background-color: var(--form-success-color);
+}
+
+.enhanced-form .form-progress-bar {
+    height: 4px;
+    background-color: var(--form-primary-color);
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+/* Form Step Navigation */
+.enhanced-form .form-step {
+    display: block;
+    margin-bottom: 30px;
+}
+
+.enhanced-form .form-nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.enhanced-form .btn-prev-step {
+    background-color: #fff;
+    color: var(--form-text-color);
+    border: 1px solid var(--form-border-color);
+}
+
+.enhanced-form .btn-prev-step:hover {
+    background-color: var(--form-gray-color);
+    border-color: var(--form-border-color);
+    color: var(--form-text-color);
+}
+
+/* Form Success Message */
+.enhanced-form .form-success-message {
+    text-align: center;
+    padding: 30px;
+    background-color: #f8fff8;
+    border-radius: var(--form-border-radius);
+    border-left: 4px solid var(--form-success-color);
+    box-shadow: var(--form-shadow);
+    margin: 30px 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.enhanced-form .form-success-message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.enhanced-form .form-success-message i {
+    color: var(--form-success-color);
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.enhanced-form .form-success-message h3 {
+    color: var(--form-success-color);
+    margin-bottom: 10px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .enhanced-form .form-col-6,
+    .enhanced-form .form-col-4,
+    .enhanced-form .form-col-8,
+    .enhanced-form .form-col-3,
+    .enhanced-form .form-col-9 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    .enhanced-form .step-label {
+        font-size: 10px;
+    }
+    
+    .enhanced-form .form-section {
+        padding: 15px;
+    }
+    
+    .enhanced-form .form-progress-container {
+        overflow-x: auto;
+        padding-bottom: 5px;
+    }
+    
+    .enhanced-form .form-steps-indicators {
+        min-width: 500px;
+    }
+}
+
+/* Dark Mode Styling */
+.enhanced-form.dark-mode {
+    --form-primary-color: #61dafb;
+    --form-secondary-color: #4299e1;
+    --form-text-color: #e2e8f0;
+    --form-label-color: #a0aec0;
+    --form-placeholder-color: #718096;
+    --form-border-color: #2d3748;
+    --form-gray-color: #1a202c;
+    --form-light-color: #171923;
+    --form-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    
+    background-color: var(--form-light-color);
+}
+
+.enhanced-form.dark-mode .enhanced-input {
+    background-color: #2d3748;
+    color: var(--form-text-color);
+    border-color: #4a5568;
+}
+
+.enhanced-form.dark-mode .enhanced-input:focus {
+    border-color: var(--form-primary-color);
+}
+
+.enhanced-form.dark-mode .enhanced-input.has-content {
+    background-color: rgba(97, 218, 251, 0.1);
+}
+
+.enhanced-form.dark-mode .custom-checkbox,
+.enhanced-form.dark-mode .custom-radio {
+    background-color: #2d3748;
+    border-color: #4a5568;
+}
+
+.enhanced-form.dark-mode .form-section {
+    background-color: #2d3748;
+}
+
+.enhanced-form.dark-mode .btn-prev-step {
+    background-color: #2d3748;
+    color: var(--form-text-color);
+    border-color: #4a5568;
+}
+
+.enhanced-form.dark-mode .form-success-message {
+    background-color: rgba(56, 161, 105, 0.1);
+}
