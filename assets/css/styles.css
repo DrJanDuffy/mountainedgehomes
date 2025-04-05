@@ -1,69 +1,29 @@
-/* Ultra-Aggressive Anti-flicker styles */
-* {
-    visibility: visible !important;
-    opacity: 1 !important;
-}
-
-html {
-    display: block !important;
-    min-height: 100%;
-    width: 100%;
-    visibility: visible !important;
-    opacity: 1 !important;
-    background-color: #fff;
-}
-
-html.content-loaded {
-    visibility: visible !important;
-    opacity: 1 !important;
-}
-
+/* Simple Anti-flicker styles - reliable approach */
 html, body {
-    -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000;
-    -webkit-transform: translate3d(0,0,0);
-    backface-visibility: hidden;
-    perspective: 1000;
-    transform: translate3d(0,0,0);
+    display: block;
+    visibility: visible;
+    opacity: 1;
+    background-color: #fff;
     min-height: 100%;
     width: 100%;
-    background-color: #fff;
 }
 
 body {
-    opacity: 1 !important; /* Always visible - force with !important */
     overflow-x: hidden;
-    display: block !important;
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    visibility: visible !important;
 }
 
-body.content-visible {
-    opacity: 1 !important;
-}
-
-/* Override ANY styles that might hide content */
-.loading, 
-[style*="visibility: hidden"], 
-[style*="opacity: 0"],
-[style*="display: none"] {
-    visibility: visible !important;
-    opacity: 1 !important;
-    display: block !important;
-}
-
-/* Make sure all content is visible */
+/* Basic content visibility */
 .hero, 
 .container,
 header, 
 main, 
 section, 
 footer {
-    visibility: visible !important;
-    opacity: 1 !important;
-    display: block !important;
+    visibility: visible;
+    opacity: 1;
 }
 
 /* Page loader styles */

@@ -1,9 +1,5 @@
 
 <svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200">
   <rect width="300" height="200" fill="#f5f5f5"/>
-  <rect x="0" y="0" width="300" height="200" fill="#f5f5f5"/>
-  <path d="M120 80 L150 120 L180 80 Z" fill="#e0e0e0"/>
-  <circle cx="150" cy="60" r="15" fill="#e0e0e0"/>
-  <rect x="75" y="140" width="150" height="20" fill="#e0e0e0"/>
-  <text x="150" y="155" text-anchor="middle" fill="#999" font-family="Arial, sans-serif" font-size="12">Image loading...</text>
+  <text x="50%" y="50%" text-anchor="middle" fill="#999" font-family="Arial" font-size="14">Image not found</text>
 </svg>

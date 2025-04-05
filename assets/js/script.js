@@ -1,143 +1,69 @@
-// Performance tracking
-const perfMetrics = {
-    pageLoadStart: Date.now(),
-    domContentLoaded: 0,
-    heroImageLoaded: 0,
-    fullLoad: 0
-};
-
-// Create a performance optimization function to batch DOM operations
-function optimizeDOMOperations(callback) {
-    return new Promise(resolve => {
-        // Use requestAnimationFrame to sync with browser rendering
-        window.requestAnimationFrame(() => {
-            // Create a document fragment to batch DOM changes
-            const fragment = document.createDocumentFragment();
-            callback(fragment);
-            resolve(fragment);
-        });
-    });
-}
-
-// Preconnect to important domains - called immediately on script parse
-(function setupPreconnect() {
-    const domains = [
-        'https://fonts.googleapis.com', 
-        'https://fonts.gstatic.com', 
-        'https://cdnjs.cloudflare.com'
-    ];
-    
-    optimizeDOMOperations(fragment => {
-        domains.forEach(domain => {
-            const link = document.createElement('link');
-            link.rel = 'preconnect';
-            link.href = domain;
-            link.crossOrigin = 'anonymous';
-            fragment.appendChild(link);
-        });
-        document.head.appendChild(fragment);
-    });
-})();
-
-// Preload hero image as early as possible
-(function preloadHeroImage() {
-    const heroImage = new Image();
-    heroImage.src = 'assets/images/hero-mountains-edge-1600w.jpg';
-    heroImage.fetchPriority = 'high';
-    heroImage.onload = () => {
-        perfMetrics.heroImageLoaded = Date.now() - perfMetrics.pageLoadStart;
-        console.log('Hero image preloaded in ' + perfMetrics.heroImageLoaded + 'ms');
-    };
-})();
-
-// Critical content loading handler
-document.addEventListener('DOMContentLoaded', function() {
-    perfMetrics.domContentLoaded = Date.now() - perfMetrics.pageLoadStart;
-    console.log('DOM content loaded in ' + perfMetrics.domContentLoaded + 'ms');
-    
-    // Use double requestAnimationFrame for reliable rendering timing
-    requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-            // Load hero image with highest priority
-            const heroImages = document.querySelectorAll('.hero-background, .hero img');
-            Promise.all(
-                Array.from(heroImages).map(img => {
-                    if (img.dataset && img.dataset.src) {
-                        return new Promise(resolve => {
-                            img.onload = resolve;
-                            img.src = img.dataset.src;
-                            img.classList.add('loaded');
-                        });
-                    }
-                    return Promise.resolve();
-                })
-            ).then(() => {
-                // Remove loading class after hero images are loaded
-                setTimeout(() => {
-                    if (document.documentElement.classList.contains('loading')) {
-                        console.log('Revealing content after hero loaded');
-                        document.documentElement.classList.remove('loading');
-                    }
-                }, 10);
-            });
-        });
-    });
-});
-
-// Track page load start time
+// Simple performance tracking
 const pageLoadStart = Date.now();
 
-// Emergency visibility handler - runs immediately
-(function forceVisibility() {
-    document.documentElement.style.visibility = 'visible';
-    document.documentElement.style.opacity = '1';
-    document.documentElement.style.display = 'block';
-})();
-
-// Force visibility as soon as DOM is ready
+// Basic preconnect to important domains
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM content loaded in ' + (Date.now() - pageLoadStart) + 'ms');
-    
-    // Force visibility immediately
-    document.documentElement.style.visibility = 'visible';
-    document.documentElement.style.opacity = '1';
-    document.documentElement.classList.add('content-loaded');
-    
-    // Remove any loading classes that may hide content
-    document.documentElement.classList.remove('loading');
-    
-    if (document.body) {
-        document.body.style.visibility = 'visible';
-        document.body.style.opacity = '1';
-        document.body.classList.add('content-visible');
+
+    // Simple lazy loading for images
+    const lazyImages = document.querySelectorAll('img[data-src]');
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        if (img.dataset.srcset) {
+                            img.srcset = img.dataset.srcset;
+                        }
+                        img.classList.add('loaded');
+                        imageObserver.unobserve(img);
+                        console.log('Image loaded:', img.alt);
+                    }
+                }
+            });
+        });
+
+        lazyImages.forEach(img => {
+            imageObserver.observe(img);
+        });
+    } else {
+        // Fallback for browsers that don't support IntersectionObserver
+        lazyImages.forEach(img => {
+            if (img.dataset.src) {
+                img.src = img.dataset.src;
+                if (img.dataset.srcset) {
+                    img.srcset = img.dataset.srcset;
+                }
+                img.classList.add('loaded');
+            }
+        });
     }
-    
-    // Load all images immediately for reliable display
-    document.querySelectorAll('img[data-src]').forEach(img => {
-        if (img.dataset && img.dataset.src) {
-            img.src = img.dataset.src;
-            img.classList.add('loaded');
-        }
+
+    // Handle image errors
+    document.querySelectorAll('img').forEach(img => {
+        img.addEventListener('error', function() {
+            if (!this.src.includes('fallback') && !this.classList.contains('error-handled')) {
+                console.error('Failed to load image:', this.src);
+                this.src = 'assets/images/placeholders/fallback.svg';
+                this.classList.add('error-handled');
+            }
+        });
     });
-    
+
     console.log("Window loaded");
 });
 
-// Complete page load handler
-window.addEventListener('load', function() {
-    // Final force visibility
-    document.documentElement.style.visibility = 'visible';
-    document.documentElement.style.opacity = '1';
-    
-    // Load any remaining images
-    const allImages = document.querySelectorAll('img[data-src]:not(.loaded)');
-    allImages.forEach(img => {
-        if (img.dataset && img.dataset.src) {
-            img.src = img.dataset.src;
-            img.classList.add('loaded');
-        }
-    });
-});
+// Set viewport height fix for mobile browsers
+function setVhProperty() {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+// Set initially and on resize
+setVhProperty();
+window.addEventListener('resize', setVhProperty);
 
 // Set viewport height fix for mobile browsers
 function setVhProperty() {
