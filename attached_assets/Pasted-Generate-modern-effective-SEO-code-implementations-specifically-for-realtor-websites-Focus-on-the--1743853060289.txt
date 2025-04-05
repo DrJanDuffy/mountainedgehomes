@@ -1,0 +1,82 @@
+Generate modern, effective SEO code implementations specifically for realtor websites. Focus on the latest techniques that align with 2025 search engine algorithms and real estate industry best practices.
+Required Technical Implementations
+
+Create a structured data implementation using JSON-LD for real estate listings that includes:
+
+PropertyListing schema with complete property details
+LocalBusiness schema for the realtor agency
+Person schema for individual agents
+Review aggregation markup
+FAQPage schema for property and neighborhood FAQs
+
+
+Generate a complete semantic HTML5 structure for a property listing page that includes:
+
+Proper heading hierarchy (H1-H6)
+Semantic sectioning elements (article, section, nav, aside)
+ARIA attributes for accessibility
+Schema.org vocabularies integrated with HTML
+
+
+Create optimized image loading and alt text strategies:
+
+Next-gen image format implementation (WebP, AVIF)
+Responsive image code with srcset and sizes attributes
+Image lazy loading with Intersection Observer API
+Automated descriptive alt text generation for property photos
+
+
+Implement technical SEO optimizations:
+
+Core Web Vitals optimization code
+Canonical URL implementation
+Hreflang for multi-region realtors
+Meta robots control
+XML sitemap generation specifically for property listings
+
+
+Create local SEO enhancements:
+
+Google Business Profile schema integration
+Neighborhood targeting markup
+Local business structured data
+Geographic coordinate integration
+Microdata for service areas
+
+
+Generate code for mobile optimization:
+
+Mobile-first responsive design patterns
+Touch-friendly interactive elements
+Accelerated Mobile Pages compatibility
+Mobile usability enhancements
+
+
+Implement advanced realtor-specific SEO features:
+
+Property search schema implementation
+Virtual tour markup
+Mortgage calculator schema
+Open house event markup
+Real estate agent expertise schema
+
+
+
+Implementation Requirements
+
+Code must comply with latest W3C standards
+All implementations must be SEO-friendly and improve Core Web Vitals
+Focus on clean, maintainable code that can be integrated into existing websites
+Include implementation instructions and best practices
+Prioritize techniques that specifically boost real estate website rankings
+Include comments explaining the SEO benefit of each code section
+Provide code that works across major CMS platforms used by realtors
+
+Output Format
+Provide the code implementation with:
+
+Clear section headers
+Explanation of SEO benefit
+Implementation instructions
+Testing validation methods
+Expected SEO impact
