@@ -121,13 +121,6 @@ function supportsWebP() {
     }
     return false;
 }
-function supportsWebP() {
-    const canvas = document.createElement('canvas');
-    if (canvas.getContext && canvas.getContext('2d')) {
-        return canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
-    }
-    return false;
-}
 
 // Handle image load event to remove blur
 document.addEventListener('DOMContentLoaded', function() {
@@ -137,20 +130,43 @@ document.addEventListener('DOMContentLoaded', function() {
     function loadImage(img) {
         return new Promise((resolve, reject) => {
             if (img.dataset.src) {
+                // Check if image is already loaded or loading
+                if (img.classList.contains('loaded') || img.src === img.dataset.src) {
+                    resolve(img);
+                    return;
+                }
+
+                // Add loading class to track state
+                img.classList.add('loading');
+                
                 const tempImage = new Image();
 
                 tempImage.onload = function() {
-                    img.src = img.dataset.src;
-
-                    // If there's a srcset, set it too
-                    if (img.dataset.srcset) {
-                        img.srcset = img.dataset.srcset;
-                    }
-                    resolve(img);
+                    requestAnimationFrame(() => {
+                        img.src = img.dataset.src;
+                        
+                        // If there's a srcset, set it too
+                        if (img.dataset.srcset) {
+                            img.srcset = img.dataset.srcset;
+                        }
+                        
+                        // Add loaded class and remove loading class
+                        img.classList.add('loaded');
+                        img.classList.remove('loading');
+                        
+                        // Remove blur filter when loaded
+                        if (img.style.filter && img.style.filter.includes('blur')) {
+                            img.style.filter = 'none';
+                        }
+                        
+                        resolve(img);
+                    });
                 };
 
                 tempImage.onerror = function() {
                     console.log('Failed to load image:', img.dataset.src);
+                    img.classList.remove('loading');
+                    
                     if (typeof window.IMAGE_LOAD_ERROR_PLACEHOLDER !== 'undefined') {
                         img.src = window.IMAGE_LOAD_ERROR_PLACEHOLDER;
                     }

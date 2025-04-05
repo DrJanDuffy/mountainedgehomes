@@ -1,14 +1,13 @@
-
 /* Anti-flicker styles */
-html {
-    visibility: visible;
-    opacity: 1;
+html.loading {
+    opacity: 0;
+    visibility: hidden;
 }
 
-html.loading {
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s 0.1s, opacity 0.1s linear;
+html {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.25s ease;
 }
 
 /* General Styles */
@@ -412,12 +411,12 @@ nav ul li a.active {
     .property-stats {
         gap: 15px;
     }
-    
+
     .stat-item {
         min-width: 100px;
         padding: 10px 15px;
     }
-    
+
     .stat-number {
         font-size: 1.5rem;
     }

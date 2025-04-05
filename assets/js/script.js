@@ -8,6 +8,16 @@ function optimizeDOMOperations(callback) {
     });
 }
 
+// Create a page load performance tracker
+let pageLoadStart = Date.now();
+
+// Add page load complete handler
+window.addEventListener('load', function() {
+    // Remove loading class to show page
+    document.documentElement.classList.remove('loading');
+    console.log('Page fully loaded in ' + (Date.now() - pageLoadStart) + 'ms');
+});
+
 document.addEventListener('DOMContentLoaded', function() {
     // Cache frequently accessed DOM elements to reduce lookups
     const cachedElements = {};
