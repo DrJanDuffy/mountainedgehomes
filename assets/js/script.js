@@ -84,9 +84,21 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// Handle content visibility as soon as DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    // Force layout calculation to ensure styles are applied
+    void document.documentElement.offsetHeight;
+    
+    // Make sure critical content is ready to display
+    setTimeout(function() {
+        document.documentElement.classList.add('content-loaded');
+    }, 50);
+});
+
 // Add page load complete handler with improved performance
 window.addEventListener('load', function() {
     // Ensure page is fully visible
+    document.documentElement.classList.add('content-loaded');
     document.documentElement.classList.remove('loading');
     
     const loadTime = Date.now() - pageLoadStart;

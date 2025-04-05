@@ -1,6 +1,14 @@
 /* Enhanced Anti-flicker styles */
 html {
     display: block; /* Overridden by JS initially */
+    contain: layout style paint;
+    content-visibility: auto;
+    will-change: opacity;
+}
+
+html.content-loaded {
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 html, body {
@@ -14,6 +22,7 @@ html, body {
     transform: translateZ(0);
     min-height: 100%;
     width: 100%;
+    contain: layout style paint;
 }
 
 body {

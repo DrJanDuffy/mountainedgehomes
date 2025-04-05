@@ -8,12 +8,23 @@ const FALLBACK_SVG = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/sv
 
 // Create page loader immediately in the head to prevent flash
 (function() {
-  // Block rendering until critical content is ready
-  document.documentElement.style.display = 'none';
+  // Aggressively block rendering until critical content is ready
+  document.documentElement.style.visibility = 'hidden';
+  document.documentElement.style.opacity = '0';
+  document.documentElement.style.display = 'block';
 
   // Create a style element for the loader
   const style = document.createElement('style');
   style.textContent = `
+    html {
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    html.content-loaded {
+      visibility: visible;
+      opacity: 1;
+    }
     .page-loader {
       position: fixed;
       top: 0;
@@ -88,11 +99,30 @@ const FALLBACK_SVG = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/sv
   // Store reference to the loader in window for access by other scripts
   window.pageLoader = pageLoader;
 
-  // Allow rendering once the DOM is ready
+  // Preload critical images right away
+  preloadCriticalImages();
+  
+  // Allow rendering once the DOM is ready but maintain opacity control
   window.addEventListener('DOMContentLoaded', () => {
-    document.documentElement.style.display = '';
+    setTimeout(() => {
+      document.documentElement.style.display = 'block';
+    }, 10);
   });
 })();
+
+// Preload critical hero images immediately
+function preloadCriticalImages() {
+  const criticalImages = [
+    'assets/images/hero-mountains-edge-1600w.jpg',
+    'assets/images/hero-mountains-edge-800w.jpg'
+  ];
+  
+  criticalImages.forEach(src => {
+    const img = new Image();
+    img.fetchPriority = 'high';
+    img.src = src;
+  });
+}
 
 // Primary loader functionality
 document.addEventListener('DOMContentLoaded', () => {
@@ -121,20 +151,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const progressPct = Math.min(90, Math.floor((loadedCriticalImagesCount / totalCriticalImages) * 100));
 
     if (loadedCriticalImagesCount >= totalCriticalImages) {
-      // Critical images loaded, remove loader
+      // Critical images loaded, remove loader and make content visible immediately
+      document.documentElement.classList.add('content-loaded');
+      pageLoader.classList.add('loader-hidden');
+      body.classList.add('content-visible');
+
+      // Force immediate reflow to apply styles
+      void document.documentElement.offsetHeight;
+
       setTimeout(() => {
-        pageLoader.classList.add('loader-hidden');
-        body.classList.add('content-visible');
+        if (document.body.contains(pageLoader)) {
+          pageLoader.remove();
+        }
 
-        setTimeout(() => {
-          if (document.body.contains(pageLoader)) {
-            pageLoader.remove();
-          }
-
-          // Now handle remaining non-critical images with lazy loading
-          initLazyLoading();
-        }, 300);
-      }, 300);
+        // Now handle remaining non-critical images with lazy loading
+        initLazyLoading();
+      }, 100);
     }
   };
 
