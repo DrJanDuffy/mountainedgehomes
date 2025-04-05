@@ -230,37 +230,77 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Function to preload critical images
+// Preload critical images as early as possible
+(function() {
+    // Define critical images to preload immediately
+    const CRITICAL_IMAGES = [
+        'assets/images/hero-mountains-edge-1600w.jpg'
+    ];
+    
+    // Preload critical hero image during parse time
+    CRITICAL_IMAGES.forEach(imageSrc => {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.href = imageSrc;
+        link.fetchPriority = 'high';
+        document.head.appendChild(link);
+        
+        // Also create an image object to start loading
+        const img = new Image();
+        img.src = imageSrc;
+    });
+})();
+
 function preloadCriticalImages() {
     // Preload critical images
     const imagesToPreload = document.querySelectorAll('img.preload, img.hero-background, .hero img');
     
-    // Create a batch of preload links at once
-    const fragment = document.createDocumentFragment();
+    // Prioritize loading
+    const priorityImages = [];
+    const secondaryImages = [];
     
+    // Sort images by priority
     imagesToPreload.forEach(img => {
-        if (img.dataset.src) {
-            const preloadLink = document.createElement('link');
-            preloadLink.rel = 'preload';
-            preloadLink.href = img.dataset.src;
-            preloadLink.as = 'image';
-            preloadLink.fetchpriority = 'high';
-            fragment.appendChild(preloadLink);
-            
-            // Pre-load the image immediately for faster display
-            const tempImg = new Image();
-            tempImg.onload = function() {
-                img.src = img.dataset.src;
-                img.classList.add('loaded');
-            };
-            tempImg.src = img.dataset.src;
+        if (img.classList.contains('hero-background') || img.closest('.hero')) {
+            priorityImages.push(img);
+        } else {
+            secondaryImages.push(img);
         }
     });
     
-    document.head.appendChild(fragment);
+    // Load priority images first with Promise.all for parallelism
+    Promise.all(priorityImages.map(img => {
+        if (img.dataset.src) {
+            return new Promise(resolve => {
+                img.onload = () => {
+                    img.classList.add('loaded');
+                    resolve();
+                };
+                img.onerror = resolve;
+                img.src = img.dataset.src;
+            });
+        }
+        return Promise.resolve();
+    })).then(() => {
+        // After priority images are loaded, load secondary ones
+        secondaryImages.forEach(img => {
+            if (img.dataset.src) {
+                img.loading = 'lazy'; // Use native lazy loading
+                img.src = img.dataset.src;
+                img.classList.add('loaded');
+            }
+        });
+    });
 }
 
-// Immediately execute preload for critical images
-document.addEventListener('DOMContentLoaded', preloadCriticalImages);
+// Execute preload earlier for parsing-critical images
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', preloadCriticalImages);
+} else {
+    // DOM already loaded
+    preloadCriticalImages();
+}
 
 // Set up error handler once for placeholder images
 const IMAGE_LOAD_ERROR_PLACEHOLDER = 'assets/images/placeholders/image-not-found.jpg';

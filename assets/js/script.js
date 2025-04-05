@@ -1,53 +1,86 @@
+// Performance tracking
+const perfMetrics = {
+    pageLoadStart: Date.now(),
+    domContentLoaded: 0,
+    heroImageLoaded: 0,
+    fullLoad: 0
+};
+
 // Create a performance optimization function to batch DOM operations
 function optimizeDOMOperations(callback) {
-    // Use requestAnimationFrame to sync with browser rendering
-    return window.requestAnimationFrame(() => {
-        // Create a document fragment to batch DOM changes
-        const fragment = document.createDocumentFragment();
-        callback(fragment);
+    return new Promise(resolve => {
+        // Use requestAnimationFrame to sync with browser rendering
+        window.requestAnimationFrame(() => {
+            // Create a document fragment to batch DOM changes
+            const fragment = document.createDocumentFragment();
+            callback(fragment);
+            resolve(fragment);
+        });
     });
 }
 
-// Create a page load performance tracker with improved metrics
-let pageLoadStart = Date.now();
-
-// Preconnect to important domains
-function setupPreconnect() {
-    const domains = ['https://fonts.googleapis.com', 'https://fonts.gstatic.com'];
-    const fragment = document.createDocumentFragment();
+// Preconnect to important domains - called immediately on script parse
+(function setupPreconnect() {
+    const domains = [
+        'https://fonts.googleapis.com', 
+        'https://fonts.gstatic.com', 
+        'https://cdnjs.cloudflare.com'
+    ];
     
-    domains.forEach(domain => {
-        const link = document.createElement('link');
-        link.rel = 'preconnect';
-        link.href = domain;
-        link.crossOrigin = 'anonymous';
-        fragment.appendChild(link);
+    optimizeDOMOperations(fragment => {
+        domains.forEach(domain => {
+            const link = document.createElement('link');
+            link.rel = 'preconnect';
+            link.href = domain;
+            link.crossOrigin = 'anonymous';
+            fragment.appendChild(link);
+        });
+        document.head.appendChild(fragment);
     });
-    
-    document.head.appendChild(fragment);
-}
+})();
 
-// Call immediately
-setupPreconnect();
+// Preload hero image as early as possible
+(function preloadHeroImage() {
+    const heroImage = new Image();
+    heroImage.src = 'assets/images/hero-mountains-edge-1600w.jpg';
+    heroImage.fetchPriority = 'high';
+    heroImage.onload = () => {
+        perfMetrics.heroImageLoaded = Date.now() - perfMetrics.pageLoadStart;
+        console.log('Hero image preloaded in ' + perfMetrics.heroImageLoaded + 'ms');
+    };
+})();
 
-// Mark critical CSS as loaded early
+// Critical content loading handler
 document.addEventListener('DOMContentLoaded', function() {
-    // Immediately remove loading class when critical content is parsed
-    // This prevents the white flash before full page load
-    setTimeout(() => {
-        if (document.documentElement.classList.contains('loading')) {
-            console.log('Revealing critical content');
-            document.documentElement.classList.remove('loading');
-        }
-    }, 100); // Small timeout to ensure critical CSS is applied
+    perfMetrics.domContentLoaded = Date.now() - perfMetrics.pageLoadStart;
+    console.log('DOM content loaded in ' + perfMetrics.domContentLoaded + 'ms');
     
-    // Pre-load hero image immediately
-    const heroImages = document.querySelectorAll('.hero-background, .hero img');
-    heroImages.forEach(img => {
-        if (img.dataset && img.dataset.src) {
-            img.src = img.dataset.src;
-            img.classList.add('loaded');
-        }
+    // Use double requestAnimationFrame for reliable rendering timing
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            // Load hero image with highest priority
+            const heroImages = document.querySelectorAll('.hero-background, .hero img');
+            Promise.all(
+                Array.from(heroImages).map(img => {
+                    if (img.dataset && img.dataset.src) {
+                        return new Promise(resolve => {
+                            img.onload = resolve;
+                            img.src = img.dataset.src;
+                            img.classList.add('loaded');
+                        });
+                    }
+                    return Promise.resolve();
+                })
+            ).then(() => {
+                // Remove loading class after hero images are loaded
+                setTimeout(() => {
+                    if (document.documentElement.classList.contains('loading')) {
+                        console.log('Revealing content after hero loaded');
+                        document.documentElement.classList.remove('loading');
+                    }
+                }, 10);
+            });
+        });
     });
 });
 

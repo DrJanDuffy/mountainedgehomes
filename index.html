@@ -1,13 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Anti-flicker snippet with improved implementation -->
+    <!-- Critical anti-flicker snippet (must be at very top) -->
+    <style>
+        html.loading {
+            visibility: hidden;
+            opacity: 0;
+        }
+        
+        body {
+            content-visibility: auto;
+            contain-intrinsic-size: 1px 5000px;
+        }
+        
+        .preload-hero {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+    </style>
     <script>
         // Prevent Flash of Unstyled Content (FOUC)
         document.documentElement.classList.add('loading');
         
         // Set image error fallback
         window.IMAGE_LOAD_ERROR_PLACEHOLDER = 'assets/images/placeholders/image-not-found.jpg';
+        
+        // Performance markers
+        if (window.performance && window.performance.mark) {
+            window.performance.mark('pageStart');
+        }
+        
+        // Critical rendering timing
+        window.addEventListener('DOMContentLoaded', function() {
+            // Use requestAnimationFrame to sync with the next paint
+            requestAnimationFrame(function() {
+                requestAnimationFrame(function() {
+                    setTimeout(function() {
+                        document.documentElement.classList.remove('loading');
+                        if (window.performance && window.performance.mark) {
+                            window.performance.mark('firstContentfulPaint');
+                        }
+                    }, 50);
+                });
+            });
+        });
     </script>
     <style>
         /* Inline critical styles to prevent FOUC */
@@ -50,15 +90,32 @@
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
     
-    <!-- Preload critical resources -->
-    <link rel="preload" href="assets/images/hero-mountains-edge-1600w.jpg" as="image">
+    <!-- Preload hero image with high priority -->
+    <link rel="preload" href="assets/images/hero-mountains-edge-1600w.jpg" as="image" fetchpriority="high">
+    
+    <!-- Preload critical CSS -->
     <link rel="preload" href="assets/css/styles.css" as="style">
-    <link rel="preload" href="assets/js/image-optimization.js" as="script">
-    <link rel="preload" href="assets/js/script.js" as="script">
+    
+    <!-- Add preload for critical fonts to avoid FOIT (Flash of Invisible Text) -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <!-- Add invisible hero image preload -->
+    <img src="assets/images/hero-mountains-edge-1600w.jpg" class="preload-hero" aria-hidden="true" alt="">
     
     <!-- Define fallback image for errors -->
     <script>
         window.IMAGE_LOAD_ERROR_PLACEHOLDER = 'assets/images/placeholders/image-not-found.jpg';
+        
+        // Prevent image errors from causing layout shifts
+        window.addEventListener('error', function(e) {
+            if (e.target.tagName === 'IMG') {
+                if (!e.target.classList.contains('error-handled')) {
+                    e.target.src = window.IMAGE_LOAD_ERROR_PLACEHOLDER;
+                    e.target.classList.add('error-handled');
+                }
+                e.preventDefault();
+            }
+        }, true);
     </script>
 </head>
 <body>

@@ -1,32 +1,64 @@
-/* Anti-flicker styles - improved */
+/* Anti-flicker styles - comprehensive solution */
 html.loading {
-    opacity: 0;
-    visibility: hidden;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    overflow: hidden !important;
 }
 
 html {
     opacity: 1;
     visibility: visible;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.2s ease-out;
     backface-visibility: hidden;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     will-change: opacity;
+    contain: layout style paint;
 }
 
 /* Prevent content shifting during load */
 body {
     content-visibility: auto;
     contain-intrinsic-size: 1px 5000px; /* Approximate page height */
+    display: block !important; /* Ensure body displays correctly immediately */
+    min-height: 100vh;
+    overflow-x: hidden;
+    transform: translateZ(0); /* Hardware acceleration */
+    contain: layout style paint;
 }
 
 /* Prevent image flicker */
 img {
     opacity: 1;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.2s ease-out;
+    transform: translateZ(0); /* Hardware acceleration */
+    backface-visibility: hidden;
 }
 
 img[data-src]:not(.loaded) {
     opacity: 0;
+    background-color: transparent !important;
+}
+
+/* Prevent cumulative layout shift */
+main, header, footer, section {
+    contain: layout style;
+}
+
+/* Prevent hero section flicker specifically */
+.hero {
+    contain: layout style paint;
+    transform: translateZ(0);
+    will-change: opacity, transform;
+    transition: opacity 0.2s ease-out;
+}
+
+/* Prevent layout shift for hero image */
+.hero-background, .hero img {
+    opacity: 1;
+    transition: opacity 0.15s ease-out;
+    will-change: opacity;
+    transform: translateZ(0);
 }
 
 /* Critical rendering path optimization */
