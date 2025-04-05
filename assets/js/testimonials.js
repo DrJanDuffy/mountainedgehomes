@@ -122,3 +122,73 @@ document.addEventListener('DOMContentLoaded', function() {
     
     addRichSnippets();
 });
+// Testimonials Page JavaScript
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Preload randomuser.me images to prevent flicker on load
+    const testimonialsImages = [
+        'https://randomuser.me/api/portraits/couples/68.jpg',
+        'https://randomuser.me/api/portraits/women/54.jpg',
+        'https://randomuser.me/api/portraits/couples/32.jpg',
+        'https://randomuser.me/api/portraits/men/42.jpg',
+        'https://randomuser.me/api/portraits/women/36.jpg',
+        'https://randomuser.me/api/portraits/men/47.jpg',
+        'https://randomuser.me/api/portraits/couples/23.jpg',
+        'https://randomuser.me/api/portraits/women/33.jpg',
+        'https://randomuser.me/api/portraits/men/52.jpg'
+    ];
+    
+    // Preload images
+    testimonialsImages.forEach(imgSrc => {
+        const img = new Image();
+        img.src = imgSrc;
+    });
+    
+    // Fade in testimonial cards with a staggered effect
+    const testimonialCards = document.querySelectorAll('.testimonial-card');
+    testimonialCards.forEach((card, index) => {
+        setTimeout(() => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 100);
+        }, index * 150);
+    });
+    
+    // Add hover effect to video testimonials
+    const videoTestimonials = document.querySelectorAll('.video-testimonial');
+    videoTestimonials.forEach(video => {
+        video.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.02)';
+            this.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.2)';
+            this.style.transition = 'all 0.3s ease';
+        });
+        
+        video.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+            this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.08)';
+        });
+    });
+    
+    // Handle Google review "Write a Review" button click
+    const writeReviewBtn = document.querySelector('.btn-review');
+    if (writeReviewBtn) {
+        writeReviewBtn.addEventListener('click', function(e) {
+            // Analytics tracking could be added here
+            console.log('Review button clicked');
+        });
+    }
+    
+    // Handle CTA buttons
+    const ctaButtons = document.querySelectorAll('.testimonial-cta .btn');
+    ctaButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Analytics tracking could be added here
+            console.log('CTA button clicked: ' + this.textContent.trim());
+        });
+    });
+});
