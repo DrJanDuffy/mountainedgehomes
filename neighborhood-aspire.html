@@ -221,24 +221,33 @@
                     <h2>Request More Information About Aspire</h2>
                     <p>Complete the form below to receive detailed information about available homes in Aspire or to schedule a private tour.</p>
                 </div>
-                <form class="neighborhood-form">
-                    <div class="form-group">
-                        <input type="text" id="name" name="name" placeholder="Your Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" id="email" name="email" placeholder="Your Email" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="tel" id="phone" name="phone" placeholder="Your Phone">
-                    </div>
-                    <div class="form-group">
-                        <select id="interest" name="interest">
-                            <option value="" disabled selected>I'm interested in...</option>
-                            <option value="buying">Buying a home in Aspire</option>
-                            <option value="selling">Selling my Aspire home</option>
-                            <option value="tour">Scheduling a community tour</option>
-                            <option value="info">General information</option>
-                        </select>
+                <form class="neighborhood-form enhanced-form">
+                    <div class="form-section">
+                        <h3>Your Contact Details</h3>
+                        <div class="form-grid">
+                            <div class="form-group float-label">
+                                <input type="text" id="name" name="name" placeholder=" " required>
+                                <label for="name">Your Name</label>
+                            </div>
+                            <div class="form-group float-label">
+                                <input type="email" id="email" name="email" placeholder=" " required>
+                                <label for="email">Your Email</label>
+                            </div>
+                            <div class="form-group float-label">
+                                <input type="tel" id="phone" name="phone" placeholder=" ">
+                                <label for="phone">Your Phone</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="interest">I'm interested in</label>
+                                <select id="interest" name="interest">
+                                    <option value="" disabled selected>Select your interest</option>
+                                    <option value="buying">Buying a home in Aspire</option>
+                                    <option value="selling">Selling my Aspire home</option>
+                                    <option value="tour">Scheduling a community tour</option>
+                                    <option value="info">General information</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <textarea id="message" name="message" placeholder="Your Message" rows="4"></textarea>
