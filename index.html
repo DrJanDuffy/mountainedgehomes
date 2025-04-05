@@ -1,79 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Critical anti-flicker snippet (must be at very top) -->
-    <style>
-        html.loading {
-            visibility: hidden;
-            opacity: 0;
-        }
-        
-        body {
-            content-visibility: auto;
-            contain-intrinsic-size: 1px 5000px;
-        }
-        
-        .preload-hero {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-    </style>
+    <!-- Enhanced Anti-Flicker System with Page Loader -->
     <script>
-        // Prevent Flash of Unstyled Content (FOUC)
-        document.documentElement.classList.add('loading');
-        
-        // Set image error fallback
-        window.IMAGE_LOAD_ERROR_PLACEHOLDER = 'assets/images/placeholders/image-not-found.jpg';
-        
         // Performance markers
         if (window.performance && window.performance.mark) {
             window.performance.mark('pageStart');
         }
         
-        // Critical rendering timing
-        window.addEventListener('DOMContentLoaded', function() {
-            // Use requestAnimationFrame to sync with the next paint
-            requestAnimationFrame(function() {
-                requestAnimationFrame(function() {
-                    setTimeout(function() {
-                        document.documentElement.classList.remove('loading');
-                        if (window.performance && window.performance.mark) {
-                            window.performance.mark('firstContentfulPaint');
-                        }
-                    }, 50);
-                });
-            });
-        });
+        // Set image error fallback (with fallback to inline SVG if image not found)
+        window.IMAGE_LOAD_ERROR_PLACEHOLDER = 'assets/images/placeholders/image-not-found.jpg';
     </script>
-    <style>
-        /* Inline critical styles to prevent FOUC */
-        html.loading { opacity: 0; visibility: hidden; }
-        html { opacity: 1; visibility: visible; transition: opacity 0.5s ease; }
-    </style>
-    <script>
-        // Add loading class to prevent FOUC
-        document.documentElement.classList.add('loading');
-        
-        // Better load event handling with timeout fallback
-        var readyTimer;
-        function removeLoading() {
-            clearTimeout(readyTimer);
-            // Use requestAnimationFrame for smoother transition
-            window.requestAnimationFrame(function() {
-                document.documentElement.classList.remove('loading');
-            });
-        }
-        
-        // Set a maximum wait time - will show content even if some resources fail
-        readyTimer = setTimeout(removeLoading, 2000);
-        
-        // Remove loading class once everything is properly loaded
-        window.addEventListener('load', removeLoading);
-    </script>
+    
+    <!-- Load page loader script immediately -->
+    <script src="assets/js/page-loader.js"></script>
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="assets/images/hero-mountains-edge-1600w.jpg" as="image" fetchpriority="high">
+    <link rel="preload" href="assets/css/styles.css" as="style">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mountain Edge Homes | Luxury Mountain Real Estate</title>
@@ -1063,16 +1007,19 @@
     <!-- Load Google Maps API first -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDt84u_m6IGyrNZ9Eyc2W0fAIx6yD3peTo&callback=initMapsCallback" async defer></script>
     
-    <script src="assets/js/image-optimization.js"></script>
-    <script src="assets/js/alt-text-checker.js"></script>
+    <!-- Load critical scripts first -->
     <script src="assets/js/script.js"></script>
-    <script src="assets/js/properties.js"></script>
-    <script src="assets/js/property-search.js"></script>
-    <script src="assets/js/followupboss.js"></script>
-    <script src="assets/js/map.js"></script>
-    <script src="assets/js/map-test.js"></script>
-    <script src="assets/js/booking.js"></script>
-    <script src="assets/js/form-enhancements.js"></script>
+    <script src="assets/js/image-optimization.js"></script>
+    
+    <!-- Load non-critical scripts with defer to improve page load performance -->
+    <script src="assets/js/alt-text-checker.js" defer></script>
+    <script src="assets/js/properties.js" defer></script>
+    <script src="assets/js/property-search.js" defer></script>
+    <script src="assets/js/followupboss.js" defer></script>
+    <script src="assets/js/map.js" defer></script>
+    <script src="assets/js/map-test.js" defer></script>
+    <script src="assets/js/booking.js" defer></script>
+    <script src="assets/js/form-enhancements.js" defer></script>
     
     <!-- Add skip link for keyboard accessibility -->
     <a href="#properties" class="skip-to-images">Skip to property images</a>

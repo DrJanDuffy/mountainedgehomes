@@ -1,30 +1,55 @@
-/* Anti-flicker styles - comprehensive solution */
-html.loading {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    overflow: hidden !important;
+/* Enhanced Anti-flicker styles */
+body:not(.content-visible) {
+    opacity: 0;
 }
 
-html {
+body.content-visible {
     opacity: 1;
-    visibility: visible;
-    transition: opacity 0.2s ease-out;
-    backface-visibility: hidden;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    will-change: opacity;
-    contain: layout style paint;
+    transition: opacity 0.5s ease-out;
 }
 
-/* Prevent content shifting during load */
+/* Optimize rendering */
 body {
-    content-visibility: auto;
-    contain-intrinsic-size: 1px 5000px; /* Approximate page height */
     display: block !important; /* Ensure body displays correctly immediately */
     min-height: 100vh;
     overflow-x: hidden;
     transform: translateZ(0); /* Hardware acceleration */
-    contain: layout style paint;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    will-change: opacity;
+}
+
+/* Page loader styles */
+.page-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+}
+
+.loader-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(42, 65, 106, 0.2);
+    border-top: 5px solid #2a416a;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loader-hidden {
+    opacity: 0;
 }
 
 /* Prevent image flicker */
