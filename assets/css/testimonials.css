@@ -1,3 +1,4 @@
+
 /* Testimonials Page Styles */
 .testimonials-banner {
     background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/testimonials-banner.jpg');
@@ -35,42 +36,24 @@
 }
 
 .testimonial-card {
-    display: flex;
     background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    padding: 25px;
-    margin-bottom: 30px;
-    transition: transform 0.3s ease;
-    align-items: center;
-    gap: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .testimonial-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
-.testimonial-photo {
-    flex-shrink: 0;
-}
-
-.testimonial-photo img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #4a90e2;
-}
-
-.testimonial-content {
-    flex: 1;
-}
-
-.testimonial-photos-notice {
-    text-align: center;
-    margin: 30px 0;
-    font-style: italic;
-    color: #666;
+.testimonial-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #f0f0f0;
 }
 
 .client-image {

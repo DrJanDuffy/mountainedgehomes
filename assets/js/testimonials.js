@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize Google Maps
     if (typeof initGlobalMap === 'function') {
@@ -6,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Animation for testimonial cards
     const testimonialCards = document.querySelectorAll('.testimonial-card, .community-testimonial, .video-testimonial');
-
+    
     if (testimonialCards.length > 0) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -18,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, {
             threshold: 0.2
         });
-
+        
         testimonialCards.forEach(card => {
             card.classList.add('animate-section');
             observer.observe(card);
@@ -27,12 +28,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle Google Review submission button
     const reviewButtons = document.querySelectorAll('.btn-review');
-
+    
     reviewButtons.forEach(button => {
         button.addEventListener('click', function(e) {
             // Track the click event (you can add analytics here)
             console.log('Review button clicked');
-
+            
             // Continue with the default action (opening the link)
             // The link opens in a new tab due to target="_blank"
         });
@@ -45,25 +46,25 @@ document.addEventListener('DOMContentLoaded', function() {
         // In a real implementation, you would fetch this data from Google's API
         const staticReviewCount = 87;
         const staticRating = 4.9;
-
+        
         const ratingCountElement = document.querySelector('.rating-count');
         if (ratingCountElement) {
             ratingCountElement.textContent = `Based on ${staticReviewCount} reviews`;
         }
-
+        
         const ratingNumberElement = document.querySelector('.rating-number');
         if (ratingNumberElement) {
             ratingNumberElement.textContent = staticRating;
         }
     }
-
+    
     updateGoogleReviewStats();
-
+    
     // Add Rich Snippets for SEO
     function addRichSnippets() {
         const script = document.createElement('script');
         script.type = 'application/ld+json';
-
+        
         // Aggregate rating schema for the business
         const jsonData = {
             "@context": "https://schema.org",
@@ -114,11 +115,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             ]
         };
-
+        
         script.textContent = JSON.stringify(jsonData);
         document.head.appendChild(script);
     }
-
+    
     addRichSnippets();
 });
 // Testimonials Page JavaScript
@@ -136,13 +137,13 @@ document.addEventListener('DOMContentLoaded', function() {
         'https://randomuser.me/api/portraits/women/33.jpg',
         'https://randomuser.me/api/portraits/men/52.jpg'
     ];
-
+    
     // Preload images
     testimonialsImages.forEach(imgSrc => {
         const img = new Image();
         img.src = imgSrc;
     });
-
+    
     // Fade in testimonial cards with a staggered effect
     const testimonialCards = document.querySelectorAll('.testimonial-card');
     testimonialCards.forEach((card, index) => {
@@ -150,14 +151,14 @@ document.addEventListener('DOMContentLoaded', function() {
             card.style.opacity = '0';
             card.style.transform = 'translateY(20px)';
             card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-
+            
             setTimeout(() => {
                 card.style.opacity = '1';
                 card.style.transform = 'translateY(0)';
             }, 100);
         }, index * 150);
     });
-
+    
     // Add hover effect to video testimonials
     const videoTestimonials = document.querySelectorAll('.video-testimonial');
     videoTestimonials.forEach(video => {
@@ -166,13 +167,13 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.2)';
             this.style.transition = 'all 0.3s ease';
         });
-
+        
         video.addEventListener('mouseleave', function() {
             this.style.transform = 'scale(1)';
             this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.08)';
         });
     });
-
+    
     // Handle Google review "Write a Review" button click
     const writeReviewBtn = document.querySelector('.btn-review');
     if (writeReviewBtn) {
@@ -181,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Review button clicked');
         });
     }
-
+    
     // Handle CTA buttons
     const ctaButtons = document.querySelectorAll('.testimonial-cta .btn');
     ctaButtons.forEach(button => {
@@ -190,62 +191,4 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('CTA button clicked: ' + this.textContent.trim());
         });
     });
-
-    // Testimonial data could be loaded from a database or API in a real implementation
-    const testimonials = [
-        {
-            name: "Michael & Sarah Davis",
-            neighborhood: "Sierra Madre",
-            date: "January 2023",
-            quote: "Mountain Edge Homes helped us find our dream property with an incredible view of the mountains. Their knowledge of the area was invaluable.",
-            rating: 5,
-            image: "assets/images/clients/davis-family.jpg"
-        },
-        {
-            name: "Robert & Emily Johnson",
-            neighborhood: "Cascade",
-            date: "March 2023",
-            quote: "We sold our home in just 8 days and for $25,000 over asking price! The professional photography and staging advice made all the difference.",
-            rating: 5,
-            image: "assets/images/clients/johnson-family.jpg"
-        },
-        // Add more testimonials here...
-    ];
-
-    // Function to create the HTML for a single testimonial
-    function createTestimonialHTML(testimonial) {
-        const stars = '★'.repeat(testimonial.rating) + '☆'.repeat(5 - testimonial.rating);
-
-        // Check if testimonial has an image
-        const photoHTML = testimonial.image ? 
-            `<div class="testimonial-photo">
-                <img src="${testimonial.image}" alt="${testimonial.name}" 
-                     onerror="this.src='assets/images/placeholders/image-not-found.jpg'; this.onerror=null;"
-                     width="120" height="120">
-             </div>` : '';
-
-        return `
-            <div class="testimonial-card">
-                ${photoHTML}
-                <div class="testimonial-content">
-                    <div class="testimonial-header">
-                        <h3>${testimonial.name}</h3>
-                        <p>${testimonial.neighborhood} • ${testimonial.date}</p>
-                    </div>
-                    <div class="rating">${stars}</div>
-                    <blockquote>
-                        <p>"${testimonial.quote}"</p>
-                    </blockquote>
-                </div>
-            </div>
-        `;
-    }
-
-    // Render testimonials to the page (assuming you have a container with id="testimonials")
-    const testimonialsContainer = document.getElementById('testimonials');
-    if (testimonialsContainer) {
-        testimonials.forEach(testimonial => {
-            testimonialsContainer.innerHTML += createTestimonialHTML(testimonial);
-        });
-    }
 });
