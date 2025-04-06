@@ -1,0 +1,39 @@
+
+# robots.txt for https://mountainedgehomes.com/
+
+# Allow all user agents
+User-agent: *
+Allow: /
+
+# Specify sitemap location
+Sitemap: https://mountainedgehomes.com/sitemap.xml
+
+# Block sensitive directories 
+Disallow: /attached_assets/
+Disallow: /.config/
+Disallow: /auto-push.js
+Disallow: /start-auto-push.sh
+Disallow: /stop-auto-push.sh
+
+# Allow Google images to index image directories
+User-agent: Googlebot-Image
+Allow: /assets/images/
+
+# Image sitemap (if implemented in future)
+# Sitemap: https://mountainedgehomes.com/image-sitemap.xml
+
+# Crawl delay for bots that respect it (Bing, Yahoo, etc.)
+User-agent: bingbot
+Crawl-delay: 2
+
+User-agent: DuckDuckBot
+Crawl-delay: 2
+
+User-agent: Slurp
+Crawl-delay: 2
+
+User-agent: Baiduspider
+Crawl-delay: 2
+
+User-agent: Yandex
+Crawl-delay: 2

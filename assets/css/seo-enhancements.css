@@ -1,0 +1,189 @@
+
+/* SEO-Friendly Breadcrumbs */
+.breadcrumbs {
+    padding: 10px 0;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    color: #666;
+    background: #f9f9f9;
+    border-bottom: 1px solid #eee;
+}
+
+.breadcrumbs a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.breadcrumbs a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.breadcrumb-separator {
+    color: #aaa;
+    margin: 0 5px;
+}
+
+/* FAQ Section Styles */
+.faq-section {
+    padding: 60px 0;
+    background-color: #f9f9f9;
+}
+
+.faq-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    margin-bottom: 20px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.faq-question {
+    padding: 15px 20px;
+    background-color: #f5f7fa;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.faq-question:hover {
+    background-color: #e9ecef;
+}
+
+.faq-question::after {
+    content: "\f107";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    transition: transform 0.3s;
+}
+
+.faq-question.active::after {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.faq-answer-content {
+    padding: 0 20px;
+}
+
+.faq-answer.active {
+    padding: 20px;
+    max-height: 1000px;
+}
+
+/* Schema.org Visibility Helper Classes */
+.schema-content {
+    display: block;
+}
+
+.schema-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* Structured Data Visual Indicators */
+article[itemscope],
+div[itemscope] {
+    position: relative;
+}
+
+/* Video Schema Styling */
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    margin-bottom: 30px;
+}
+
+.video-container iframe,
+.video-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    border: none;
+}
+
+.video-meta {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.video-meta > div {
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.video-meta i {
+    margin-right: 5px;
+}
+
+/* Review Schema Styles */
+.review-item {
+    padding: 20px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    background: #fff;
+}
+
+.review-meta {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.review-author {
+    font-weight: 600;
+    margin-right: 15px;
+}
+
+.review-date {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* Make skip links more accessible */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--primary-color);
+    color: white;
+    padding: 8px;
+    z-index: 100;
+    transition: top 0.3s;
+}
+
+.skip-link:focus {
+    top: 0;
+}
