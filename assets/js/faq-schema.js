@@ -70,3 +70,62 @@ document.addEventListener('DOMContentLoaded', function() {
     script.text = JSON.stringify(faqSchema);
     document.head.appendChild(script);
 });
+/**
+ * FAQ Schema Generator
+ * Creates structured data for frequently asked questions
+ */
+document.addEventListener('DOMContentLoaded', function() {
+    // Define FAQs for the main site
+    const mountainsEdgeFaqs = [
+        {
+            question: "What are the average home prices in Mountain's Edge?",
+            answer: "The average home price in Mountain's Edge is approximately $750,000, with properties ranging from $500,000 to over $1.5 million depending on size, location, and amenities."
+        },
+        {
+            question: "What amenities are available in the Mountain's Edge community?",
+            answer: "Mountain's Edge features numerous amenities including community parks, hiking trails, picnic areas, playgrounds, sports courts, and the 2,800-acre Exploration Peak Park with mountain views and recreational facilities."
+        },
+        {
+            question: "How are the schools in Mountain's Edge Las Vegas?",
+            answer: "Mountain's Edge is served by highly-rated schools in the Clark County School District, including several within the community itself. Many families choose Mountain's Edge specifically for its quality educational options."
+        },
+        {
+            question: "Is Mountain's Edge a good investment area?",
+            answer: "Mountain's Edge has consistently shown strong property value appreciation, making it an excellent investment area in Las Vegas. The master-planned community's amenities, location, and continued development contribute to its investment potential."
+        },
+        {
+            question: "What is the HOA fee structure in Mountain's Edge?",
+            answer: "HOA fees in Mountain's Edge typically range from $50-150 per month depending on the specific neighborhood. These fees cover maintenance of common areas, community amenities, and neighborhood security features."
+        }
+    ];
+    
+    // Only create FAQ schema on relevant pages
+    const path = window.location.pathname;
+    if (path === '/' || path.includes('index.html') || path.includes('neighborhood-')) {
+        createFaqSchema(mountainsEdgeFaqs);
+    }
+    
+    // Create and add FAQ schema to the page
+    function createFaqSchema(faqItems) {
+        const faqSchema = {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqItems.map(item => ({
+                "@type": "Question",
+                "name": item.question,
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": item.answer
+                }
+            }))
+        };
+        
+        // Add schema to the page
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.textContent = JSON.stringify(faqSchema);
+        document.head.appendChild(script);
+        
+        console.log('[SEO] Added FAQ schema with', faqItems.length, 'questions');
+    }
+});

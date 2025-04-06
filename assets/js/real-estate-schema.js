@@ -72,6 +72,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 "latitude": 36.0051,
                 "longitude": -115.2552
             },
+            "containedInPlace": {
+                "@type": "Neighborhood",
+                "name": "Mountain's Edge",
+                "containedInPlace": {
+                    "@type": "City",
+                    "name": "Las Vegas",
+                    "containedInPlace": {
+                        "@type": "State",
+                        "name": "Nevada"
+                    }
+                }
+            },
             "address": {
                 "@type": "PostalAddress",
                 "streetAddress": propertyData.addressFormatted?.streetAddress || "Mountain's Edge",
