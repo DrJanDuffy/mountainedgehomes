@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Animation for testimonial cards
     const testimonialCards = document.querySelectorAll('.testimonial-card, .community-testimonial, .video-testimonial');
 
-    if (testimonialCards.length > 0) {
+    if (testimonialCards && testimonialCards.length > 0) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -55,20 +55,22 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle Google Review submission button
     const reviewButtons = document.querySelectorAll('.btn-review');
 
-    reviewButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            // Track the click event (you can add analytics here)
-            console.log('Review button clicked');
+    if (reviewButtons) {
+        reviewButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Track the click event (you can add analytics here)
+                console.log('Review button clicked');
 
-            // Continue with the default action (opening the link)
-            // The link opens in a new tab due to target="_blank"
+                // Continue with the default action (opening the link)
+                // The link opens in a new tab due to target="_blank"
+            });
         });
-    });
+    }
 
     // Display current Google Review count by fetching it dynamically
     // Note: This would require actual integration with Google's API
     // This is a placeholder function
-    function updateGoogleReviewStats() {
+    const updateGoogleReviewStats = function() {
         // In a real implementation, you would fetch this data from Google's API
         const staticReviewCount = 87;
         const staticRating = 4.9;
