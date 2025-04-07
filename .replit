@@ -21,3 +21,6 @@ externalPort = 80
 [[ports]]
 localPort = 37265
 externalPort = 3000
+
+[deployment]
+run = ["sh", "-c", "npx http-server ./ -p 3000 --cors -c-1"]

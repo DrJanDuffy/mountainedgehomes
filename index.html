@@ -376,7 +376,7 @@
                             <hvs-autocomplete id="location" placeholder="Enter address, neighborhood, or city" data-search-type="tiered"></hvs-autocomplete>
                         </div>
                     </div>
-
+                    
                     <div class="form-group">
                         <label for="property-type">Property Type</label>
                         <select id="property-type">
@@ -388,7 +388,7 @@
                             <option value="luxury">Luxury</option>
                         </select>
                     </div>
-
+                    
                     <div class="form-group">
                         <label for="price-range">Price Range</label>
                         <select id="price-range">
@@ -401,7 +401,7 @@
                             <option value="1500000-10000000">$1,500,000+</option>
                         </select>
                     </div>
-
+                    
                     <div class="advanced-fields">
                         <div class="form-group">
                             <label for="min-beds">Min Bedrooms</label>
@@ -414,7 +414,7 @@
                                 <option value="5">5+</option>
                             </select>
                         </div>
-
+                        
                         <div class="form-group">
                             <label for="min-baths">Min Bathrooms</label>
                             <select id="min-baths">
@@ -426,7 +426,7 @@
                                 <option value="5">5+</option>
                             </select>
                         </div>
-
+                        
                         <div class="form-group">
                             <label for="square-feet">Square Feet</label>
                             <select id="square-feet">
@@ -438,7 +438,7 @@
                                 <option value="4000-9999">4,000+ sq ft</option>
                             </select>
                         </div>
-
+                        
                         <div class="form-group">
                             <label for="features">Features</label>
                             <select id="features">
@@ -451,7 +451,7 @@
                             </select>
                         </div>
                     </div>
-
+                    
                     <button type="submit"><i class="fas fa-search"></i> Search Properties</button>
                 </form>
             </div>
@@ -488,16 +488,60 @@
     </section>
 
     <!-- Home Value Section -->
-    <section id="home-value" class="home-value-section">
+    <section id="home-value" class="valuation-section">
         <div class="container">
             <h2 class="section-title">What's Your Mountain's Edge Home Worth?</h2>
-            <p class="section-subtitle">Get an instant estimate of your home's value based on recent sales in your neighborhood</p>
-            <div class="realscout-home-value">
-                <realscout-home-value agent-encoded-id="QWdlbnQtMjI1MDUw" include-name include-phone></realscout-home-value>
+            <p class="section-subtitle">Receive a comprehensive home valuation report with insights on market trends and upgrade potential</p>
+            
+            <div class="homebot-container">
+                <!-- Shadow DOM container for Homebot Widget -->
+                <div id="homebot-widget-container" style="min-height: 480px; z-index: 1000;"></div>
             </div>
-            <div style="margin-top: 30px;">
-                <a href="home-value.html" class="btn btn-lg">Get Full Home Value Report</a>
-            </div>
+            
+            <script>
+                // Initialize Homebot Widget with Shadow DOM
+                document.addEventListener('DOMContentLoaded', function() {
+                    const container = document.getElementById('homebot-widget-container');
+                    if (container) {
+                        // Create Shadow DOM
+                        const shadow = container.attachShadow({mode: 'open'});
+                        
+                        // Create container for the widget
+                        const widgetContainer = document.createElement('div');
+                        widgetContainer.setAttribute('class', 'homebot-shadow-container');
+                        
+                        // Set styles for the Shadow DOM container
+                        const style = document.createElement('style');
+                        style.textContent = `
+                            .homebot-shadow-container {
+                                width: 100%;
+                                min-height: 480px;
+                                position: relative;
+                                z-index: 1000;
+                            }
+                            .homebot-widget {
+                                width: 100%;
+                                border: none;
+                                min-height: 480px;
+                            }
+                        `;
+                        
+                        // Create the widget iframe
+                        const iframe = document.createElement('iframe');
+                        iframe.setAttribute('src', 'https://www.homebot.ai/widget?id=mountainedgehomes');
+                        iframe.setAttribute('class', 'homebot-widget');
+                        iframe.setAttribute('title', 'Home Valuation Tool');
+                        iframe.setAttribute('scrolling', 'no');
+                        
+                        // Append elements to Shadow DOM
+                        shadow.appendChild(style);
+                        widgetContainer.appendChild(iframe);
+                        shadow.appendChild(widgetContainer);
+                        
+                        console.log('Homebot valuation widget initialized in Shadow DOM');
+                    }
+                });
+            </script>
         </div>
     </section>
 
@@ -507,7 +551,104 @@
             <h2 class="section-title">Featured Properties</h2>
             <p class="section-subtitle">Discover our handpicked selection of luxury homes in Mountain's Edge and surrounding areas</p>
             <div class="properties-grid">
-                <!-- Property cards will be populated here -->
+                <!-- Property Card 1 -->
+                <div class="property-card" data-property-id="prop123" data-url="property-details.html?id=prop123">
+                    <span class="property-label new">New Listing</span>
+                    <div class="property-favorite" data-property-id="prop123">
+                        <i class="far fa-heart"></i>
+                    </div>
+                    <div class="property-image">
+                        <img src="assets/images/property-placeholder.jpg" data-src="assets/images/property1.jpg" alt="Luxury home in Sierra Madre with mountain views" class="optimized-image">
+                        <div class="property-price">$875,000</div>
+                    </div>
+                    <div class="property-details">
+                        <h3>Sierra Madre Luxury Home</h3>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt"></i> Sierra Madre, Mountain's Edge
+                        </div>
+                        <p class="property-description">Stunning 4-bedroom luxury home with panoramic mountain views and premium finishes throughout.</p>
+                        <div class="property-specs">
+                            <span>
+                                <i class="fas fa-bed"></i>
+                                4 Beds
+                            </span>
+                            <span>
+                                <i class="fas fa-bath"></i>
+                                3.5 Baths
+                            </span>
+                            <span>
+                                <i class="fas fa-ruler-combined"></i>
+                                3,200 Sq Ft
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Property Card 2 -->
+                <div class="property-card" data-property-id="prop124" data-url="property-details.html?id=prop124">
+                    <span class="property-label">Featured</span>
+                    <div class="property-favorite" data-property-id="prop124">
+                        <i class="far fa-heart"></i>
+                    </div>
+                    <div class="property-image">
+                        <img src="assets/images/property-placeholder.jpg" data-src="assets/images/property2.jpg" alt="Modern home in Cascade with pool and spa" class="optimized-image">
+                        <div class="property-price">$925,000</div>
+                    </div>
+                    <div class="property-details">
+                        <h3>Cascade Modern Estate</h3>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt"></i> Cascade, Mountain's Edge
+                        </div>
+                        <p class="property-description">Contemporary 5-bedroom home featuring a resort-style backyard with pool and outdoor kitchen.</p>
+                        <div class="property-specs">
+                            <span>
+                                <i class="fas fa-bed"></i>
+                                5 Beds
+                            </span>
+                            <span>
+                                <i class="fas fa-bath"></i>
+                                4 Baths
+                            </span>
+                            <span>
+                                <i class="fas fa-ruler-combined"></i>
+                                3,800 Sq Ft
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Property Card 3 -->
+                <div class="property-card" data-property-id="prop125" data-url="property-details.html?id=prop125">
+                    <span class="property-label">Premium</span>
+                    <div class="property-favorite" data-property-id="prop125">
+                        <i class="far fa-heart"></i>
+                    </div>
+                    <div class="property-image">
+                        <img src="assets/images/property-placeholder.jpg" data-src="assets/images/property3.jpg" alt="Single-story home in Collina with large backyard" class="optimized-image">
+                        <div class="property-price">$780,000</div>
+                    </div>
+                    <div class="property-details">
+                        <h3>Collina Single Story</h3>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt"></i> Collina, Mountain's Edge
+                        </div>
+                        <p class="property-description">Elegant single-story home with 4 bedrooms, gourmet kitchen, and expansive backyard oasis.</p>
+                        <div class="property-specs">
+                            <span>
+                                <i class="fas fa-bed"></i>
+                                4 Beds
+                            </span>
+                            <span>
+                                <i class="fas fa-bath"></i>
+                                3 Baths
+                            </span>
+                            <span>
+                                <i class="fas fa-ruler-combined"></i>
+                                2,800 Sq Ft
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="center-btn">
                 <a href="http://drjanduffy.realscout.com" class="btn">View All Properties</a>
@@ -627,7 +768,7 @@
         <div class="container">
             <h2 class="section-title">Neighborhood Market Reports</h2>
             <p class="section-subtitle">Stay informed with the latest real estate market trends and data for Mountain's Edge neighborhoods</p>
-
+            
             <div class="cloudcma-container" id="cloudcma-container">
                 <!-- CloudCMA widget will be lazy loaded here -->
                 <div class="cloudcma-placeholder">
@@ -637,14 +778,14 @@
                     <h3>Loading Market Reports...</h3>
                 </div>
             </div>
-
+            
             <script>
                 // Lazy load CloudCMA widget
                 document.addEventListener('DOMContentLoaded', function() {
                     const options = {
                         threshold: 0.5 // Load when 50% visible
                     };
-
+                    
                     const observer = new IntersectionObserver((entries) => {
                         entries.forEach(entry => {
                             if (entry.isIntersecting) {
@@ -653,28 +794,28 @@
                             }
                         });
                     }, options);
-
+                    
                     const cloudCMAContainer = document.getElementById('cloudcma-container');
                     if (cloudCMAContainer) {
                         observer.observe(cloudCMAContainer);
                     }
-
+                    
                     function loadCloudCMAWidget() {
                         console.log('Loading CloudCMA widget');
                         const container = document.getElementById('cloudcma-container');
-
+                        
                         // Remove placeholder
                         const placeholder = container.querySelector('.cloudcma-placeholder');
                         if (placeholder) {
                             placeholder.style.display = 'none';
                         }
-
+                        
                         // Create React wrapper for CloudCMA
                         const wrapper = document.createElement('div');
                         wrapper.id = 'cloudcma-market-reports';
                         wrapper.className = 'cloudcma-wrapper';
                         container.appendChild(wrapper);
-
+                        
                         // Load CloudCMA script
                         const script = document.createElement('script');
                         script.src = 'https://www.cloudcma.com/api/widget.js';
@@ -694,7 +835,7 @@
                                 });
                             }
                         };
-
+                        
                         document.head.appendChild(script);
                     }
                 });
@@ -1556,10 +1697,10 @@
             const loadPolyfills = () => {
                 return new Promise((resolve) => {
                     console.log('Loading polyfills if needed...');
-
+                    
                     // Check if any polyfills are needed
                     const needsIntersectionObserver = !('IntersectionObserver' in window);
-
+                    
                     if (needsIntersectionObserver) {
                         const script = document.createElement('script');
                         script.src = 'https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver';
@@ -1575,13 +1716,13 @@
             const loadAnalytics = () => {
                 return new Promise((resolve) => {
                     console.log('Loading analytics...');
-
+                    
                     // Google Analytics
                     const gaScript = document.createElement('script');
                     gaScript.async = true;
                     gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-EXAMPLE';
                     document.head.appendChild(gaScript);
-
+                    
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments);}
                     gtag('js', new Date());
@@ -1591,7 +1732,7 @@
                             'pageCategory': 'homepage'
                         }
                     });
-
+                    
                     setTimeout(resolve, 100); // Ensure analytics has time to initialize
                 });
             };
@@ -1600,16 +1741,16 @@
             const loadABTesting = () => {
                 return new Promise((resolve) => {
                     console.log('Loading A/B testing...');
-
+                    
                     // Simple A/B test assignment with persistent cookie
                     const testId = 'homepage-layout-test';
                     let testVariant = localStorage.getItem(testId);
-
+                    
                     if (!testVariant) {
                         // Assign variant (50/50)
                         testVariant = Math.random() < 0.5 ? 'A' : 'B';
                         localStorage.setItem(testId, testVariant);
-
+                        
                         // Track assignment
                         if (window.gtag) {
                             gtag('event', 'ab_test_assignment', {
@@ -1618,10 +1759,10 @@
                             });
                         }
                     }
-
+                    
                     // Apply test variant styles/behavior
                     document.body.classList.add(`variant-${testVariant.toLowerCase()}`);
-
+                    
                     resolve();
                 });
             };
@@ -1630,17 +1771,17 @@
             const loadWidgets = () => {
                 return new Promise((resolve) => {
                     console.log('Initializing widgets...');
-
+                    
                     // At this point, all scripts are loaded and we can initialize widgets
                     // Most widgets are already set to initialize on their own
-
+                    
                     // Track widget load completion
                     if (window.gtag) {
                         gtag('event', 'widgets_loaded', {
                             'page_type': 'homepage'
                         });
                     }
-
+                    
                     resolve();
                 });
             };
