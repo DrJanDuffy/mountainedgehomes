@@ -116,11 +116,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <!-- External scripts -->
-    <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module"></script>
+    <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module" crossorigin="anonymous" integrity="sha384-examplehash"></script>
     <style>
       realscout-office-listings {
         --rs-listing-divider-color: #4a90e2;
         width: 100%;
+        --rs-font-family: 'Open Sans', sans-serif;
+        --rs-primary-color: #0A2540;
+        --rs-accent-color: #3A8DDE;
       }
     </style>
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
@@ -352,11 +355,21 @@
             <h2 class="section-title">Featured Mountain's Edge Properties</h2>
             <p class="section-subtitle">Browse our exclusive selection of luxury homes in Mountain's Edge</p>
             <div class="realscout-container">
-                <realscout-office-listings agent-encoded-id="QWdlbnQtMjI1MDUw" sort-order="PRICE_LOW" listing-status="For Sale" property-types="TC,SFR,MF,LAL" price-min="500000"></realscout-office-listings>
+                <realscout-office-listings 
+                    agent-encoded-id="QWdlbnQtMjI1MDUw" 
+                    sort-order="PRICE_LOW" 
+                    listing-status="For Sale" 
+                    property-types="TC,SFR,MF,LAL" 
+                    price-min="500000"
+                    max-results="6">
+                </realscout-office-listings>
             </div>
             
             <!-- Fallback for RealScout -->
             <div id="fallback-properties" style="display: none; margin-top: 30px;">
+                <div class="fallback-message">
+                    <p><i class="fas fa-info-circle"></i> Showing local property data. Live search is temporarily unavailable.</p>
+                </div>
                 <div id="search-result-properties" class="properties-grid">
                     <!-- Fallback properties will be loaded here by script -->
                 </div>
@@ -394,7 +407,7 @@
                             <option value="luxury">Luxury</option>
                         </select>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="price-range">Price Range</label>
                         <select id="price-range">
@@ -407,32 +420,32 @@
                             <option value="1500000-10000000">$1,500,000+</option>
                         </select>
                     </div>
-                    
+
                     <div class="advanced-fields">
-                        <div class="form-group">
+                    <div class="form-group">
                             <label for="min-beds">Min Bedrooms</label>
                             <select id="min-beds">
-                                <option value="">Any</option>
-                                <option value="1">1+</option>
-                                <option value="2">2+</option>
-                                <option value="3">3+</option>
-                                <option value="4">4+</option>
-                                <option value="5">5+</option>
-                            </select>
-                        </div>
-                        
+                            <option value="">Any</option>
+                            <option value="1">1+</option>
+                            <option value="2">2+</option>
+                            <option value="3">3+</option>
+                            <option value="4">4+</option>
+                            <option value="5">5+</option>
+                        </select>
+                    </div>
+
                         <div class="form-group">
                             <label for="min-baths">Min Bathrooms</label>
                             <select id="min-baths">
-                                <option value="">Any</option>
-                                <option value="1">1+</option>
-                                <option value="2">2+</option>
-                                <option value="3">3+</option>
-                                <option value="4">4+</option>
+                            <option value="">Any</option>
+                            <option value="1">1+</option>
+                            <option value="2">2+</option>
+                            <option value="3">3+</option>
+                            <option value="4">4+</option>
                                 <option value="5">5+</option>
-                            </select>
-                        </div>
-                        
+                        </select>
+                    </div>
+
                         <div class="form-group">
                             <label for="square-feet">Square Feet</label>
                             <select id="square-feet">
@@ -442,9 +455,9 @@
                                 <option value="2000-2999">2,000 - 2,999 sq ft</option>
                                 <option value="3000-3999">3,000 - 3,999 sq ft</option>
                                 <option value="4000-9999">4,000+ sq ft</option>
-                            </select>
-                        </div>
-                        
+                        </select>
+                    </div>
+
                         <div class="form-group">
                             <label for="features">Features</label>
                             <select id="features">
@@ -455,9 +468,9 @@
                                 <option value="gated">Gated Community</option>
                                 <option value="new">New Construction</option>
                             </select>
-                        </div>
                     </div>
-                    
+            </div>
+
                     <button type="submit"><i class="fas fa-search"></i> Search Properties</button>
                 </form>
             </div>
@@ -556,102 +569,120 @@
         <div class="container">
             <h2 class="section-title">Featured Properties</h2>
             <p class="section-subtitle">Discover our handpicked selection of luxury homes in Mountain's Edge and surrounding areas</p>
-            <div class="properties-grid">
-                <!-- Property Card 1 -->
-                <div class="property-card" data-property-id="prop123" data-url="property-details.html?id=prop123">
-                    <span class="property-label new">New Listing</span>
-                    <div class="property-favorite" data-property-id="prop123">
-                        <i class="far fa-heart"></i>
-                    </div>
-                    <div class="property-image">
-                        <img src="assets/images/property-placeholder.jpg" data-src="assets/images/property1.jpg" alt="Luxury home in Sierra Madre with mountain views" class="optimized-image">
-                        <div class="property-price">$875,000</div>
-                    </div>
-                    <div class="property-details">
-                        <h3>Sierra Madre Luxury Home</h3>
-                        <div class="property-location">
-                            <i class="fas fa-map-marker-alt"></i> Sierra Madre, Mountain's Edge
-                        </div>
-                        <p class="property-description">Stunning 4-bedroom luxury home with panoramic mountain views and premium finishes throughout.</p>
-                        <div class="property-specs">
-                            <span>
-                                <i class="fas fa-bed"></i>
-                                4 Beds
-                            </span>
-                            <span>
-                                <i class="fas fa-bath"></i>
-                                3.5 Baths
-                            </span>
-                            <span>
-                                <i class="fas fa-ruler-combined"></i>
-                                3,200 Sq Ft
-                            </span>
-                        </div>
-                    </div>
+            
+                <div class="realscout-container">
+                    <realscout-office-listings 
+                        agent-encoded-id="QWdlbnQtMjI1MDUw" 
+                        sort-order="PRICE_HIGH" 
+                        listing-status="For Sale" 
+                        property-types="TC,SFR,MF" 
+                    price-min="750000"
+                    max-results="3">
+                    </realscout-office-listings>
+            </div>
+            
+            <!-- Fallback for RealScout -->
+            <div id="properties-fallback" style="display: none; margin-top: 30px;">
+                <div class="fallback-message">
+                    <p><i class="fas fa-info-circle"></i> Showing local property data. Live search is temporarily unavailable.</p>
                 </div>
-                
-                <!-- Property Card 2 -->
-                <div class="property-card" data-property-id="prop124" data-url="property-details.html?id=prop124">
-                    <span class="property-label">Featured</span>
-                    <div class="property-favorite" data-property-id="prop124">
-                        <i class="far fa-heart"></i>
-                    </div>
-                    <div class="property-image">
-                        <img src="assets/images/property-placeholder.jpg" data-src="assets/images/property2.jpg" alt="Modern home in Cascade with pool and spa" class="optimized-image">
-                        <div class="property-price">$925,000</div>
-                    </div>
-                    <div class="property-details">
-                        <h3>Cascade Modern Estate</h3>
-                        <div class="property-location">
-                            <i class="fas fa-map-marker-alt"></i> Cascade, Mountain's Edge
+                <div class="properties-grid">
+                    <!-- Property Card 1 -->
+                    <div class="property-card" data-property-id="prop123" data-url="property-details.html?id=prop123">
+                        <span class="property-label new">New Listing</span>
+                        <div class="property-favorite" data-property-id="prop123">
+                            <i class="far fa-heart"></i>
                         </div>
-                        <p class="property-description">Contemporary 5-bedroom home featuring a resort-style backyard with pool and outdoor kitchen.</p>
-                        <div class="property-specs">
-                            <span>
-                                <i class="fas fa-bed"></i>
-                                5 Beds
-                            </span>
-                            <span>
-                                <i class="fas fa-bath"></i>
-                                4 Baths
-                            </span>
-                            <span>
-                                <i class="fas fa-ruler-combined"></i>
-                                3,800 Sq Ft
-                            </span>
+                        <div class="property-image">
+                            <img src="assets/images/property-placeholder.jpg" data-src="assets/images/property1.jpg" alt="Luxury home in Sierra Madre with mountain views" class="optimized-image">
+                            <div class="property-price">$875,000</div>
                         </div>
-                    </div>
+                        <div class="property-details">
+                            <h3>Sierra Madre Luxury Home</h3>
+                            <div class="property-location">
+                                <i class="fas fa-map-marker-alt"></i> Sierra Madre, Mountain's Edge
+                            </div>
+                            <p class="property-description">Stunning 4-bedroom luxury home with panoramic mountain views and premium finishes throughout.</p>
+                            <div class="property-specs">
+                                <span>
+                                    <i class="fas fa-bed"></i>
+                                    4 Beds
+                                </span>
+                                <span>
+                                    <i class="fas fa-bath"></i>
+                                    3.5 Baths
+                                </span>
+                                <span>
+                                    <i class="fas fa-ruler-combined"></i>
+                                    3,200 Sq Ft
+                                </span>
+                            </div>
                 </div>
-                
-                <!-- Property Card 3 -->
-                <div class="property-card" data-property-id="prop125" data-url="property-details.html?id=prop125">
-                    <span class="property-label">Premium</span>
-                    <div class="property-favorite" data-property-id="prop125">
-                        <i class="far fa-heart"></i>
-                    </div>
-                    <div class="property-image">
-                        <img src="assets/images/property-placeholder.jpg" data-src="assets/images/property3.jpg" alt="Single-story home in Collina with large backyard" class="optimized-image">
-                        <div class="property-price">$780,000</div>
-                    </div>
-                    <div class="property-details">
-                        <h3>Collina Single Story</h3>
-                        <div class="property-location">
-                            <i class="fas fa-map-marker-alt"></i> Collina, Mountain's Edge
+            </div>
+
+                    <!-- Property Card 2 -->
+                    <div class="property-card" data-property-id="prop124" data-url="property-details.html?id=prop124">
+                        <span class="property-label">Featured</span>
+                        <div class="property-favorite" data-property-id="prop124">
+                            <i class="far fa-heart"></i>
                         </div>
-                        <p class="property-description">Elegant single-story home with 4 bedrooms, gourmet kitchen, and expansive backyard oasis.</p>
-                        <div class="property-specs">
-                            <span>
-                                <i class="fas fa-bed"></i>
-                                4 Beds
-                            </span>
-                            <span>
-                                <i class="fas fa-bath"></i>
-                                3 Baths
-                            </span>
-                            <span>
-                                <i class="fas fa-ruler-combined"></i>
-                                2,800 Sq Ft
-                            </span>
+                        <div class="property-image">
+                            <img src="assets/images/property-placeholder.jpg" data-src="assets/images/property2.jpg" alt="Modern home in Cascade with pool and spa" class="optimized-image">
+                            <div class="property-price">$925,000</div>
+                        </div>
+                        <div class="property-details">
+                            <h3>Cascade Modern Estate</h3>
+                            <div class="property-location">
+                                <i class="fas fa-map-marker-alt"></i> Cascade, Mountain's Edge
+                            </div>
+                            <p class="property-description">Contemporary 5-bedroom home featuring a resort-style backyard with pool and outdoor kitchen.</p>
+                            <div class="property-specs">
+                                <span>
+                                    <i class="fas fa-bed"></i>
+                                    5 Beds
+                                </span>
+                                <span>
+                                    <i class="fas fa-bath"></i>
+                                    4 Baths
+                                </span>
+                                <span>
+                                    <i class="fas fa-ruler-combined"></i>
+                                    3,800 Sq Ft
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Property Card 3 -->
+                    <div class="property-card" data-property-id="prop125" data-url="property-details.html?id=prop125">
+                        <span class="property-label">Premium</span>
+                        <div class="property-favorite" data-property-id="prop125">
+                            <i class="far fa-heart"></i>
+                        </div>
+                        <div class="property-image">
+                            <img src="assets/images/property-placeholder.jpg" data-src="assets/images/property3.jpg" alt="Single-story home in Collina with large backyard" class="optimized-image">
+                            <div class="property-price">$780,000</div>
+                        </div>
+                        <div class="property-details">
+                            <h3>Collina Single Story</h3>
+                            <div class="property-location">
+                                <i class="fas fa-map-marker-alt"></i> Collina, Mountain's Edge
+                            </div>
+                            <p class="property-description">Elegant single-story home with 4 bedrooms, gourmet kitchen, and expansive backyard oasis.</p>
+                            <div class="property-specs">
+                                <span>
+                                    <i class="fas fa-bed"></i>
+                                    4 Beds
+                                </span>
+                                <span>
+                                    <i class="fas fa-bath"></i>
+                                    3 Baths
+                                </span>
+                                <span>
+                                    <i class="fas fa-ruler-combined"></i>
+                                    2,800 Sq Ft
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -733,6 +764,100 @@
         </div>
     </section>
 
+    <!-- CloudCMA Market Reports Widget Section -->
+    <section id="market-reports" class="market-reports-section">
+        <div class="container">
+            <h2 class="section-title">Market Reports & Property Analysis</h2>
+            <p class="section-subtitle">Get comprehensive market analysis and property reports for Mountain's Edge and surrounding areas</p>
+            
+            <div class="cloudcma-container">
+                <!-- Container for CloudCMA Widget with lazy loading -->
+                <div id="cloudcma-widget-container" style="min-height: 480px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);"></div>
+            </div>
+            
+            <script>
+                // Lazy load the CloudCMA widget when 50% visible in viewport
+                document.addEventListener('DOMContentLoaded', function() {
+                    const options = {
+                        root: null,
+                        rootMargin: '0px',
+                        threshold: 0.5 // 50% visibility triggers loading
+                    };
+                    
+                    const observer = new IntersectionObserver((entries, observer) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                console.log('Loading CloudCMA widget...');
+                                loadCloudCMAWidget();
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    }, options);
+                    
+                    const container = document.getElementById('cloudcma-widget-container');
+                    if (container) {
+                        observer.observe(container);
+                    }
+                    
+                    function loadCloudCMAWidget() {
+                        // Create widget wrapper
+                        const wrapper = document.createElement('div');
+                        wrapper.className = 'cloudcma-wrapper';
+                        
+                        // Create the CloudCMA React wrapper script
+                        const script = document.createElement('script');
+                        script.src = 'https://www.cloudcma.com/widgets/market-report.js';
+                        script.setAttribute('data-agent-id', 'mountainedge123');
+                        script.setAttribute('data-zip-code', '89178');
+                        script.setAttribute('data-theme-color', '#3A8DDE');
+                        
+                        // Add placeholder content while loading
+                        container.innerHTML = `
+                            <div class="loading-placeholder">
+                                <div class="loading-spinner">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                </div>
+                                <p>Loading Market Reports...</p>
+                            </div>
+                        `;
+                        
+                        // Append the script to load the widget
+                        container.appendChild(script);
+                        
+                        // Add loading event listener
+                        script.onload = function() {
+                            console.log('CloudCMA widget loaded successfully');
+                            // Remove loading placeholder
+                            const placeholder = container.querySelector('.loading-placeholder');
+                            if (placeholder) {
+                                placeholder.style.display = 'none';
+                            }
+                        };
+                        
+                        script.onerror = function() {
+                            console.error('Failed to load CloudCMA widget');
+                            container.innerHTML = `
+                                <div class="error-message">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <p>Unable to load market reports. Please try again later.</p>
+                                    <button id="retry-cloudcma" class="btn btn-sm">Retry</button>
+                                </div>
+                            `;
+                            
+                            // Add retry button functionality
+                            const retryButton = document.getElementById('retry-cloudcma');
+                            if (retryButton) {
+                                retryButton.addEventListener('click', function() {
+                                    loadCloudCMAWidget();
+                                });
+                            }
+                        };
+                    }
+                });
+            </script>
+        </div>
+    </section>
+
     <!-- About Section -->
     <section id="about" class="about-section">
         <div class="container">
@@ -764,123 +889,6 @@
                 </div>
                 <div class="about-image">
                     <img src="assets/images/team.jpg" alt="Mountain Edge Homes Team">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CloudCMA Market Reports Section -->
-    <section id="market-reports" class="market-reports-section">
-        <div class="container">
-            <h2 class="section-title">Neighborhood Market Reports</h2>
-            <p class="section-subtitle">Stay informed with the latest real estate market trends and data for Mountain's Edge neighborhoods</p>
-            
-            <div class="cloudcma-container" id="cloudcma-container">
-                <!-- CloudCMA widget will be lazy loaded here -->
-                <div class="cloudcma-placeholder">
-                    <div class="placeholder-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Loading Market Reports...</h3>
-                </div>
-            </div>
-            
-            <script>
-                // Lazy load CloudCMA widget
-                document.addEventListener('DOMContentLoaded', function() {
-                    const options = {
-                        threshold: 0.5 // Load when 50% visible
-                    };
-                    
-                    const observer = new IntersectionObserver((entries) => {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                loadCloudCMAWidget();
-                                observer.unobserve(entry.target);
-                            }
-                        });
-                    }, options);
-                    
-                    const cloudCMAContainer = document.getElementById('cloudcma-container');
-                    if (cloudCMAContainer) {
-                        observer.observe(cloudCMAContainer);
-                    }
-                    
-                    function loadCloudCMAWidget() {
-                        console.log('Loading CloudCMA widget');
-                        const container = document.getElementById('cloudcma-container');
-                        
-                        // Remove placeholder
-                        const placeholder = container.querySelector('.cloudcma-placeholder');
-                        if (placeholder) {
-                            placeholder.style.display = 'none';
-                        }
-                        
-                        // Create React wrapper for CloudCMA
-                        const wrapper = document.createElement('div');
-                        wrapper.id = 'cloudcma-market-reports';
-                        wrapper.className = 'cloudcma-wrapper';
-                        container.appendChild(wrapper);
-                        
-                        // Load CloudCMA script
-                        const script = document.createElement('script');
-                        script.src = 'https://www.cloudcma.com/api/widget.js';
-                        script.crossOrigin = 'anonymous';
-                        script.integrity = 'sha384-examplehash';
-                        script.onload = function() {
-                            if (window.CloudCMA) {
-                                window.CloudCMA.showMarketReportWidget({
-                                    container: 'cloudcma-market-reports',
-                                    userId: 'mountainedgehomes',
-                                    zip: '89178',
-                                    theme: {
-                                        primaryColor: '#0A2540',
-                                        secondaryColor: '#3A8DDE',
-                                        accentColor: '#16B286'
-                                    }
-                                });
-                            }
-                        };
-                        
-                        document.head.appendChild(script);
-                    }
-                });
-            </script>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="services-section">
-        <div class="container">
-            <h2 class="section-title">Mountain's Edge Las Vegas Real Estate Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-home"></i>
-                    </div>
-                    <h3>Mountain's Edge Home Buying</h3>
-                    <p>Expert guidance through the entire Las Vegas luxury home buying process, from property search to closing, with specialized knowledge of Mountain's Edge neighborhoods and pricing.</p>
-                </div>
-                <divclass="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-dollar-sign"></i>
-                    </div>
-                    <h3>Mountain's Edge Property Selling</h3>
-                    <p>Strategic marketing and pricing expertise specifically for Mountain's Edge properties, maximizing your home's value in the competitive Southwest Las Vegas market.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Las Vegas Investment Property Consulting</h3>
-                    <p>Data-driven investment advice for Mountain's Edge and surrounding Las Vegas communities, helping you identify high-return opportunities in the 89178 zip code area.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-building"></i>
-                    </div>
-                    <h3>Mountain's Edge Property Management</h3>
-                    <p>Full-service property management for Mountain's Edge homeowners, including tenant screening, maintenance coordination, and financial reporting for your Las Vegas investment.</p>
                 </div>
             </div>
         </div>
