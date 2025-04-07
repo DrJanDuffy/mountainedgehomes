@@ -52,6 +52,12 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://mountainedgehomes.com/es/home-value.html"/>
   </url>
   <url>
+    <loc>https://mountainedgehomes.com/resident-portal.html</loc>
+    <lastmod>2024-04-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://mountainedgehomes.com/our-team.html</loc>
     <lastmod>2024-04-04</lastmod>
     <changefreq>monthly</changefreq>
