@@ -1,0 +1,87 @@
+a comprehensive hyperlocal website for a planned residential community using Replit as the development platform. This website will serve as both a marketing tool for prospective buyers and an information hub for current residents.
+Replit Setup Instructions
+
+Start a new Repl using the "HTML, CSS, JS" template as your foundation
+Fork and integrate these additional Replit templates:
+
+Portfolio Site Template (for overall structure)
+Contact Form with SendGrid (for inquiry forms)
+TailwindCSS Template (Node.js) (for responsive styling)
+Express.js + htmx (for interactive features)
+Demo Repl: Interactive Data Visualization App (for community maps)
+Minimal Blog Template (for community updates)
+Supabase.js (Database) (for resident portal functionality)
+
+
+
+Development Process on Replit
+
+Begin with the HTML, CSS, JS template and establish your file structure
+Implement TailwindCSS by integrating the configuration from the TailwindCSS template
+Adapt the Portfolio Site Template's components for community showcasing
+Set up Express.js backend using the Express.js + htmx template structure
+Implement contact functionality using the SendGrid template
+Create an interactive community map by adapting the Data Visualization template
+Set up the blog section using components from the Minimal Blog template
+Configure Supabase for the resident portal database functionality
+
+Key Sections & Features (Same as previous prompt)
+Homepage
+
+Hero section with community imagery and tagline
+Quick access links to property listings and resident portal
+Latest community news/updates
+Interactive community map
+Resident testimonials
+
+About the Community
+
+Vision and development information
+Sustainable features
+Development timeline with status indicators
+
+Property Listings
+
+Searchable database of available homes
+Detailed listing pages with specifications
+Contact forms for each listing
+
+Amenities & Lifestyle
+
+Interactive amenity map
+Community event calendar
+Local area information
+
+Resident Portal (password protected)
+
+Community announcements
+HOA documents
+Maintenance requests
+Amenity reservations
+
+Contact & Information
+
+General inquiry forms
+Sales office information
+FAQ section
+Newsletter signup
+
+Replit-Specific Technical Considerations
+
+Use Replit's built-in hosting for deployment
+Take advantage of Replit's environment variables for SendGrid and Supabase credentials
+Use the "Always On" feature to ensure database connectivity
+Implement proper URL routing through the Express.js template
+Utilize Replit's real-time collaboration features for team development
+Implement the database using Replit's persistent storage in conjunction with Supabase
+Test responsive design using Replit's device preview functionality
+Use Replit's Git integration for version control
+
+Deliverables
+
+A complete, functioning Repl containing the entire website
+Admin access configuration via environment variables
+Documentation within the Repl using Markdown files
+Replit Deployment URL for the live site
+
+This development approach leverages Replit's template ecosystem to accelerate development while maintaining flexibility to customize the site according to the community's specific needs and branding.

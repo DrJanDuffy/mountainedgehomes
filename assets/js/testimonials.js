@@ -1,4 +1,31 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Check if we're on a page with testimonials
+    const testimonialElements = document.querySelectorAll('.testimonial');
+    if (testimonialElements.length === 0) return;
+
+    let currentTestimonialIndex = 0;
+    const testimonialCount = testimonialElements.length;
+
+    // Initially hide all testimonials except the first one
+    testimonialElements.forEach((testimonial, index) => {
+        testimonial.style.display = index === 0 ? 'block' : 'none';
+    });
+
+    // Set up automatic slide transition
+    function rotateTestimonials() {
+        testimonialElements[currentTestimonialIndex].style.display = 'none';
+        currentTestimonialIndex = (currentTestimonialIndex + 1) % testimonialCount;
+        testimonialElements[currentTestimonialIndex].style.display = 'block';
+    }
+
+    // Only set up the interval if we have more than one testimonial
+    if (testimonialCount > 1) {
+        setInterval(rotateTestimonials, 5000);
+    }
+
+    console.log('Testimonials initialized:', testimonialCount);
+
+
     // Initialize Google Maps
     if (typeof initGlobalMap === 'function') {
         initGlobalMap();

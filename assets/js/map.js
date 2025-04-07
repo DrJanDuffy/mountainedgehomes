@@ -1,206 +1,145 @@
 // Google Maps initialization
 let map;
 let markers = [];
-const mountainEdgeCenter = { lat: 36.0051, lng: -115.2552 }; // Mountain Edge, Las Vegas coordinates
+let infoWindow;
 
-// Get Google Maps API key from environment variable
-const googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY || '';
-
-// Log a warning if API key is missing (but don't expose it in console)
-if (!googleMapsApiKey) {
-    console.warn('Google Maps API key is missing. Maps functionality will be limited.');
-}
-
-// Points of Interest data 
-const pointsOfInterest = {
-    schools: [
-        { position: { lat: 36.0059, lng: -115.2501 }, title: "Carolyn S. Reedom Elementary School" },
-        { position: { lat: 36.0142, lng: -115.2526 }, title: "Wright Elementary School" },
-        { position: { lat: 36.0113, lng: -115.2363 }, title: "Tarkanian Middle School" }
-    ],
-    parks: [
-        { position: { lat: 36.0024, lng: -115.2452 }, title: "Exploration Peak Park" },
-        { position: { lat: 36.0127, lng: -115.2639 }, title: "Mountain's Edge Regional Park" },
-        { position: { lat: 36.0067, lng: -115.2508 }, title: "Nathaniel Jones Park" }
-    ],
-    shopping: [
-        { position: { lat: 36.0137, lng: -115.2370 }, title: "Mountain's Edge Marketplace" },
-        { position: { lat: 36.0251, lng: -115.2419 }, title: "South Valley Shopping Center" },
-        { position: { lat: 36.0136, lng: -115.2237 }, title: "Retail Plaza" }
-    ],
-    restaurants: [
-        { position: { lat: 36.0138, lng: -115.2376 }, title: "Distill" },
-        { position: { lat: 36.0141, lng: -115.2371 }, title: "Napoli Pizzeria" },
-        { position: { lat: 36.0139, lng: -115.2368 }, title: "Thai BBQ" }
-    ]
-};
-
-// Global maps initialization callback
+// Callback function for Google Maps API
 function initMapsCallback() {
-    console.log('Google Maps API loaded successfully');
-
-    // Initialize maps if elements exist
+    // Check if the map element exists on this page
     if (document.getElementById('mountain-edge-map')) {
-        initMap();
-    }
-
-    if (document.getElementById('global-mountain-edge-map')) {
-        initGlobalMap();
+        // Delay initialization slightly to ensure DOM is ready
+        setTimeout(initMap, 100);
     }
 }
 
-// Initialize the main map
 function initMap() {
-    console.log('Initializing main map');
-    const mapElement = document.getElementById("mountain-edge-map");
-    if (!mapElement) return;
-
     try {
-        // Create the map
-        map = new google.maps.Map(mapElement, {
-            center: mountainEdgeCenter,
-            zoom: 12,
+        const mountainEdgeCoordinates = { lat: 36.0051, lng: -115.2552 };
+
+        // Check if Google Maps is loaded
+        if (!window.google || !window.google.maps) {
+            console.error("Google Maps API not loaded");
+            document.getElementById('map-error').style.display = 'block';
+            return;
+        }
+
+        // Initialize the map
+        map = new google.maps.Map(document.getElementById("mountain-edge-map"), {
+            zoom: 13,
+            center: mountainEdgeCoordinates,
             mapTypeControl: true,
-            fullscreenControl: true,
             streetViewControl: true,
+            fullscreenControl: true,
+            zoomControl: true,
             styles: [
                 {
-                    featureType: "poi.business",
-                    stylers: [{ visibility: "simplified" }],
-                },
-                {
-                    featureType: "water",
-                    elementType: "geometry",
-                    stylers: [{ color: "#a3ccff" }],
-                },
-            ],
+                    featureType: "poi",
+                    elementType: "labels",
+                    stylers: [{ visibility: "off" }]
+                }
+            ]
         });
 
-        // Add Mountain Edge boundary overlay
-        const mountainEdgeBoundary = [
-            { lat: 36.0227, lng: -115.2697 },
-            { lat: 36.0227, lng: -115.2365 },
-            { lat: 35.9932, lng: -115.2365 },
-            { lat: 35.9932, lng: -115.2697 },
-            { lat: 36.0227, lng: -115.2697 }
-        ];
+        // Create info window for markers
+        infoWindow = new google.maps.InfoWindow();
 
-        const mountainEdgePolygon = new google.maps.Polygon({
-            paths: mountainEdgeBoundary,
-            strokeColor: "#FF9800",
-            strokeOpacity: 0.8,
-            strokeWeight: 2,
-            fillColor: "#FFC107",
-            fillOpacity: 0.1,
-        });
-        mountainEdgePolygon.setMap(map);
+        // Add main marker for Mountain's Edge
+        addMarker(
+            mountainEdgeCoordinates,
+            "Mountain's Edge",
+            "A beautiful master-planned community in southwest Las Vegas"
+        );
 
-        // Add Mountain Edge center marker
-        new google.maps.Marker({
-            position: mountainEdgeCenter,
-            map: map,
-            title: "Mountain Edge",
-            icon: {
-                path: google.maps.SymbolPath.CIRCLE,
-                scale: 10,
-                fillColor: "#4CAF50",
-                fillOpacity: 0.9,
-                strokeWeight: 2,
-                strokeColor: "#fff"
-            },
-            animation: google.maps.Animation.DROP
-        });
+        console.log("Map initialized successfully");
 
-        // Set up map button event listeners
-        document.querySelectorAll('.map-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const poiType = this.getAttribute('data-poi');
-                showPointsOfInterest(poiType);
-
-                // Toggle active class
-                document.querySelectorAll('.map-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                this.classList.add('active');
-            });
-        });
-
-        console.log('Main map initialized successfully');
+        // Set up map controls
+        setupMapControls();
     } catch (error) {
-        console.error('Error initializing main map:', error);
-        showMapError(mapElement);
+        console.error("Error initializing map:", error);
+        document.getElementById('map-error').style.display = 'block';
     }
 }
 
-// Show points of interest by type
-function showPointsOfInterest(type) {
-    // Clear existing markers
-    clearMarkers();
-
-    // Add new markers based on type
-    if (pointsOfInterest[type]) {
-        pointsOfInterest[type].forEach((poi, i) => {
-            setTimeout(() => {
-                addMarker(poi.position, poi.title, type);
-            }, i * 200);
-        });
-    }
-}
-
-// Add a marker to the map
-function addMarker(position, title, type) {
-    // Set icon based on type
-    let icon = {
-        url: '',
-        scaledSize: new google.maps.Size(30, 30)
-    };
-
-    switch(type) {
-        case 'schools':
-            icon.url = 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png';
-            break;
-        case 'parks':
-            icon.url = 'https://maps.google.com/mapfiles/ms/icons/green-dot.png';
-            break;
-        case 'shopping':
-            icon.url = 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
-            break;
-        case 'restaurants':
-            icon.url = 'https://maps.google.com/mapfiles/ms/icons/red-dot.png';
-            break;
-        default:
-            icon.url = 'https://maps.google.com/mapfiles/ms/icons/purple-dot.png';
-    }
-
+function addMarker(position, title, content) {
     const marker = new google.maps.Marker({
         position: position,
         map: map,
         title: title,
-        icon: icon,
         animation: google.maps.Animation.DROP
     });
 
-    // Add info window
-    const infoWindow = new google.maps.InfoWindow({
-        content: `<div class="info-window"><h3>${title}</h3><p>Point of interest in Mountain Edge</p></div>`
-    });
+    markers.push(marker);
 
-    marker.addListener('click', () => {
+    marker.addListener("click", () => {
+        infoWindow.setContent(`<div class="info-window"><h3>${title}</h3><p>${content}</p></div>`);
         infoWindow.open(map, marker);
     });
 
-    markers.push(marker);
+    return marker;
 }
 
-// Clear all markers from the map
+function setupMapControls() {
+    const mapButtons = document.querySelectorAll('.map-btn');
+
+    mapButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const poiType = this.getAttribute('data-poi');
+            showPointsOfInterest(poiType);
+
+            // Toggle active class
+            mapButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+}
+
+function showPointsOfInterest(type) {
+    // Clear existing POI markers
+    clearMarkers();
+
+    // Example POI data - in a real app, this would come from an API
+    const poiData = {
+        schools: [
+            { position: { lat: 36.0021, lng: -115.2452 }, title: "Canarelli Middle School", content: "Top-rated middle school serving Mountain's Edge" },
+            { position: { lat: 36.0121, lng: -115.2352 }, title: "Wright Elementary School", content: "Elementary school within the Mountain's Edge community" }
+        ],
+        parks: [
+            { position: { lat: 36.0051, lng: -115.2652 }, title: "Exploration Peak Park", content: "2,800-acre park with hiking trails and picnic areas" },
+            { position: { lat: 36.0151, lng: -115.2452 }, title: "Mountain's Edge Regional Park", content: "Large park with sports fields and recreation areas" }
+        ],
+        shopping: [
+            { position: { lat: 36.0091, lng: -115.2352 }, title: "Mountain's Edge Marketplace", content: "Shopping center with restaurants and retail stores" },
+            { position: { lat: 36.0181, lng: -115.2452 }, title: "Blue Diamond Marketplace", content: "Convenience shopping with everyday essentials" }
+        ],
+        restaurants: [
+            { position: { lat: 36.0071, lng: -115.2552 }, title: "Settebello Pizzeria", content: "Authentic Neapolitan-style pizzeria" },
+            { position: { lat: 36.0111, lng: -115.2452 }, title: "Hokkaido Teppanyaki", content: "Japanese hibachi and sushi restaurant" }
+        ]
+    };
+
+    // Add markers for the selected POI type
+    if (poiData[type]) {
+        poiData[type].forEach(poi => {
+            addMarker(poi.position, poi.title, poi.content);
+        });
+    }
+}
+
 function clearMarkers() {
     markers.forEach(marker => {
         marker.setMap(null);
     });
     markers = [];
+
+    // Re-add main marker
+    addMarker(
+        { lat: 36.0051, lng: -115.2552 },
+        "Mountain's Edge",
+        "A beautiful master-planned community in southwest Las Vegas"
+    );
 }
 
-// Function to show map error
+//This function was kept from the original file because it handles map errors in a way that the edited code did not.
 function showMapError(element) {
     console.error('Showing map error');
     // Make sure the error element exists
@@ -229,6 +168,7 @@ function showMapError(element) {
     }
 }
 
+
 // Error handler for Google Maps authentication failures
 window.gm_authFailure = function() {
     console.error('Google Maps authentication error');
@@ -242,4 +182,12 @@ window.gm_authFailure = function() {
     }
 };
 
-//This section was removed because the edited code provided a better implementation.  The original's window.addEventListener was redundant given the new structure.
+//This was kept because the edited code did not include a way to handle the case where the map failed to load.  This function provides a timeout to check for that.
+window.addEventListener('load', function() {
+    setTimeout(function() {
+        const mapElement = document.getElementById('mountain-edge-map');
+        if (mapElement && !mapElement.querySelector('iframe') && !mapElement.querySelector('canvas')) {
+            document.getElementById('map-error').style.display = 'block';
+        }
+    }, 3000);
+});

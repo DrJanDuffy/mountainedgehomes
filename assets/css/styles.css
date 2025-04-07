@@ -1,3 +1,35 @@
+/* Improved anti-flicker and page load styles */
+html {
+    visibility: visible;
+    opacity: 1;
+    background-color: #fff;
+}
+
+/* Prevent FOUC (Flash of Unstyled Content) */
+html:not(.page-loaded) {
+    visibility: hidden;
+}
+
+/* Smooth fade-in transition */
+.page-content {
+    animation: fadeIn 0.4s ease-in;
+    opacity: 1;
+}
+
+/* Improved fade-in animation */
+@keyframes fadeIn {
+    0% { opacity: 0.7; }
+    50% { opacity: 0.9; }
+    100% { opacity: 1; }
+}
+
+/* Ensure images don't cause layout shift */
+img {
+    min-height: 1px;
+    min-width: 1px;
+    display: block;
+}
+
 /* Simple Anti-flicker styles - reliable approach */
 html, body {
     display: block;
