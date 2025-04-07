@@ -116,7 +116,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <!-- External scripts -->
-    <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" crossorigin="anonymous" integrity="sha384-examplehash"></script>
+    <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module"></script>
+    <style>
+      realscout-office-listings {
+        --rs-listing-divider-color: #4a90e2;
+        width: 100%;
+      }
+    </style>
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 
@@ -346,7 +352,7 @@
             <h2 class="section-title">Featured Mountain's Edge Properties</h2>
             <p class="section-subtitle">Browse our exclusive selection of luxury homes in Mountain's Edge</p>
             <div class="realscout-container">
-                <realscout-office-listings agent-encoded-id="QWdlbnQtMjI1MDUw" sort-order="PRICE_HIGH" listing-status="For Sale" property-types="TC,SFR,MF" price-min="500000" max-results="3" custom-search="Mountain Edge"></realscout-office-listings>
+                <realscout-office-listings agent-encoded-id="QWdlbnQtMjI1MDUw" sort-order="PRICE_LOW" listing-status="For Sale" property-types="TC,SFR,MF,LAL" price-min="500000"></realscout-office-listings>
             </div>
             
             <!-- Fallback for RealScout -->

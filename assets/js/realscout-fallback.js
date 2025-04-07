@@ -126,9 +126,8 @@ function loadRealScoutScript() {
 
     const script = document.createElement('script');
     script.src = 'https://em.realscout.com/widgets/realscout-web-components.umd.js';
-    script.crossOrigin = 'anonymous';
-    script.async = true;
-
+    script.type = 'module';
+    
     script.onload = function() {
         console.log('RealScout script loaded successfully');
         refreshRealScoutComponents();

@@ -299,7 +299,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const realscoutListingsElement = document.querySelector('realscout-office-listings');
         if (realscoutListingsElement) {
             console.log('RealScout listings element found, initializing...');
-            // Complete initialization if needed
+            
+            // Make sure component is properly styled
+            realscoutListingsElement.style.setProperty('--rs-listing-divider-color', '#4a90e2');
+            realscoutListingsElement.style.width = '100%';
+            
+            // Force refresh the component
             realscoutListingsElement.setAttribute('refresh', 'true');
             console.log('RealScout listings component refreshed');
         }
