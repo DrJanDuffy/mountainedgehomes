@@ -104,6 +104,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Simulate API delay
         setTimeout(function() {
+            // First, remove any existing fallback messages to prevent duplicates
+            const existingMessages = resultsContainer.parentNode.querySelectorAll('.fallback-message');
+            existingMessages.forEach(msg => msg.remove());
+            
             // In a real application, this would be populated with actual database results
             resultsContainer.innerHTML = `
                 <h3>Search Results for ${params.propertyType} in ${params.location}</h3>
@@ -138,6 +142,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
             `;
+            
+            // Add fallback message only once
+            const fallbackMessage = document.createElement('div');
+            fallbackMessage.className = 'fallback-message';
+            fallbackMessage.innerHTML = '<p><i class="fas fa-info-circle"></i> Showing local property data. Live search is temporarily unavailable.</p>';
+            resultsContainer.parentNode.insertBefore(fallbackMessage, resultsContainer);
         }, 1000);
     }
 });

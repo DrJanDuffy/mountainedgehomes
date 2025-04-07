@@ -221,6 +221,10 @@ function showFallbackProperties() {
 
             searchResultProperties.innerHTML = propertiesHTML;
 
+            // First, remove any existing fallback messages to prevent duplicates
+            const existingMessages = searchResultProperties.parentNode.querySelectorAll('.fallback-message');
+            existingMessages.forEach(msg => msg.remove());
+
             // Show a message about using fallback data
             const fallbackMessage = document.createElement('div');
             fallbackMessage.className = 'fallback-message';

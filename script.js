@@ -482,11 +482,28 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Placeholder for fallback function -  needs implementation based on requirements
-    function showFallbackProperties() {
-        console.warn('RealScout failed to load. Showing fallback properties.');
-        //Implement your fallback logic here.  For example:
-        //const fallbackContainer = document.getElementById('fallback-properties');
-        //fallbackContainer.innerHTML = 'Fallback Property Listings';
+    // Prevent duplicate call to showFallbackProperties
+let fallbackShown = false;
+    
+function showFallbackProperties() {
+    if (fallbackShown) {
+        console.log('Fallback properties already shown, skipping duplicate call');
+        return;
     }
+    
+    console.warn('RealScout failed to load. Showing fallback properties.');
+    // Call the implementation from realscout-fallback.js
+    if (typeof window.showFallbackProperties === 'function') {
+        window.showFallbackProperties();
+    } else {
+        console.error('Fallback function not found in global scope');
+        // Basic fallback if the main one is not available
+        const fallbackContainer = document.getElementById('fallback-properties');
+        if (fallbackContainer) {
+            fallbackContainer.style.display = 'block';
+        }
+    }
+    
+    fallbackShown = true;
+}
 });
