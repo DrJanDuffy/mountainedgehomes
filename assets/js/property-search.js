@@ -10,12 +10,12 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             
             // Get form values
-            const location = document.getElementById('search-location').value;
-            const propertyType = document.getElementById('search-property-type').value;
-            const priceRange = document.getElementById('search-price-range').value;
-            const bedrooms = document.getElementById('search-bedrooms').value;
-            const bathrooms = document.getElementById('search-bathrooms').value;
-            const neighborhood = document.getElementById('search-neighborhood').value;
+            const location = document.getElementById('search-location')?.value || '';
+            const propertyType = document.getElementById('search-property-type')?.value || '';
+            const priceRange = document.getElementById('search-price-range')?.value || '';
+            const bedrooms = document.getElementById('search-bedrooms')?.value || '';
+            const bathrooms = document.getElementById('search-bathrooms')?.value || '';
+            const neighborhood = document.getElementById('search-neighborhood')?.value || '';
             
             // Build the search query for RealScout
             let searchQuery = '';
@@ -51,7 +51,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                     
                     // Scroll to results
-                    document.getElementById('search-results').scrollIntoView({ behavior: 'smooth' });
+                    const searchResults = document.getElementById('search-results');
+                    if (searchResults) {
+                        searchResults.scrollIntoView({ behavior: 'smooth' });
+                    }
                 }, 300);
             }
             
@@ -71,7 +74,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const resetButton = document.getElementById('reset-search');
     if (resetButton) {
         resetButton.addEventListener('click', function() {
-            document.getElementById('advanced-property-search').reset();
+            if (searchForm) {
+                searchForm.reset();
+            }
             
             // Reset RealScout to default state if it exists
             const realscoutElement = document.querySelector('realscout-office-listings');
@@ -137,14 +142,22 @@ function showSearchSummary(params) {
     
     if (params.neighborhood) {
         const neighborhoodElement = document.getElementById('search-neighborhood');
-        const selectedOption = neighborhoodElement.options[neighborhoodElement.selectedIndex];
-        summaryHTML += `<span class="search-param"><i class="fas fa-home"></i> ${selectedOption.text}</span>`;
+        if (neighborhoodElement) {
+            const selectedOption = neighborhoodElement.options[neighborhoodElement.selectedIndex];
+            if (selectedOption) {
+                summaryHTML += `<span class="search-param"><i class="fas fa-home"></i> ${selectedOption.text}</span>`;
+            }
+        }
     }
     
     if (params.propertyType) {
         const propertyTypeElement = document.getElementById('search-property-type');
-        const selectedOption = propertyTypeElement.options[propertyTypeElement.selectedIndex];
-        summaryHTML += `<span class="search-param"><i class="fas fa-building"></i> ${selectedOption.text}</span>`;
+        if (propertyTypeElement) {
+            const selectedOption = propertyTypeElement.options[propertyTypeElement.selectedIndex];
+            if (selectedOption) {
+                summaryHTML += `<span class="search-param"><i class="fas fa-building"></i> ${selectedOption.text}</span>`;
+            }
+        }
     }
     
     if (params.priceRange) {

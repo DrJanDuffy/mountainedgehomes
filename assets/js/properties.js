@@ -152,9 +152,9 @@ if (typeof module !== 'undefined') {
     module.exports = { properties, generatePropertyCard };
 }
 //Assuming this is where the select element is located.  Adjust as needed.
-const neighborhoodSelect = document.getElementById('neighborhood-select'); //replace 'neighborhood-select' with the actual id of your select element.
-if (neighborhoodSelect) {
-    neighborhoodSelect.innerHTML = `
+const neighborhoodSelectElement = document.getElementById('neighborhood-select'); //replace 'neighborhood-select' with the actual id of your select element.
+if (neighborhoodSelectElement) {
+    neighborhoodSelectElement.innerHTML = `
 <option value="">All Neighborhoods</option>
                         <option value="alpian-meadows">Alpian Meadows</option>
                         <option value="alturas">Alturas</option>
