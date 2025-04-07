@@ -1,0 +1,34 @@
+Create a comprehensive SEO optimization plan for Mountain Edge Homes, a luxury mountain real estate company. Our website is hosted on Replit and needs significant improvement in search rankings. Please analyze and provide actionable recommendations for the following areas:
+
+1. Keyword Strategy:
+   - Research and suggest primary and secondary keywords for mountain homes, luxury cabins, and mountain real estate
+   - Recommend long-tail keywords specific to our mountain locations and property features
+   - Provide keyword density recommendations for different page types
+
+2. On-Page SEO Elements:
+   - Create templates for optimized title tags and meta descriptions for our key page types (home page, property listings, about us, contact)
+   - Suggest header structure (H1, H2, H3) implementation across different pages
+   - Recommend image optimization strategies including file naming and alt text formats
+
+3. Content Strategy:
+   - Outline a content calendar with topic suggestions for our blog focusing on mountain lifestyle, property investment, and local attractions
+   - Provide content structure recommendations to maximize readability and keyword placement
+   - Suggest internal linking strategies to improve site architecture
+
+4. Technical SEO for Replit:
+   - Explain how to implement proper URL structures on Replit
+   - Provide code snippets for implementing schema markup for real estate listings
+   - Recommend solutions for page speed optimization specific to Replit-hosted sites
+   - Suggest mobile optimization techniques for our responsive design
+
+5. Local SEO Strategy:
+   - Outline steps for optimizing Google Business Profile for multiple mountain locations
+   - Suggest local citation building opportunities specific to real estate
+   - Recommend strategies for generating location-specific reviews
+
+6. Measurement & Analytics:
+   - Recommend KPIs to track SEO progress
+   - Suggest tools compatible with Replit for monitoring rankings and performance
+   - Outline a monthly reporting template to track progress
+
+Please provide specific, actionable recommendations rather than general principles, with examples tailored to mountain real estate where applicable.
