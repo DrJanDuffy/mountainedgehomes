@@ -340,6 +340,27 @@
         </div>
     </section>
 
+    <!-- RealScout Listings Panel -->
+    <section class="realscout-listings-section">
+        <div class="container">
+            <h2 class="section-title">Featured Mountain's Edge Properties</h2>
+            <p class="section-subtitle">Browse our exclusive selection of luxury homes in Mountain's Edge</p>
+            <div class="realscout-container">
+                <realscout-office-listings agent-encoded-id="QWdlbnQtMjI1MDUw" sort-order="PRICE_HIGH" listing-status="For Sale" property-types="TC,SFR,MF" price-min="500000" max-results="3" custom-search="Mountain Edge"></realscout-office-listings>
+            </div>
+            
+            <!-- Fallback for RealScout -->
+            <div id="fallback-properties" style="display: none; margin-top: 30px;">
+                <div class="fallback-message">
+                    <p><i class="fas fa-info-circle"></i> Showing local property data. Live search is temporarily unavailable.</p>
+                </div>
+                <div id="search-result-properties" class="properties-grid">
+                    <!-- Fallback properties will be loaded here by script -->
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Enhanced Property Search Section -->
     <section class="property-search-section">
         <div class="container">

@@ -221,6 +221,7 @@ img {
     --footer-text: #e1e4e8;
     --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     --border-radius: 10px;
+    --white: #ffffff;
 }
 
 /* Header Styles */
@@ -2154,4 +2155,41 @@ footer::before {
     .neighborhoods-section {
         padding: 60px 0;
     }
+}
+
+/* RealScout Listings Section */
+.realscout-listings-section {
+    background-color: var(--white);
+    padding: 60px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.realscout-container {
+    width: 100%;
+    min-height: 400px;
+    position: relative;
+}
+
+.realscout-container realscout-office-listings {
+    width: 100%;
+    display: block;
+}
+
+.fallback-message {
+    background-color: #f8f9fa;
+    border-left: 4px solid #16B286;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.fallback-message i {
+    color: #16B286;
+    margin-right: 8px;
+}
+
+/* Property Search Section */
+.property-search-section {
+    background-color: var(--light-bg);
+    padding: 60px 0;
 }
