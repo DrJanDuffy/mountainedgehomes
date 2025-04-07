@@ -1,4 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize RealScout components with improved error handling
+    initializeRealScoutComponents();
+
+    // Lazy load images when they come into view
+    initializeLazyLoading();
+
+    // Set up basic interactivity
+    setupEventListeners();
+
     // Mobile navigation toggle
     const menuToggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('nav ul');
@@ -58,22 +67,22 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchForm = document.querySelector('.search-form');
     const searchToggle = document.getElementById('search-toggle');
     const advancedFields = document.querySelector('.advanced-fields');
-    
+
     if (searchToggle && advancedFields) {
         // Initially hide advanced fields
         advancedFields.style.display = 'none';
-        
+
         searchToggle.addEventListener('click', function() {
             const isExpanded = advancedFields.style.display !== 'none';
             advancedFields.style.display = isExpanded ? 'none' : 'grid';
-            
+
             // Update toggle button text and icon
-            searchToggle.innerHTML = isExpanded ? 
-                'Advanced Search <i class="fas fa-chevron-down"></i>' : 
+            searchToggle.innerHTML = isExpanded ?
+                'Advanced Search <i class="fas fa-chevron-down"></i>' :
                 'Simple Search <i class="fas fa-chevron-up"></i>';
         });
     }
-    
+
     // Debounce function for search
     function debounce(func, wait) {
         let timeout;
@@ -86,44 +95,44 @@ document.addEventListener('DOMContentLoaded', function() {
             timeout = setTimeout(later, wait);
         };
     }
-    
+
     // Setup address autocomplete with debounce
     const addressInput = document.getElementById('location');
     if (addressInput) {
         // Cache for search results to minimize API calls
         const searchCache = {};
-        
+
         const performSearch = debounce(function(query) {
             // Check cache first
             if (searchCache[query]) {
                 displaySearchResults(searchCache[query]);
                 return;
             }
-            
+
             // In a real implementation, this would call an API
             console.log('Searching for:', query);
-            
+
             // Mock results for demonstration
             const mockResults = [
                 { address: query + ' Main St, Las Vegas, NV 89178' },
                 { address: query + ' Park Ave, Las Vegas, NV 89178' },
                 { address: query + ' Mountain View, Las Vegas, NV 89178' }
             ];
-            
+
             // Cache the results
             searchCache[query] = mockResults;
-            
+
             // Display results
             displaySearchResults(mockResults);
         }, 1500); // 1.5 second debounce
-        
+
         addressInput.addEventListener('input', function() {
             const query = this.value.trim();
             if (query.length > 2) {
                 performSearch(query);
             }
         });
-        
+
         function displaySearchResults(results) {
             console.log('Search results:', results);
             // In a real implementation, display results in a dropdown
@@ -156,12 +165,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const propertiesSection = document.getElementById('properties');
             if (propertiesSection) {
                 propertiesSection.scrollIntoView({ behavior: 'smooth' });
-                
+
                 // Add loading state
                 const propertiesGrid = propertiesSection.querySelector('.properties-grid');
                 if (propertiesGrid) {
                     propertiesGrid.innerHTML = '<div class="loading-animation"><i class="fas fa-circle-notch fa-spin"></i><span>Searching properties...</span></div>';
-                    
+
                     // Simulate API delay
                     setTimeout(() => {
                         // Replace with actual API call in production
@@ -182,13 +191,13 @@ document.addEventListener('DOMContentLoaded', function() {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                
+
                 this.classList.toggle('active');
                 const propertyId = this.getAttribute('data-property-id');
-                
+
                 // Save favorite status in localStorage
                 const favorites = JSON.parse(localStorage.getItem('propertyFavorites') || '[]');
-                
+
                 if (this.classList.contains('active')) {
                     if (!favorites.includes(propertyId)) {
                         favorites.push(propertyId);
@@ -201,11 +210,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         showToast('Property removed from favorites');
                     }
                 }
-                
+
                 localStorage.setItem('propertyFavorites', JSON.stringify(favorites));
             });
         });
-        
+
         // Load favorite status from localStorage
         const savedFavorites = JSON.parse(localStorage.getItem('propertyFavorites') || '[]');
         favoriteButtons.forEach(button => {
@@ -214,7 +223,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 button.classList.add('active');
             }
         });
-        
+
         // Make property cards clickable
         const propertyCards = document.querySelectorAll('.property-card');
         propertyCards.forEach(card => {
@@ -224,23 +233,23 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
-    
+
     // Initialize property cards on page load
     initializePropertyCards();
-    
+
     // Toast notification function
     function showToast(message, duration = 3000) {
         const toast = document.createElement('div');
         toast.className = 'toast-notification';
         toast.textContent = message;
-        
+
         document.body.appendChild(toast);
-        
+
         // Show with animation
         setTimeout(() => {
             toast.classList.add('show');
         }, 10);
-        
+
         // Hide after duration
         setTimeout(() => {
             toast.classList.remove('show');
@@ -259,22 +268,22 @@ document.addEventListener('DOMContentLoaded', function() {
         const testimonialsContainer = testimonials[0].parentElement;
         const dotsContainer = document.createElement('div');
         dotsContainer.className = 'testimonial-dots';
-        
+
         testimonials.forEach((_, index) => {
             const dot = document.createElement('button');
             dot.className = 'testimonial-dot';
             dot.setAttribute('aria-label', `Go to testimonial ${index + 1}`);
             if (index === 0) dot.classList.add('active');
-            
+
             dot.addEventListener('click', () => {
                 goToTestimonial(index);
             });
-            
+
             dotsContainer.appendChild(dot);
         });
-        
+
         testimonialsContainer.appendChild(dotsContainer);
-        
+
         // Show first testimonial
         testimonials.forEach((testimonial, index) => {
             testimonial.style.display = index === 0 ? 'block' : 'none';
@@ -284,25 +293,25 @@ document.addEventListener('DOMContentLoaded', function() {
         function goToTestimonial(index) {
             testimonials[currentTestimonial].style.display = 'none';
             document.querySelectorAll('.testimonial-dot')[currentTestimonial].classList.remove('active');
-            
+
             currentTestimonial = index;
-            
+
             testimonials[currentTestimonial].style.display = 'block';
             document.querySelectorAll('.testimonial-dot')[currentTestimonial].classList.add('active');
         }
-        
+
         // Set up automatic slide transition
         let testimonialsInterval = setInterval(() => {
             goToTestimonial((currentTestimonial + 1) % testimonials.length);
         }, 5000);
-        
+
         // Pause rotation on hover
         const testimonialsSection = document.querySelector('.testimonials-section');
         if (testimonialsSection) {
             testimonialsSection.addEventListener('mouseenter', () => {
                 clearInterval(testimonialsInterval);
             });
-            
+
             testimonialsSection.addEventListener('mouseleave', () => {
                 testimonialsInterval = setInterval(() => {
                     goToTestimonial((currentTestimonial + 1) % testimonials.length);
@@ -311,59 +320,173 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Initialize RealScout widget with integrity hash
-    function initializeRealScoutWidget() {
-        const realscoutElement = document.querySelector('realscout-office-listings');
-        if (realscoutElement) {
-            console.log('Initializing RealScout widget');
-            
+
+    //New functions from edited code
+    function initializeRealScoutComponents() {
+        console.log('Initializing RealScout components');
+
+        const realscoutElements = document.querySelectorAll('realscout-office-listings, realscout-simple-search, realscout-advanced-search, realscout-home-value');
+
+        if (realscoutElements.length > 0) {
+            console.log(`Found ${realscoutElements.length} RealScout elements on page`);
+
             // Check if script is already loaded
             if (!document.querySelector('script[src*="realscout-web-components.umd.js"]')) {
+                console.log('Loading RealScout script dynamically');
+
                 const script = document.createElement('script');
                 script.src = 'https://em.realscout.com/widgets/realscout-web-components.umd.js';
                 script.crossOrigin = 'anonymous';
-                script.integrity = 'sha384-example-hash-would-go-here';
-                
+                script.async = true;
+
                 script.onload = () => {
-                    console.log('RealScout script loaded');
-                    // Initialize the component
-                    realscoutElement.setAttribute('refresh', 'true');
+                    console.log('RealScout script loaded successfully');
+                    refreshAllRealScoutComponents();
                 };
-                
+
+                script.onerror = () => {
+                    console.error('Failed to load RealScout script, activating fallback');
+                    showFallbackProperties();
+                };
+
                 document.head.appendChild(script);
             } else {
-                // Script already loaded, just initialize the component
-                realscoutElement.setAttribute('refresh', 'true');
+                // Script already loaded, just refresh components
+                console.log('RealScout script already loaded, refreshing components');
+                refreshAllRealScoutComponents();
+            }
+        } else {
+            console.log('No RealScout elements found on page');
+        }
+    }
+
+    function refreshAllRealScoutComponents() {
+        const realscoutElements = document.querySelectorAll('realscout-office-listings, realscout-simple-search, realscout-advanced-search, realscout-home-value');
+
+        realscoutElements.forEach(element => {
+            try {
+                // Set refresh attribute if available in API
+                element.setAttribute('refresh', 'true');
+                console.log('RealScout component refreshed:', element);
+            } catch (error) {
+                console.error('Error refreshing RealScout component:', error);
+            }
+        });
+
+        // Check status after refreshing
+        setTimeout(() => {
+            checkRealScoutRenderStatus();
+        }, 3000);
+    }
+
+    function checkRealScoutRenderStatus() {
+        const realscoutElements = document.querySelectorAll('realscout-office-listings, realscout-simple-search, realscout-advanced-search, realscout-home-value');
+        let anyFailed = false;
+
+        realscoutElements.forEach(element => {
+            // Check if the element is rendering properly
+            if (!element.shadowRoot || element.offsetHeight < 50) {
+                console.log('RealScout element not rendering properly:', element);
+                anyFailed = true;
+            }
+        });
+
+        if (anyFailed) {
+            console.log('Some RealScout components failed to render, activating fallback');
+            if (typeof showFallbackProperties === 'function') {
+                showFallbackProperties();
             }
         }
     }
-    
-    // Call with a slight delay to ensure DOM is fully rendered
-    setTimeout(initializeRealScoutWidget, 1000);
-    
-    // Lazy load images when they come into view
-    const lazyImages = document.querySelectorAll('img[data-src]');
-    
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.removeAttribute('data-src');
-                    imageObserver.unobserve(img);
+
+    function initializeLazyLoading() {
+        const lazyImages = document.querySelectorAll('img[data-src]');
+
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+
+                        if (img.dataset.srcset) {
+                            img.srcset = img.dataset.srcset;
+                        }
+
+                        img.classList.add('loaded');
+                        imageObserver.unobserve(img);
+
+                        // Log image loading for debugging
+                        console.log('Image loaded:', img.alt || 'unnamed image');
+                    }
+                });
+            });
+
+            lazyImages.forEach(img => {
+                imageObserver.observe(img);
+            });
+        } else {
+            // Fallback for browsers without IntersectionObserver
+            lazyImages.forEach(img => {
+                img.src = img.dataset.src;
+                if (img.dataset.srcset) {
+                    img.srcset = img.dataset.srcset;
                 }
             });
-        }, { threshold: 0.5 });
-        
-        lazyImages.forEach(img => {
-            imageObserver.observe(img);
+        }
+    }
+
+    function setupEventListeners() {
+        // Toggle mobile menu
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav ul');
+
+        if (menuToggle && nav) {
+            menuToggle.addEventListener('click', function() {
+                nav.classList.toggle('show');
+            });
+        }
+
+        // Close announcement banner
+        const closeBanner = document.getElementById('close-banner');
+        const banner = document.getElementById('announcement-banner');
+
+        if (closeBanner && banner) {
+            closeBanner.addEventListener('click', function() {
+                banner.style.display = 'none';
+                // Store preference in localStorage
+                localStorage.setItem('announcement-closed', 'true');
+            });
+
+            // Check if previously closed
+            if (localStorage.getItem('announcement-closed') === 'true') {
+                banner.style.display = 'none';
+            }
+        }
+
+        // Initialize FAQ accordions
+        const faqQuestions = document.querySelectorAll('.faq-question');
+
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+
+                this.classList.toggle('active');
+
+                if (answer.style.maxHeight) {
+                    answer.style.maxHeight = null;
+                } else {
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                }
+            });
         });
-    } else {
-        // Fallback for browsers that don't support IntersectionObserver
-        lazyImages.forEach(img => {
-            img.src = img.dataset.src;
-            img.removeAttribute('data-src');
-        });
+    }
+
+    // Placeholder for fallback function -  needs implementation based on requirements
+    function showFallbackProperties() {
+        console.warn('RealScout failed to load. Showing fallback properties.');
+        //Implement your fallback logic here.  For example:
+        //const fallbackContainer = document.getElementById('fallback-properties');
+        //fallbackContainer.innerHTML = 'Fallback Property Listings';
     }
 });
