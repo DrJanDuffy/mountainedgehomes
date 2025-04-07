@@ -170,6 +170,13 @@ function refreshRealScoutComponents() {
 }
 
 function showFallbackProperties() {
+    // Set global flag to prevent duplicate calls
+    window.fallbackShown = true;
+    
+    // First, remove ALL existing fallback messages from the entire document
+    const existingMessages = document.querySelectorAll('.fallback-message');
+    existingMessages.forEach(msg => msg.remove());
+    
     // Hide all RealScout elements
     const realscoutElements = document.querySelectorAll('realscout-office-listings, realscout-simple-search, realscout-advanced-search, realscout-home-value');
     realscoutElements.forEach(element => {
@@ -180,6 +187,15 @@ function showFallbackProperties() {
     const fallbackProperties = document.getElementById('fallback-properties');
     if (fallbackProperties) {
         fallbackProperties.style.display = 'block';
+
+        // Create a single fallback message at the top of the fallback properties container
+        const fallbackMessage = document.createElement('div');
+        fallbackMessage.className = 'fallback-message';
+        fallbackMessage.id = 'primary-fallback-message'; // Add an ID to easily reference this
+        fallbackMessage.innerHTML = '<p><i class="fas fa-info-circle"></i> Showing local property data because the live RealScout search is currently unavailable.</p>';
+        
+        // Insert the message at the beginning of the fallback properties container
+        fallbackProperties.insertBefore(fallbackMessage, fallbackProperties.firstChild);
 
         // Load properties from our local data
         const searchResultProperties = document.getElementById('search-result-properties');
@@ -220,39 +236,9 @@ function showFallbackProperties() {
             }
 
             searchResultProperties.innerHTML = propertiesHTML;
-
-            // Make sure we don't have duplicate fallback messages
-            // First, check if a fallback message already exists
-            const existingMessages = document.querySelectorAll('.fallback-message');
-            let shouldAddMessage = true;
-            
-            // If there are existing messages, we'll keep only one
-            if (existingMessages.length > 0) {
-                // Remove all but the first one
-                for (let i = 1; i < existingMessages.length; i++) {
-                    existingMessages[i].remove();
-                }
-                // If we already have one message, don't add another
-                if (existingMessages[0].textContent.includes('Showing local property data')) {
-                    shouldAddMessage = false;
-                }
-            }
-
-            // Only add a new message if needed
-            if (shouldAddMessage) {
-                const fallbackMessage = document.createElement('div');
-                fallbackMessage.className = 'fallback-message';
-                fallbackMessage.innerHTML = '<p><i class="fas fa-info-circle"></i> Showing local property data because the live RealScout search is currently unavailable.</p>';
-                
-                // Add the message before the properties container
-                const propertiesContainer = document.getElementById('search-result-properties');
-                if (propertiesContainer && propertiesContainer.parentNode) {
-                    propertiesContainer.parentNode.insertBefore(fallbackMessage, propertiesContainer);
-                } else {
-                    // Fallback - add it to the beginning of searchResultProperties parent
-                    searchResultProperties.parentNode.insertBefore(fallbackMessage, searchResultProperties);
-                }
-            }
         }
     }
+    
+    // Log that fallback message has been displayed once
+    console.log('Fallback message displayed. Global flag set to prevent duplicates.');
 }
