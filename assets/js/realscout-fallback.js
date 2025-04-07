@@ -221,15 +221,38 @@ function showFallbackProperties() {
 
             searchResultProperties.innerHTML = propertiesHTML;
 
-            // First, remove any existing fallback messages to prevent duplicates
-            const existingMessages = searchResultProperties.parentNode.querySelectorAll('.fallback-message');
-            existingMessages.forEach(msg => msg.remove());
+            // Make sure we don't have duplicate fallback messages
+            // First, check if a fallback message already exists
+            const existingMessages = document.querySelectorAll('.fallback-message');
+            let shouldAddMessage = true;
+            
+            // If there are existing messages, we'll keep only one
+            if (existingMessages.length > 0) {
+                // Remove all but the first one
+                for (let i = 1; i < existingMessages.length; i++) {
+                    existingMessages[i].remove();
+                }
+                // If we already have one message, don't add another
+                if (existingMessages[0].textContent.includes('Showing local property data')) {
+                    shouldAddMessage = false;
+                }
+            }
 
-            // Show a message about using fallback data
-            const fallbackMessage = document.createElement('div');
-            fallbackMessage.className = 'fallback-message';
-            fallbackMessage.innerHTML = '<p><i class="fas fa-info-circle"></i> Showing local property data because the live RealScout search is currently unavailable.</p>';
-            searchResultProperties.parentNode.insertBefore(fallbackMessage, searchResultProperties);
+            // Only add a new message if needed
+            if (shouldAddMessage) {
+                const fallbackMessage = document.createElement('div');
+                fallbackMessage.className = 'fallback-message';
+                fallbackMessage.innerHTML = '<p><i class="fas fa-info-circle"></i> Showing local property data because the live RealScout search is currently unavailable.</p>';
+                
+                // Add the message before the properties container
+                const propertiesContainer = document.getElementById('search-result-properties');
+                if (propertiesContainer && propertiesContainer.parentNode) {
+                    propertiesContainer.parentNode.insertBefore(fallbackMessage, propertiesContainer);
+                } else {
+                    // Fallback - add it to the beginning of searchResultProperties parent
+                    searchResultProperties.parentNode.insertBefore(fallbackMessage, searchResultProperties);
+                }
+            }
         }
     }
 }

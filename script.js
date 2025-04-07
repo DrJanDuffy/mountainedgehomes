@@ -482,28 +482,40 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Prevent duplicate call to showFallbackProperties
-let fallbackShown = false;
+    // Use a global variable to track fallback status
+window.fallbackShown = window.fallbackShown || false;
     
 function showFallbackProperties() {
-    if (fallbackShown) {
+    // Prevent duplicate calls across all scripts
+    if (window.fallbackShown) {
         console.log('Fallback properties already shown, skipping duplicate call');
         return;
     }
     
     console.warn('RealScout failed to load. Showing fallback properties.');
+    
     // Call the implementation from realscout-fallback.js
-    if (typeof window.showFallbackProperties === 'function') {
+    if (typeof window.showFallbackProperties === 'function' && window.showFallbackProperties !== showFallbackProperties) {
+        // This is the external function from realscout-fallback.js
         window.showFallbackProperties();
     } else {
-        console.error('Fallback function not found in global scope');
+        console.log('Using basic fallback display logic');
         // Basic fallback if the main one is not available
         const fallbackContainer = document.getElementById('fallback-properties');
         if (fallbackContainer) {
             fallbackContainer.style.display = 'block';
+            
+            // Clean up any duplicate messages
+            const existingMessages = document.querySelectorAll('.fallback-message');
+            if (existingMessages.length > 1) {
+                for (let i = 1; i < existingMessages.length; i++) {
+                    existingMessages[i].remove();
+                }
+            }
         }
     }
     
-    fallbackShown = true;
+    // Set the global flag to prevent duplicate calls
+    window.fallbackShown = true;
 }
 });

@@ -143,11 +143,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             `;
             
-            // Add fallback message only once
-            const fallbackMessage = document.createElement('div');
-            fallbackMessage.className = 'fallback-message';
-            fallbackMessage.innerHTML = '<p><i class="fas fa-info-circle"></i> Showing local property data. Live search is temporarily unavailable.</p>';
-            resultsContainer.parentNode.insertBefore(fallbackMessage, resultsContainer);
+            // Check for existing fallback messages
+            const existingMessages = document.querySelectorAll('.fallback-message');
+            
+            // Only add a message if none exists
+            if (existingMessages.length === 0) {
+                const fallbackMessage = document.createElement('div');
+                fallbackMessage.className = 'fallback-message';
+                fallbackMessage.innerHTML = '<p><i class="fas fa-info-circle"></i> Showing local property data. Live search is temporarily unavailable.</p>';
+                resultsContainer.parentNode.insertBefore(fallbackMessage, resultsContainer);
+            }
         }, 1000);
     }
 });
